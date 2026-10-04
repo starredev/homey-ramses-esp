@@ -3,7 +3,10 @@
     "no_gateway": "Er is geen ramses_esp-gateway verbonden. Controleer het gateway-apparaat in Homey.",
     "no_remote": "Vul het adres in van een afstandsbediening waaraan de unit gekoppeld is (apparaatinstellingen), zodat Homey hem kan bedienen.",
     "invalid_remote": "Dat is geen geldig adres. Gebruik de vorm 29:123456.",
-    "invalid_address": "Dat is geen geldig adres. Gebruik de vorm 29:123456."
+    "invalid_address": "Dat is geen geldig adres. Gebruik de vorm 29:123456.",
+    "params_supported": "Ja",
+    "params_unsupported": "Nee",
+    "unknown_param": "Onbekende parameter."
   },
   "gateway": {
     "connecting": "Verbinden met de MQTT-broker…",

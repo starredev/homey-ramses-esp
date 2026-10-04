@@ -330,6 +330,9 @@ export class FakeFlow {
   /** @type {Map<string, (args: any) => Promise<unknown>>} */
   actions = new Map();
 
+  /** @type {Map<string, (query: string, args?: any) => Promise<unknown>>} */
+  autocompletes = new Map();
+
   /** @type {Array<{ card: string, device: unknown, tokens: object, state: object }>} */
   fired = [];
 
@@ -383,6 +386,13 @@ export class FakeFlow {
       /** @param {(args: any) => Promise<unknown>} listener */
       registerRunListener: (listener) => {
         this.actions.set(id, listener);
+      },
+      /**
+       * @param {string} arg
+       * @param {(query: string, args: any) => Promise<unknown>} listener
+       */
+      registerArgumentAutocompleteListener: (arg, listener) => {
+        this.autocompletes.set(`${id}.${arg}`, listener);
       },
     };
   }

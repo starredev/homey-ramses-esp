@@ -13,6 +13,6 @@ export default class FanDriver extends BusDeviceDriver {
    * @param {import('../../lib/utils.js').Logger} logger
    */
   createFlowCards(flow, logger) {
-    return new FanFlowCards(flow, logger).register();
+    return new FanFlowCards(flow, logger, this.homey.i18n.getLanguage()).register();
   }
 }

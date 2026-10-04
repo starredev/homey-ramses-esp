@@ -346,6 +346,39 @@
           ]
         }
       ]
+    },
+    {
+      "id": "set_fan_param",
+      "title": {
+        "en": "Set a parameter",
+        "nl": "Zet een parameter"
+      },
+      "titleFormatted": {
+        "en": "Set [[param]] to [[value]]",
+        "nl": "Zet [[param]] op [[value]]"
+      },
+      "hint": {
+        "en": "For heat recovery units with parameters.",
+        "nl": "Voor warmteterugwinunits met parameters."
+      },
+      "args": [
+        {
+          "name": "param",
+          "type": "autocomplete",
+          "placeholder": {
+            "en": "Parameter",
+            "nl": "Parameter"
+          }
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "placeholder": {
+            "en": "Value",
+            "nl": "Waarde"
+          }
+        }
+      ]
     }
   ]
 }

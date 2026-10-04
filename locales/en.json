@@ -3,7 +3,10 @@
     "no_gateway": "No ramses_esp gateway is connected. Check the gateway device in Homey.",
     "no_remote": "Set the address of a remote the unit is bound to (device settings) so Homey can control it.",
     "invalid_remote": "That is not a valid address. Use the form 29:123456.",
-    "invalid_address": "That is not a valid address. Use the form 29:123456."
+    "invalid_address": "That is not a valid address. Use the form 29:123456.",
+    "params_supported": "Yes",
+    "params_unsupported": "No",
+    "unknown_param": "Unknown parameter."
   },
   "gateway": {
     "connecting": "Connecting to the MQTT broker…",

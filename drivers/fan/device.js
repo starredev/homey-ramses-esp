@@ -1,7 +1,8 @@
 import { ValidationError } from '../../lib/errors.js';
 import {
-  BypassModeChanged, FanModeChanged, ReadingChanged, SchemeDetected,
+  BypassModeChanged, FanModeChanged, ParamChanged, ReadingChanged, SchemeDetected,
 } from '../../lib/domain/events.js';
+import { FAN_PARAMS } from '../../lib/ramses/FanParams.js';
 import { FanUnit } from '../../lib/domain/FanUnit.js';
 import { FanStatus } from '../../lib/homey/FanStatus.js';
 import { RamsesDevice } from '../../lib/homey/RamsesDevice.js';
@@ -32,6 +33,12 @@ export default class FanDevice extends RamsesDevice {
    */
   static SCHEMA = 4;
 
+  /** Time between two parameter requests, so the bus is not flooded. */
+  static PARAM_SPACING_MS = 1500;
+
+  /** How long to wait for a first parameter before calling them unsupported. */
+  static PARAM_PROBE_MS = 10000;
+
   /** @type {unknown} */
   #poller = null;
 
@@ -59,6 +66,7 @@ export default class FanDevice extends RamsesDevice {
     this.#startPolling(this.getSetting('poll_interval'));
     this.homey.setTimeout(() => {
       this.#requestStatus();
+      this.runSafely(() => this.#probeParams());
     }, FanDevice.FIRST_STATUS_MS);
   }
 
@@ -118,6 +126,13 @@ export default class FanDevice extends RamsesDevice {
       await this.#showBypass(event.mode);
     }
 
+    if (event instanceof ParamChanged) {
+      await this.setSettings({
+        [`param_${event.param.id}`]: event.param.value,
+        params_status: this.homey.__('device.params_supported'),
+      }).catch(this.error);
+    }
+
     if (event instanceof SchemeDetected) {
       this.log(`The unit numbers its modes as ${event.scheme} does`);
       await this.setStoreValue('scheme', event.scheme);
@@ -141,6 +156,20 @@ export default class FanDevice extends RamsesDevice {
 
       this.unit.configure({ remote });
       await this.#showRemoteWarning(remote);
+    }
+
+    for (const key of changedKeys.filter((changed) => changed.startsWith('param_'))) {
+      const id = key.slice('param_'.length);
+
+      try {
+        await this.unit.setParam(id, newSettings[key]);
+      } catch (error) {
+        throw this.toUserError(error);
+      }
+
+      this.homey.setTimeout(() => {
+        this.runSafely(() => this.unit.readParam(id));
+      }, FanDevice.PARAM_SPACING_MS);
     }
 
     if (changedKeys.includes('scheme')) {
@@ -200,6 +229,38 @@ export default class FanDevice extends RamsesDevice {
         throw this.toUserError(error);
       }
     });
+  }
+
+  /**
+   * Asks for one parameter; when the unit answers, reads them all, one at a
+   * time. Units without parameters are asked once and then left alone.
+   */
+  async #probeParams() {
+    if (!(await this.unit.readParam(FAN_PARAMS[0].id))) {
+      return;
+    }
+
+    this.homey.setTimeout(() => {
+      if (this.unit.paramsSupported) {
+        this.#readParams(1);
+      } else {
+        this.setSettings({ params_status: this.homey.__('device.params_unsupported') }).catch(this.error);
+      }
+    }, FanDevice.PARAM_PROBE_MS);
+  }
+
+  /** @param {number} index the next parameter to ask for */
+  #readParams(index) {
+    const param = FAN_PARAMS[index];
+
+    if (!param) {
+      return;
+    }
+
+    this.runSafely(() => this.unit.readParam(param.id));
+    this.homey.setTimeout(() => {
+      this.#readParams(index + 1);
+    }, FanDevice.PARAM_SPACING_MS);
   }
 
   /** Brings a unit added by an earlier version up to the current layout. */

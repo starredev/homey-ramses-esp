@@ -100,6 +100,404 @@
   {
     "type": "group",
     "label": {
+      "en": "Parameters (heat recovery)",
+      "nl": "Parameters (WTW)"
+    },
+    "children": [
+      {
+        "id": "params_status",
+        "type": "label",
+        "label": {
+          "en": "Supported by this unit",
+          "nl": "Ondersteund door deze unit"
+        },
+        "value": "-",
+        "hint": {
+          "en": "Only heat recovery units (Orcon HRC, Vasco, ClimaRad and others) have parameters. The values are read from the unit; a change is written to it.",
+          "nl": "Alleen warmteterugwinunits (Orcon HRC, Vasco, ClimaRad en andere) hebben parameters. De waarden worden uit de unit gelezen; een wijziging wordt naar de unit geschreven."
+        }
+      },
+      {
+        "id": "param_31",
+        "type": "number",
+        "label": {
+          "en": "Time to change filter",
+          "nl": "Filter vervangen na"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 1800.0,
+        "step": 30.0,
+        "units": {
+          "en": "days",
+          "nl": "dagen"
+        }
+      },
+      {
+        "id": "param_3D",
+        "type": "number",
+        "label": {
+          "en": "Away: supply fan",
+          "nl": "Afwezig: toevoer"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 40.0,
+        "step": 0.5,
+        "units": {
+          "en": "%"
+        }
+      },
+      {
+        "id": "param_3E",
+        "type": "number",
+        "label": {
+          "en": "Away: exhaust fan",
+          "nl": "Afwezig: afvoer"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 40.0,
+        "step": 0.5,
+        "units": {
+          "en": "%"
+        }
+      },
+      {
+        "id": "param_3F",
+        "type": "number",
+        "label": {
+          "en": "Low: supply fan",
+          "nl": "Laag: toevoer"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 75.0,
+        "step": 0.5,
+        "units": {
+          "en": "%"
+        }
+      },
+      {
+        "id": "param_40",
+        "type": "number",
+        "label": {
+          "en": "Low: exhaust fan",
+          "nl": "Laag: afvoer"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 75.0,
+        "step": 0.5,
+        "units": {
+          "en": "%"
+        }
+      },
+      {
+        "id": "param_41",
+        "type": "number",
+        "label": {
+          "en": "Medium: supply fan",
+          "nl": "Midden: toevoer"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 75.0,
+        "step": 0.5,
+        "units": {
+          "en": "%"
+        }
+      },
+      {
+        "id": "param_42",
+        "type": "number",
+        "label": {
+          "en": "Medium: exhaust fan",
+          "nl": "Midden: afvoer"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 75.0,
+        "step": 0.5,
+        "units": {
+          "en": "%"
+        }
+      },
+      {
+        "id": "param_43",
+        "type": "number",
+        "label": {
+          "en": "High: supply fan",
+          "nl": "Hoog: toevoer"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 100.0,
+        "step": 0.5,
+        "units": {
+          "en": "%"
+        }
+      },
+      {
+        "id": "param_44",
+        "type": "number",
+        "label": {
+          "en": "High: exhaust fan",
+          "nl": "Hoog: afvoer"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 100.0,
+        "step": 0.5,
+        "units": {
+          "en": "%"
+        }
+      },
+      {
+        "id": "param_95",
+        "type": "number",
+        "label": {
+          "en": "Boost: supply and exhaust",
+          "nl": "Boost: toevoer en afvoer"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 100.0,
+        "step": 0.5,
+        "units": {
+          "en": "%"
+        }
+      },
+      {
+        "id": "param_4B",
+        "type": "number",
+        "label": {
+          "en": "Night mode timer",
+          "nl": "Timer nachtstand"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 180.0,
+        "step": 10.0,
+        "units": {
+          "en": "min"
+        }
+      },
+      {
+        "id": "param_4C",
+        "type": "number",
+        "label": {
+          "en": "Away mode timer",
+          "nl": "Timer afwezig"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 180.0,
+        "step": 10.0,
+        "units": {
+          "en": "min"
+        }
+      },
+      {
+        "id": "param_4E",
+        "type": "number",
+        "label": {
+          "en": "High mode timer",
+          "nl": "Timer hoog"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 180.0,
+        "step": 10.0,
+        "units": {
+          "en": "min"
+        }
+      },
+      {
+        "id": "param_50",
+        "type": "number",
+        "label": {
+          "en": "Low mode timer",
+          "nl": "Timer laag"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 180.0,
+        "step": 10.0,
+        "units": {
+          "en": "min"
+        }
+      },
+      {
+        "id": "param_52",
+        "type": "number",
+        "label": {
+          "en": "Trickle mode timer",
+          "nl": "Timer minimum"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 180.0,
+        "step": 10.0,
+        "units": {
+          "en": "min"
+        }
+      },
+      {
+        "id": "param_54",
+        "type": "number",
+        "label": {
+          "en": "Humidity sensor overrun",
+          "nl": "Nalooptijd vochtsensor"
+        },
+        "value": 15.0,
+        "min": 15.0,
+        "max": 60.0,
+        "step": 1.0,
+        "units": {
+          "en": "min"
+        }
+      },
+      {
+        "id": "param_64",
+        "type": "number",
+        "label": {
+          "en": "Exhaust temperature limit",
+          "nl": "Temperatuurgrens afvoer"
+        },
+        "value": 5.0,
+        "min": 5.0,
+        "max": 25.0,
+        "step": 1.0,
+        "units": {
+          "en": "°C"
+        }
+      },
+      {
+        "id": "param_65",
+        "type": "number",
+        "label": {
+          "en": "Supply temperature limit",
+          "nl": "Temperatuurgrens toevoer"
+        },
+        "value": 5.0,
+        "min": 5.0,
+        "max": 25.0,
+        "step": 1.0,
+        "units": {
+          "en": "°C"
+        }
+      },
+      {
+        "id": "param_75",
+        "type": "number",
+        "label": {
+          "en": "Comfort temperature",
+          "nl": "Comforttemperatuur"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 30.0,
+        "step": 0.5,
+        "units": {
+          "en": "°C"
+        }
+      },
+      {
+        "id": "param_CA",
+        "type": "number",
+        "label": {
+          "en": "Bypass override timer",
+          "nl": "Timer bypass handmatig"
+        },
+        "value": 0,
+        "min": 0.0,
+        "max": 180.0,
+        "step": 10.0,
+        "units": {
+          "en": "min"
+        }
+      },
+      {
+        "id": "param_CB",
+        "type": "number",
+        "label": {
+          "en": "Summer mode limit",
+          "nl": "Grens zomerstand"
+        },
+        "value": 15.0,
+        "min": 15.0,
+        "max": 25.0,
+        "step": 1.0,
+        "units": {
+          "en": "°C"
+        }
+      },
+      {
+        "id": "param_CE",
+        "type": "number",
+        "label": {
+          "en": "Winter mode limit",
+          "nl": "Grens winterstand"
+        },
+        "value": 5.0,
+        "min": 5.0,
+        "max": 15.0,
+        "step": 1.0,
+        "units": {
+          "en": "°C"
+        }
+      },
+      {
+        "id": "param_CF",
+        "type": "number",
+        "label": {
+          "en": "Bypass hysteresis",
+          "nl": "Hysterese bypass"
+        },
+        "value": 0.5,
+        "min": 0.5,
+        "max": 5.0,
+        "step": 0.5,
+        "units": {
+          "en": "°C"
+        }
+      },
+      {
+        "id": "param_F5",
+        "type": "number",
+        "label": {
+          "en": "Pre-heater limit",
+          "nl": "Grens voorverwarmer"
+        },
+        "value": 0,
+        "min": -15.0,
+        "max": -5.0,
+        "step": 1.0,
+        "units": {
+          "en": "°C"
+        }
+      },
+      {
+        "id": "param_F6",
+        "type": "number",
+        "label": {
+          "en": "Pre-heater hysteresis",
+          "nl": "Hysterese voorverwarmer"
+        },
+        "value": 0.5,
+        "min": 0.5,
+        "max": 5.0,
+        "step": 0.5,
+        "units": {
+          "en": "°C"
+        }
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
       "en": "Bus",
       "nl": "Bus"
     },
