@@ -166,6 +166,13 @@
                   "en": "Away",
                   "nl": "Afwezig"
                 }
+              },
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off",
+                  "nl": "Uit"
+                }
               }
             ]
           }
@@ -197,6 +204,48 @@
             "example": "remote"
           }
         ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          }
+        ]
+      },
+      {
+        "id": "fault_on",
+        "title": {
+          "en": "The unit reported a fault",
+          "nl": "De unit meldde een storing"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          }
+        ]
+      },
+      {
+        "id": "fault_off",
+        "title": {
+          "en": "The fault of the unit is gone",
+          "nl": "De storing van de unit is weg"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          }
+        ]
+      },
+      {
+        "id": "filter_dirty",
+        "title": {
+          "en": "The filter needs replacing",
+          "nl": "Het filter moet vervangen worden"
+        },
         "args": [
           {
             "type": "device",
@@ -509,6 +558,13 @@
                 }
               },
               {
+                "id": "off",
+                "label": {
+                  "en": "Off",
+                  "nl": "Uit"
+                }
+              },
+              {
                 "id": "boost",
                 "label": {
                   "en": "Boost / timer",
@@ -617,6 +673,13 @@
                 "label": {
                   "en": "Away",
                   "nl": "Afwezig"
+                }
+              },
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off",
+                  "nl": "Uit"
                 }
               },
               {
@@ -731,8 +794,29 @@
                   "en": "Away",
                   "nl": "Afwezig"
                 }
+              },
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off",
+                  "nl": "Uit"
+                }
               }
             ]
+          }
+        ]
+      },
+      {
+        "id": "has_fault",
+        "title": {
+          "en": "The unit !{{has|has no}} fault",
+          "nl": "De unit !{{heeft|heeft geen}} storing"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
           }
         ]
       },
@@ -806,6 +890,13 @@
                   "en": "Away",
                   "nl": "Afwezig"
                 }
+              },
+              {
+                "id": "off",
+                "label": {
+                  "en": "Off",
+                  "nl": "Uit"
+                }
               }
             ]
           }
@@ -865,6 +956,51 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=fan"
+          }
+        ]
+      },
+      {
+        "id": "set_bypass",
+        "title": {
+          "en": "Set the bypass",
+          "nl": "Zet de bypass"
+        },
+        "titleFormatted": {
+          "en": "Set the bypass to [[mode]]",
+          "nl": "Zet de bypass op [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto",
+                  "nl": "Auto"
+                }
+              },
+              {
+                "id": "on",
+                "label": {
+                  "en": "Open",
+                  "nl": "Open"
+                }
+              },
+              {
+                "id": "off",
+                "label": {
+                  "en": "Closed",
+                  "nl": "Dicht"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1043,6 +1179,63 @@
                 "en": "Homey sends commands in the name of a remote the unit is bound to, e.g. 29:173894. It is filled in automatically when the remote was seen on the bus.",
                 "nl": "Homey verstuurt commando's namens een afstandsbediening waaraan de unit gekoppeld is, bv. 29:173894. Wordt automatisch ingevuld als de remote op de bus gezien is."
               }
+            },
+            {
+              "id": "scheme",
+              "type": "dropdown",
+              "label": {
+                "en": "Brand",
+                "nl": "Merk"
+              },
+              "value": "auto",
+              "hint": {
+                "en": "Brands number their modes differently. Automatic uses Orcon numbering and switches when the unit's remotes reveal another brand.",
+                "nl": "Merken nummeren hun standen verschillend. Automatisch gebruikt de Orcon-nummering en schakelt om als de remotes van de unit een ander merk verraden."
+              },
+              "values": [
+                {
+                  "id": "auto",
+                  "label": {
+                    "en": "Automatic",
+                    "nl": "Automatisch"
+                  }
+                },
+                {
+                  "id": "orcon",
+                  "label": {
+                    "en": "Orcon",
+                    "nl": "Orcon"
+                  }
+                },
+                {
+                  "id": "itho",
+                  "label": {
+                    "en": "Itho",
+                    "nl": "Itho"
+                  }
+                },
+                {
+                  "id": "vasco",
+                  "label": {
+                    "en": "Vasco",
+                    "nl": "Vasco"
+                  }
+                },
+                {
+                  "id": "climarad",
+                  "label": {
+                    "en": "ClimaRad",
+                    "nl": "ClimaRad"
+                  }
+                },
+                {
+                  "id": "nuaire",
+                  "label": {
+                    "en": "Nuaire",
+                    "nl": "Nuaire"
+                  }
+                }
+              ]
             },
             {
               "id": "poll_interval",
@@ -1424,6 +1617,101 @@
     }
   },
   "capabilities": {
+    "alarm_ramses_fault": {
+      "type": "boolean",
+      "title": {
+        "en": "Fault",
+        "nl": "Storing"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/fan.svg",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Fault",
+        "nl": "Storing"
+      },
+      "insightsTitleFalse": {
+        "en": "OK",
+        "nl": "OK"
+      }
+    },
+    "alarm_ramses_filter": {
+      "type": "boolean",
+      "title": {
+        "en": "Replace filter",
+        "nl": "Filter vervangen"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/filter.svg",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Replace filter",
+        "nl": "Filter vervangen"
+      },
+      "insightsTitleFalse": {
+        "en": "Filter OK",
+        "nl": "Filter OK"
+      }
+    },
+    "alarm_ramses_frost": {
+      "type": "boolean",
+      "title": {
+        "en": "Frost protection",
+        "nl": "Vorstbeveiliging"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/fan.svg",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Active",
+        "nl": "Actief"
+      },
+      "insightsTitleFalse": {
+        "en": "Off",
+        "nl": "Uit"
+      }
+    },
+    "measure_ramses_air_quality": {
+      "type": "number",
+      "title": {
+        "en": "Air quality",
+        "nl": "Luchtkwaliteit"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/air.svg",
+      "decimals": 0,
+      "min": 0,
+      "insights": true,
+      "units": {
+        "en": "%"
+      },
+      "max": 100
+    },
+    "measure_ramses_boost_remaining": {
+      "type": "number",
+      "title": {
+        "en": "Boost time left",
+        "nl": "Boost: resterende tijd"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/timer.svg",
+      "decimals": 0,
+      "min": 0,
+      "insights": false,
+      "units": {
+        "en": "min"
+      }
+    },
     "measure_ramses_bus_devices": {
       "type": "number",
       "title": {
@@ -1437,6 +1725,24 @@
       "decimals": 0,
       "min": 0,
       "insights": false
+    },
+    "measure_ramses_bypass": {
+      "type": "number",
+      "title": {
+        "en": "Bypass position",
+        "nl": "Bypass-stand"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/bypass.svg",
+      "decimals": 0,
+      "min": 0,
+      "insights": true,
+      "units": {
+        "en": "%"
+      },
+      "max": 100
     },
     "measure_ramses_demand": {
       "type": "number",
@@ -1455,6 +1761,23 @@
       "min": 0,
       "max": 100,
       "insights": true
+    },
+    "measure_ramses_exhaust_flow": {
+      "type": "number",
+      "title": {
+        "en": "Exhaust air flow",
+        "nl": "Afvoerdebiet"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/air.svg",
+      "decimals": 1,
+      "min": 0,
+      "insights": true,
+      "units": {
+        "en": "l/s"
+      }
     },
     "measure_ramses_fan_mode_label": {
       "type": "string",
@@ -1485,16 +1808,35 @@
       },
       "max": 100
     },
-    "ramses_air_quality": {
+    "measure_ramses_filter_days": {
       "type": "number",
       "title": {
-        "en": "Air quality",
-        "nl": "Luchtkwaliteit"
+        "en": "Filter days left",
+        "nl": "Filter: dagen over"
       },
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "/assets/capabilities/air.svg",
+      "icon": "/assets/capabilities/filter.svg",
+      "decimals": 0,
+      "min": 0,
+      "insights": true,
+      "units": {
+        "en": "days",
+        "nl": "dagen"
+      },
+      "max": 255
+    },
+    "measure_ramses_filter_remaining": {
+      "type": "number",
+      "title": {
+        "en": "Filter left",
+        "nl": "Filter: resterend"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/filter.svg",
       "decimals": 0,
       "min": 0,
       "insights": true,
@@ -1503,11 +1845,11 @@
       },
       "max": 100
     },
-    "ramses_boost_remaining": {
+    "measure_ramses_post_heater": {
       "type": "number",
       "title": {
-        "en": "Boost time left",
-        "nl": "Boost: resterende tijd"
+        "en": "Post-heater",
+        "nl": "Naverwarmer"
       },
       "getable": true,
       "setable": false,
@@ -1515,21 +1857,22 @@
       "icon": "/assets/capabilities/timer.svg",
       "decimals": 0,
       "min": 0,
-      "insights": false,
+      "insights": true,
       "units": {
-        "en": "min"
-      }
+        "en": "%"
+      },
+      "max": 100
     },
-    "ramses_bypass": {
+    "measure_ramses_pre_heater": {
       "type": "number",
       "title": {
-        "en": "Bypass position",
-        "nl": "Bypass-stand"
+        "en": "Pre-heater",
+        "nl": "Voorverwarmer"
       },
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "/assets/capabilities/bypass.svg",
+      "icon": "/assets/capabilities/timer.svg",
       "decimals": 0,
       "min": 0,
       "insights": true,
@@ -1537,6 +1880,57 @@
         "en": "%"
       },
       "max": 100
+    },
+    "measure_ramses_supply_flow": {
+      "type": "number",
+      "title": {
+        "en": "Supply air flow",
+        "nl": "Toevoerdebiet"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/air.svg",
+      "decimals": 1,
+      "min": 0,
+      "insights": true,
+      "units": {
+        "en": "l/s"
+      }
+    },
+    "ramses_bypass_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Bypass",
+        "nl": "Bypass"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "icon": "/assets/capabilities/bypass.svg",
+      "values": [
+        {
+          "id": "auto",
+          "title": {
+            "en": "Auto",
+            "nl": "Auto"
+          }
+        },
+        {
+          "id": "on",
+          "title": {
+            "en": "Open",
+            "nl": "Open"
+          }
+        },
+        {
+          "id": "off",
+          "title": {
+            "en": "Closed",
+            "nl": "Dicht"
+          }
+        }
+      ]
     },
     "ramses_fan_mode": {
       "type": "enum",
@@ -1583,27 +1977,15 @@
             "en": "Away",
             "nl": "Afwezig"
           }
+        },
+        {
+          "id": "off",
+          "title": {
+            "en": "Off",
+            "nl": "Uit"
+          }
         }
       ]
-    },
-    "ramses_filter_days": {
-      "type": "number",
-      "title": {
-        "en": "Filter days left",
-        "nl": "Filter: dagen over"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/capabilities/filter.svg",
-      "decimals": 0,
-      "min": 0,
-      "insights": true,
-      "units": {
-        "en": "days",
-        "nl": "dagen"
-      },
-      "max": 255
     },
     "ramses_gateway_address": {
       "type": "string",

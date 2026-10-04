@@ -1,0 +1,34 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Bypass",
+    "nl": "Bypass"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "icon": "/assets/capabilities/bypass.svg",
+  "values": [
+    {
+      "id": "auto",
+      "title": {
+        "en": "Auto",
+        "nl": "Auto"
+      }
+    },
+    {
+      "id": "on",
+      "title": {
+        "en": "Open",
+        "nl": "Open"
+      }
+    },
+    {
+      "id": "off",
+      "title": {
+        "en": "Closed",
+        "nl": "Dicht"
+      }
+    }
+  ]
+}

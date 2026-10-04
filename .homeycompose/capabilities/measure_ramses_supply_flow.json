@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Supply air flow",
+    "nl": "Toevoerdebiet"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/air.svg",
+  "decimals": 1,
+  "min": 0,
+  "insights": true,
+  "units": {
+    "en": "l/s"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Replace filter",
+    "nl": "Filter vervangen"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/filter.svg",
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Replace filter",
+    "nl": "Filter vervangen"
+  },
+  "insightsTitleFalse": {
+    "en": "Filter OK",
+    "nl": "Filter OK"
+  }
+}

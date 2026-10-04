@@ -1,0 +1,20 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Fault",
+    "nl": "Storing"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/fan.svg",
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Fault",
+    "nl": "Storing"
+  },
+  "insightsTitleFalse": {
+    "en": "OK",
+    "nl": "OK"
+  }
+}

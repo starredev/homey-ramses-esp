@@ -1,0 +1,18 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Filter left",
+    "nl": "Filter: resterend"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/filter.svg",
+  "decimals": 0,
+  "min": 0,
+  "insights": true,
+  "units": {
+    "en": "%"
+  },
+  "max": 100
+}

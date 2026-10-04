@@ -76,6 +76,13 @@
                 "en": "Away",
                 "nl": "Afwezig"
               }
+            },
+            {
+              "id": "off",
+              "label": {
+                "en": "Off",
+                "nl": "Uit"
+              }
             }
           ]
         }
@@ -107,6 +114,27 @@
           "example": "remote"
         }
       ]
+    },
+    {
+      "id": "fault_on",
+      "title": {
+        "en": "The unit reported a fault",
+        "nl": "De unit meldde een storing"
+      }
+    },
+    {
+      "id": "fault_off",
+      "title": {
+        "en": "The fault of the unit is gone",
+        "nl": "De storing van de unit is weg"
+      }
+    },
+    {
+      "id": "filter_dirty",
+      "title": {
+        "en": "The filter needs replacing",
+        "nl": "Het filter moet vervangen worden"
+      }
     }
   ],
   "conditions": [
@@ -159,10 +187,24 @@
                 "en": "Away",
                 "nl": "Afwezig"
               }
+            },
+            {
+              "id": "off",
+              "label": {
+                "en": "Off",
+                "nl": "Uit"
+              }
             }
           ]
         }
       ]
+    },
+    {
+      "id": "has_fault",
+      "title": {
+        "en": "The unit !{{has|has no}} fault",
+        "nl": "De unit !{{heeft|heeft geen}} storing"
+      }
     }
   ],
   "actions": [
@@ -215,6 +257,13 @@
                 "en": "Away",
                 "nl": "Afwezig"
               }
+            },
+            {
+              "id": "off",
+              "label": {
+                "en": "Off",
+                "nl": "Uit"
+              }
             }
           ]
         }
@@ -257,6 +306,46 @@
         "en": "Ask the unit for its status",
         "nl": "Vraag de status van de unit op"
       }
+    },
+    {
+      "id": "set_bypass",
+      "title": {
+        "en": "Set the bypass",
+        "nl": "Zet de bypass"
+      },
+      "titleFormatted": {
+        "en": "Set the bypass to [[mode]]",
+        "nl": "Zet de bypass op [[mode]]"
+      },
+      "args": [
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "auto",
+              "label": {
+                "en": "Auto",
+                "nl": "Auto"
+              }
+            },
+            {
+              "id": "on",
+              "label": {
+                "en": "Open",
+                "nl": "Open"
+              }
+            },
+            {
+              "id": "off",
+              "label": {
+                "en": "Closed",
+                "nl": "Dicht"
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

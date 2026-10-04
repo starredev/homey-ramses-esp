@@ -43,6 +43,13 @@
         "en": "Away",
         "nl": "Afwezig"
       }
+    },
+    {
+      "id": "off",
+      "title": {
+        "en": "Off",
+        "nl": "Uit"
+      }
     }
   ]
 }

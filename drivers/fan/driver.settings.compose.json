@@ -20,6 +20,63 @@
         }
       },
       {
+        "id": "scheme",
+        "type": "dropdown",
+        "label": {
+          "en": "Brand",
+          "nl": "Merk"
+        },
+        "value": "auto",
+        "hint": {
+          "en": "Brands number their modes differently. Automatic uses Orcon numbering and switches when the unit's remotes reveal another brand.",
+          "nl": "Merken nummeren hun standen verschillend. Automatisch gebruikt de Orcon-nummering en schakelt om als de remotes van de unit een ander merk verraden."
+        },
+        "values": [
+          {
+            "id": "auto",
+            "label": {
+              "en": "Automatic",
+              "nl": "Automatisch"
+            }
+          },
+          {
+            "id": "orcon",
+            "label": {
+              "en": "Orcon",
+              "nl": "Orcon"
+            }
+          },
+          {
+            "id": "itho",
+            "label": {
+              "en": "Itho",
+              "nl": "Itho"
+            }
+          },
+          {
+            "id": "vasco",
+            "label": {
+              "en": "Vasco",
+              "nl": "Vasco"
+            }
+          },
+          {
+            "id": "climarad",
+            "label": {
+              "en": "ClimaRad",
+              "nl": "ClimaRad"
+            }
+          },
+          {
+            "id": "nuaire",
+            "label": {
+              "en": "Nuaire",
+              "nl": "Nuaire"
+            }
+          }
+        ]
+      },
+      {
         "id": "poll_interval",
         "type": "number",
         "label": {

@@ -10,6 +10,7 @@ const SPIN_SECONDS = Object.freeze({
   high: 0.7,
   auto: 1.6,
   away: 5,
+  off: 0,
 });
 
 const PHRASES = Object.freeze({
@@ -19,6 +20,7 @@ const PHRASES = Object.freeze({
     high: 'High',
     auto: 'Auto',
     away: 'Away',
+    off: 'Off',
     unknown: 'Unknown',
     empty: 'No ventilation unit found. Add one first.',
     offline: 'not reachable',
@@ -29,6 +31,7 @@ const PHRASES = Object.freeze({
     high: 'Hoog',
     auto: 'Auto',
     away: 'Afwezig',
+    off: 'Uit',
     unknown: 'Onbekend',
     empty: 'Geen ventilatie-unit gevonden. Voeg er eerst een toe.',
     offline: 'niet bereikbaar',

@@ -1,10 +1,16 @@
 import { ValidationError } from '../../lib/errors.js';
-import { FanModeChanged, ReadingChanged } from '../../lib/domain/events.js';
+import {
+  BypassModeChanged, FanModeChanged, ReadingChanged, SchemeDetected,
+} from '../../lib/domain/events.js';
 import { FanUnit } from '../../lib/domain/FanUnit.js';
 import { FanStatus } from '../../lib/homey/FanStatus.js';
 import { RamsesDevice } from '../../lib/homey/RamsesDevice.js';
 import { FanFlowCards } from '../../lib/homey/flows/FanFlowCards.js';
+import { schemeById } from '../../lib/ramses/FanScheme.js';
 import { isAddress } from '../../lib/ramses/Packet.js';
+
+/** Setting value that lets the unit learn its brand from the bus. */
+const AUTO_SCHEME = 'auto';
 
 /** @typedef {import('../../lib/domain/events.js').DeviceEvent} DeviceEvent */
 /** @typedef {import('../../lib/homey/FanPresenter.js').FanSource} FanSource */
@@ -45,6 +51,10 @@ export default class FanDevice extends RamsesDevice {
       }
     });
 
+    if (this.hasCapability('ramses_bypass_mode')) {
+      this.#listenToBypass();
+    }
+
     await this.#showRemoteWarning(this.getSetting('remote_id'));
     this.#startPolling(this.getSetting('poll_interval'));
     this.homey.setTimeout(() => {
@@ -69,6 +79,7 @@ export default class FanDevice extends RamsesDevice {
       send: (packet) => this.send(packet),
       remote: this.getSetting('remote_id') || null,
       gateway: this.gatewayId,
+      ...this.#schemeOptions(this.getSetting('scheme')),
     });
   }
 
@@ -103,6 +114,15 @@ export default class FanDevice extends RamsesDevice {
       await this.#showStatus(event.mode);
     }
 
+    if (event instanceof BypassModeChanged) {
+      await this.#showBypass(event.mode);
+    }
+
+    if (event instanceof SchemeDetected) {
+      this.log(`The unit numbers its modes as ${event.scheme} does`);
+      await this.setStoreValue('scheme', event.scheme);
+    }
+
     if (event instanceof FanModeChanged || event instanceof ReadingChanged) {
       this.app.publishFan(this.source);
     }
@@ -123,6 +143,10 @@ export default class FanDevice extends RamsesDevice {
       await this.#showRemoteWarning(remote);
     }
 
+    if (changedKeys.includes('scheme')) {
+      this.unit.configure(this.#schemeOptions(newSettings.scheme));
+    }
+
     if (changedKeys.includes('poll_interval')) {
       this.#startPolling(newSettings.poll_interval);
     }
@@ -140,6 +164,42 @@ export default class FanDevice extends RamsesDevice {
     await this.capabilities.add(FanStatus.LABEL_CAPABILITY);
     await this.capabilities.set(FanStatus.LABEL_CAPABILITY, FanStatus.label(mode, this.homey.i18n.getLanguage()));
     this.#indicated = mode;
+  }
+
+  /**
+   * @param {unknown} setting `auto` or the id of a scheme
+   * @returns {{ scheme: import('../../lib/ramses/FanScheme.js').FanScheme, learnScheme: boolean }}
+   */
+  #schemeOptions(setting) {
+    const learn = !setting || setting === AUTO_SCHEME;
+
+    return {
+      scheme: schemeById(learn ? this.getStoreValue('scheme') : String(setting)),
+      learnScheme: learn,
+    };
+  }
+
+  /**
+   * Shows the bypass of a heat recovery unit; units without one never report it.
+   * @param {string} mode
+   */
+  async #showBypass(mode) {
+    if (!this.hasCapability('ramses_bypass_mode')) {
+      await this.capabilities.add('ramses_bypass_mode');
+      this.#listenToBypass();
+    }
+
+    await this.capabilities.set('ramses_bypass_mode', mode);
+  }
+
+  #listenToBypass() {
+    this.registerCapabilityListener('ramses_bypass_mode', async (mode) => {
+      try {
+        await this.unit.setBypass(mode);
+      } catch (error) {
+        throw this.toUserError(error);
+      }
+    });
   }
 
   /** Brings a unit added by an earlier version up to the current layout. */

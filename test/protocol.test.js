@@ -4,9 +4,10 @@ import { ValidationError } from '../lib/errors.js';
 import { codeName, CODE_NAMES } from '../lib/ramses/codes.js';
 import { FanCommands, MAX_BOOST_MINUTES, StatusCode } from '../lib/ramses/commands.js';
 import { decode, decodedCodes, Reading } from '../lib/ramses/decoders.js';
+import { FanMode, fanModes } from '../lib/ramses/FanMode.js';
 import {
-  FanMode, fanModes, modeFromRate, rateFromMode,
-} from '../lib/ramses/FanMode.js';
+  DEFAULT_SCHEME, SCHEMES, schemeById, schemeBySuffix,
+} from '../lib/ramses/FanScheme.js';
 import {
   BROADCAST, isAddress, isDeviceAddress, NO_ADDRESS, Packet, unwrap,
 } from '../lib/ramses/Packet.js';
@@ -153,19 +154,46 @@ describe('addresses', () => {
   });
 });
 
-describe('FanMode', () => {
-  it('maps rate bytes and modes both ways, as Orcon numbers them', () => {
-    assert.equal(modeFromRate('03'), FanMode.HIGH);
-    assert.equal(modeFromRate('00'), FanMode.AWAY);
-    assert.equal(modeFromRate('05'), FanMode.AUTO);
-    assert.equal(modeFromRate('99'), null);
-    assert.equal(rateFromMode(FanMode.LOW), '01');
-    assert.equal(rateFromMode(FanMode.AWAY), '00');
-    assert.deepEqual(fanModes(), ['low', 'medium', 'high', 'auto', 'away']);
+describe('FanScheme', () => {
+  it('numbers Orcon modes as confirmed on a live unit', () => {
+    const orcon = SCHEMES.orcon;
+
+    assert.equal(orcon.modeOf('03'), FanMode.HIGH);
+    assert.equal(orcon.modeOf('00'), FanMode.AWAY);
+    assert.equal(orcon.modeOf('05'), FanMode.AUTO);
+    assert.equal(orcon.modeOf('07'), FanMode.OFF);
+    assert.equal(orcon.modeOf('99'), null);
+    assert.equal(orcon.rateOf(FanMode.LOW), '01');
+    assert.equal(orcon.suffix, '04');
+    assert.equal(DEFAULT_SCHEME, orcon);
   });
 
-  it('rejects unknown modes', () => {
-    assert.throws(() => rateFromMode('turbo'), ValidationError);
+  it('numbers the same byte differently per brand', () => {
+    assert.equal(SCHEMES.orcon.modeOf('04'), FanMode.AUTO);
+    assert.equal(SCHEMES.itho.modeOf('04'), FanMode.HIGH);
+    assert.equal(SCHEMES.vasco.modeOf('04'), FanMode.HIGH);
+    assert.equal(SCHEMES.vasco.rateOf(FanMode.AUTO), '05');
+    assert.equal(SCHEMES.nuaire.modeOf('03'), FanMode.HIGH);
+  });
+
+  it('rejects modes a brand does not have', () => {
+    assert.throws(() => SCHEMES.itho.rateOf(FanMode.AUTO), ValidationError);
+    assert.throws(() => SCHEMES.nuaire.rateOf('turbo'), ValidationError);
+    assert.equal(SCHEMES.nuaire.supports(FanMode.LOW), false);
+    assert.deepEqual(SCHEMES.nuaire.modes(), ['medium', 'high']);
+  });
+
+  it('finds schemes by id and by the last byte of a command', () => {
+    assert.equal(schemeById('vasco'), SCHEMES.vasco);
+    assert.equal(schemeById('nonsense'), DEFAULT_SCHEME);
+    assert.equal(schemeById(undefined), DEFAULT_SCHEME);
+    assert.equal(schemeBySuffix('06'), SCHEMES.vasco);
+    assert.equal(schemeBySuffix('0a'), SCHEMES.nuaire);
+    assert.equal(schemeBySuffix('04'), null);
+  });
+
+  it('lists the modes a user can choose', () => {
+    assert.deepEqual(fanModes(), ['low', 'medium', 'high', 'auto', 'away', 'off']);
   });
 });
 
@@ -220,7 +248,7 @@ describe('decode', () => {
   });
 
   it('leaves out the mode for fan info values without a remote mode', () => {
-    const payload = `${STATUS_31DA.slice(0, 36)  }15${  STATUS_31DA.slice(38)}`;
+    const payload = `${STATUS_31DA.slice(0, 36)}1A${STATUS_31DA.slice(38)}`;
     const decoded = decode(parsed(`RP --- 29:233244 18:203612 --:------ 31DA 029 ${payload}`));
 
     assert.equal(decoded.mode, undefined);
@@ -228,16 +256,25 @@ describe('decode', () => {
 
   it('reads the fan speed of 31D9, or the mode an Orcon unit reports', () => {
     assert.deepEqual(decode(parsed(' I --- 29:233244 --:------ 29:233244 31D9 003 00FFC8')).readings, { fanSpeed: 100 });
-    assert.deepEqual(decode(parsed(' I --- 29:230662 --:------ 29:230662 31D9 003 000003')), { mode: 'high' });
-    assert.deepEqual(decode(parsed(' I --- 29:230662 --:------ 29:230662 31D9 003 000006')), { mode: 'high' });
-    assert.deepEqual(decode(parsed(' I --- 29:230662 --:------ 29:230662 31D9 003 000007')), {});
-    assert.deepEqual(decode(parsed(' I --- 29:230662 --:------ 29:230662 31D9 003 000080')).readings, { fanSpeed: 64 });
+    assert.deepEqual(decode(parsed(' I --- 29:230662 --:------ 29:230662 31D9 003 000003')), {
+      readings: { fault: false, filterDirty: false, frostProtection: false },
+      mode: 'high',
+    });
+    assert.equal(decode(parsed(' I --- 29:230662 --:------ 29:230662 31D9 003 000006')).mode, 'high');
+    assert.equal(decode(parsed(' I --- 29:230662 --:------ 29:230662 31D9 003 00A004')).readings?.fault, true);
+    assert.equal(decode(parsed(' I --- 32:155617 --:------ 32:155617 31D9 003 000003'), { scheme: SCHEMES.itho }).readings?.fanSpeed, 1.5);
+    assert.equal(decode(parsed(' I --- 29:230662 --:------ 29:230662 31D9 003 000007')).mode, 'off');
+    assert.equal(decode(parsed(' I --- 29:230662 --:------ 29:230662 31D9 003 000080')).readings?.fanSpeed, 64);
     assert.deepEqual(decode(parsed(' I --- 29:233244 --:------ 29:233244 31D9 003 00FFFF')), {});
   });
 
-  it('reads filter days, and ignores unknown days', () => {
-    assert.deepEqual(decode(parsed('RP --- 29:233244 18:203612 --:------ 10D0 004 00146E80')).readings, { filterDays: 20 });
-    assert.deepEqual(decode(parsed('RP --- 29:233244 18:203612 --:------ 10D0 004 00FF6E80')), {});
+  it('reads filter days and percentage, and ignores unknown days', () => {
+    assert.deepEqual(decode(parsed('RP --- 29:233244 18:203612 --:------ 10D0 004 00146E80')).readings, {
+      filterDays: 20,
+      filterRemaining: 64,
+    });
+    assert.deepEqual(decode(parsed('RP --- 29:233244 18:203612 --:------ 10D0 004 00FF6E80')).readings, { filterRemaining: 64 });
+    assert.deepEqual(decode(parsed('RP --- 29:233244 18:203612 --:------ 10D0 001 00')), {});
   });
 
   it('reads the battery and its low flag', () => {
@@ -298,6 +335,17 @@ describe('FanCommands', () => {
     assert.throws(() => commands.boost(0), ValidationError);
     assert.throws(() => commands.boost(MAX_BOOST_MINUTES + 1), ValidationError);
     assert.throws(() => commands.boost(Number.NaN), ValidationError);
+  });
+
+  it('sets the bypass, and uses the numbering of other brands', () => {
+    assert.equal(commands.setBypass('auto').payload, '00FFEF');
+    assert.equal(commands.setBypass('off').payload, '0000EF');
+    assert.throws(() => commands.setBypass('half'), ValidationError);
+
+    const vasco = new FanCommands({ remote: '29:173894', unit: '32:123456', scheme: SCHEMES.vasco });
+
+    assert.equal(vasco.setMode('auto').payload, '000506');
+    assert.equal(vasco.boost(30).payload, '00001E');
   });
 
   it('resets the filter and requests the status', () => {

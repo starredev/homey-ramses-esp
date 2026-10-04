@@ -624,6 +624,14 @@ describe('FanFlowCards', () => {
     assert.deepEqual(FanFlowCards.translate(new ReadingChanged('co2', 1, undefined)), []);
   });
 
+  it('fires fault and filter triggers on changes, not on a healthy first report', () => {
+    assert.deepEqual(FanFlowCards.translate(new ReadingChanged('fault', false, undefined)), []);
+    assert.deepEqual(FanFlowCards.translate(new ReadingChanged('fault', true, false)), [{ card: FanCards.FAULT_ON }]);
+    assert.deepEqual(FanFlowCards.translate(new ReadingChanged('fault', false, true)), [{ card: FanCards.FAULT_OFF }]);
+    assert.deepEqual(FanFlowCards.translate(new ReadingChanged('filterDirty', true, false)), [{ card: FanCards.FILTER_DIRTY }]);
+    assert.deepEqual(FanFlowCards.translate(new ReadingChanged('filterDirty', false, true)), []);
+  });
+
   it('wires conditions and actions to the unit', async () => {
     const flow = new FakeFlow();
     /** @type {string[]} */
@@ -634,6 +642,8 @@ describe('FanFlowCards', () => {
       boost: async (/** @type {number} */ minutes) => calls.push(`boost:${minutes}`),
       resetFilter: async () => calls.push('filter'),
       requestStatus: async () => calls.push('status'),
+      setBypass: async (/** @type {string} */ mode) => calls.push(`bypass:${mode}`),
+      reading: (/** @type {string} */ key) => (key === 'fault' ? true : undefined),
     };
     const device = { unit };
 
@@ -645,7 +655,10 @@ describe('FanFlowCards', () => {
     await flow.actions.get(FanCards.RESET_FILTER)?.({ device });
     await flow.actions.get(FanCards.REQUEST_STATUS)?.({ device });
 
-    assert.deepEqual(calls, ['mode:low', 'boost:15', 'filter', 'status']);
+    await flow.actions.get(FanCards.SET_BYPASS)?.({ device, mode: 'auto' });
+    assert.equal(await flow.conditions.get(FanCards.HAS_FAULT)?.({ device }), true);
+
+    assert.deepEqual(calls, ['mode:low', 'boost:15', 'filter', 'status', 'bypass:auto']);
     assert.equal(await flow.triggers.get(FanCards.MODE_CHANGED_TO).listener({ mode: 'high' }, { mode: 'high' }), true);
     assert.equal(await flow.triggers.get(FanCards.MODE_CHANGED_TO).listener({ mode: 'low' }, { mode: 'high' }), false);
   });

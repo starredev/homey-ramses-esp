@@ -6,10 +6,12 @@ import { DeviceModel } from '../lib/domain/DeviceModel.js';
 import {
   BoostStarted,
   ButtonPressed,
+  BypassModeChanged,
   DeviceInfoReceived,
   DeviceDiscovered,
   FanModeChanged,
   ReadingChanged,
+  SchemeDetected,
   Source,
 } from '../lib/domain/events.js';
 import { FanUnit } from '../lib/domain/FanUnit.js';
@@ -18,6 +20,7 @@ import { BOOST_BUTTON, Remote } from '../lib/domain/Remote.js';
 import { RepeatFilter } from '../lib/domain/RepeatFilter.js';
 import { StatusProbe } from '../lib/domain/StatusProbe.js';
 import { BusScanner, Role, roleOf } from '../lib/ramses/BusScanner.js';
+import { SCHEMES } from '../lib/ramses/FanScheme.js';
 import { Packet } from '../lib/ramses/Packet.js';
 import { FakeConnection, FakeTimers } from './fakes.js';
 import { STATUS_31DA } from './fixtures.js';
@@ -312,7 +315,7 @@ describe('FanUnit', () => {
     await fan.resetFilter();
     await fan.requestStatus();
 
-    assert.deepEqual(sent.map((frame) => frame.code), ['22F3', '10D0', '31D9', '31DA', '12A0']);
+    assert.deepEqual(sent.map((frame) => frame.code), ['22F3', '10D0', '31D9', '31DA', '12A0', '10D0', '22F7']);
     assert.equal(sent[2].src, GATEWAY);
     assert.equal(sent[2].verb, 'RQ');
     assert.deepEqual(events, [new BoostStarted(20, Source.HOMEY, REMOTE)]);
@@ -326,8 +329,8 @@ describe('FanUnit', () => {
     }
 
     assert.deepEqual(sent.map((frame) => frame.code), [
-      '31D9', '31DA', '12A0',
-      '31D9', '31DA', '12A0',
+      '31D9', '31DA', '12A0', '10D0', '22F7',
+      '31D9', '31DA', '12A0', '10D0', '22F7',
       '31D9',
       '31D9',
     ]);
@@ -370,7 +373,11 @@ describe('FanUnit', () => {
     fan.accept(packet(`RP --- ${UNIT} ${GATEWAY} --:------ 31D9 003 000004`));
 
     assert.equal(fan.mode, 'auto');
-    assert.deepEqual(events, [new FanModeChanged('auto', null, Source.UNIT)]);
+    assert.deepEqual(events.filter((event) => event instanceof FanModeChanged), [
+      new FanModeChanged('auto', null, Source.UNIT),
+    ]);
+    assert.equal(fan.reading('fault'), false);
+    assert.equal(fan.reading('filterDirty'), false);
   });
 
   it('follows a timed boost of a control sensor (Orcon CO2 15RF)', () => {
@@ -383,6 +390,52 @@ describe('FanUnit', () => {
       new FanModeChanged('high', null, Source.REMOTE, SENSOR),
       new BoostStarted(60, Source.REMOTE, SENSOR),
     ]);
+  });
+
+  it('learns the brand when a remote reveals it, unless told not to', () => {
+    const { fan, events } = unit();
+
+    fan.accept(packet(` I --- ${REMOTE} ${UNIT} --:------ 22F1 003 000506`));
+
+    assert.equal(fan.scheme, SCHEMES.vasco);
+    assert.equal(fan.mode, 'auto');
+    assert.ok(events.some((event) => event instanceof SchemeDetected && event.scheme === 'vasco'));
+
+    const fixed = unit();
+
+    fixed.fan.configure({ learnScheme: false });
+    fixed.fan.accept(packet(` I --- ${REMOTE} ${UNIT} --:------ 22F1 003 000506`));
+    assert.equal(fixed.fan.scheme, SCHEMES.orcon);
+  });
+
+  it('commands in the numbering of its brand', async () => {
+    const { fan, sent } = unit();
+
+    fan.configure({ scheme: SCHEMES.itho });
+    await fan.setMode('high');
+    await fan.boost(10);
+
+    assert.deepEqual(sent.map((frame) => frame.payload), ['000404', '00000A']);
+    await assert.rejects(fan.setMode('auto'), ValidationError);
+  });
+
+  it('follows and sets the bypass of a heat recovery unit', async () => {
+    const { fan, sent, events } = unit();
+
+    fan.accept(packet(`RP --- ${UNIT} ${GATEWAY} --:------ 22F7 003 00FF00`));
+    assert.equal(fan.bypassMode, 'auto');
+    assert.equal(fan.reading('bypass'), 0);
+
+    await fan.setBypass('on');
+    await fan.setBypass('on');
+
+    assert.equal(sent[0].toFrame(), ` W --- ${REMOTE} ${UNIT} --:------ 22F7 003 00C8EF`);
+    assert.deepEqual(events.filter((event) => event instanceof BypassModeChanged), [
+      new BypassModeChanged('auto'),
+      new BypassModeChanged('on'),
+    ]);
+    await assert.rejects(fan.setBypass('half'), ValidationError);
+    assert.equal(fan.supports('22F7'), true);
   });
 
   it('refuses commands without a valid remote or gateway', async () => {

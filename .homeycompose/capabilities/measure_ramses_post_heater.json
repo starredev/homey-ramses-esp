@@ -1,0 +1,18 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Post-heater",
+    "nl": "Naverwarmer"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/timer.svg",
+  "decimals": 0,
+  "min": 0,
+  "insights": true,
+  "units": {
+    "en": "%"
+  },
+  "max": 100
+}
