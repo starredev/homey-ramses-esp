@@ -1,0 +1,18 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Fan speed",
+    "nl": "Ventilatorsnelheid"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/fan.svg",
+  "decimals": 0,
+  "min": 0,
+  "insights": true,
+  "units": {
+    "en": "%"
+  },
+  "max": 100
+}

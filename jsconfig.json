@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "checkJs": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "strictPropertyInitialization": false,
+    "maxNodeModuleJsDepth": 0,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["node", "homey"]
+  },
+  "include": ["app.js", "api.js", "drivers/**/*.js", "lib/**/*.js", "widgets/*/api.js"]
+}

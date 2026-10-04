@@ -1,0 +1,86 @@
+{
+  "device": {
+    "no_gateway": "Er is geen ramses_esp-gateway verbonden. Controleer het gateway-apparaat in Homey.",
+    "no_remote": "Vul het adres in van een afstandsbediening waaraan de unit gekoppeld is (apparaatinstellingen), zodat Homey hem kan bedienen.",
+    "invalid_remote": "Dat is geen geldig adres. Gebruik de vorm 29:123456.",
+    "invalid_address": "Dat is geen geldig adres. Gebruik de vorm 29:123456."
+  },
+  "gateway": {
+    "connecting": "Verbinden met de MQTT-broker…",
+    "disconnected": "MQTT-broker niet bereikbaar",
+    "auth_failed": "De MQTT-broker weigert de gebruikersnaam of het wachtwoord. Controleer de apparaatinstellingen.",
+    "offline": "De ramses_esp meldt dat hij offline is. Controleer de stroom en wifi."
+  },
+  "pair": {
+    "no_gateway": "Voeg eerst je ramses_esp-gateway toe; via die gateway vindt Homey de andere apparaten.",
+    "name": {
+      "fan": "Ventilatie-unit __id__",
+      "remote": "Afstandsbediening __id__",
+      "sensor": "Sensor __id__"
+    },
+    "intro": {
+      "fan": {
+        "title": "Ventilatie-unit zoeken",
+        "text": "Homey toont de ventilatie-units die de gateway gehoord heeft. Staat hij er niet bij? Druk op een knop van de afstandsbediening, wacht een paar seconden en ga verder: de unit antwoordt en verschijnt. Zoeken duurt maximaal 30 seconden. In een appartementencomplex zie je mogelijk ook de units van je buren: kies de jouwe op adres (op de unit, of het FAN-ID uit je oude Home Assistant-config)."
+      },
+      "remote": {
+        "title": "Afstandsbediening zoeken",
+        "text": "Druk nu op een willekeurige knop van de afstandsbediening en ga verder. Zoeken duurt maximaal 30 seconden."
+      },
+      "sensor": {
+        "title": "Sensor zoeken",
+        "text": "Sensoren melden zich om de paar minuten. Met de knop op de sensor (als die er is) meldt hij zich meteen. Zoeken duurt maximaal 30 seconden."
+      }
+    },
+    "broker": {
+      "title": "Verbinden met de MQTT-broker",
+      "intro": "De ramses_esp stuurt wat hij op 868 MHz hoort naar een MQTT-broker. Vul de broker in die hij gebruikt; met de MQTT Broker-app op Homey is dat het adres van je Homey.",
+      "host": "Adres van de broker",
+      "port": "Poort",
+      "username": "Gebruikersnaam",
+      "password": "Wachtwoord",
+      "tls": "TLS gebruiken (mqtts)",
+      "gateway_id": "Gateway-adres (optioneel)",
+      "gateway_hint": "Alleen nodig als de gateway niet automatisch gevonden wordt, bv. 18:203612.",
+      "search": "Gateways zoeken",
+      "invalid": "Vul een geldig broker-adres en een geldige poort in.",
+      "not_reachable": "Op dit adres antwoordt geen MQTT-broker. Controleer het adres, de poort en of de broker draait.",
+      "auth_failed": "De broker weigert de gebruikersnaam of het wachtwoord.",
+      "no_gateways": "Verbonden, maar er heeft geen ramses_esp iets op deze broker gepubliceerd. Controleer de MQTT-instellingen van de ramses_esp, of vul hieronder zijn adres in."
+    }
+  },
+  "settings": {
+    "title": "RAMSES-bus",
+    "gateways": "Gateways",
+    "no_gateways": "Nog geen gateway toegevoegd. Voeg eerst een ramses_esp-gateway toe als apparaat.",
+    "connected": "verbonden",
+    "disconnected": "niet verbonden",
+    "offline": "gateway offline",
+    "devices": "Apparaten op de bus",
+    "no_devices": "Nog geen apparaten gehoord.",
+    "address": "Adres",
+    "role": "Rol",
+    "codes": "Verstuurt",
+    "seen": "Laatst gezien",
+    "in_homey": "In Homey",
+    "live": "Live verkeer",
+    "pause": "Pauzeren",
+    "resume": "Hervatten",
+    "clear": "Wissen",
+    "filter": "Filter (adres of code)",
+    "no_packets": "Wachten op pakketten…",
+    "send": "Frame versturen",
+    "send_hint": "Wordt ongewijzigd verstuurd via de eerste verbonden gateway.",
+    "send_button": "Versturen",
+    "sent": "Verstuurd",
+    "roles": {
+      "gateway": "Gateway",
+      "fan": "Ventilatie-unit",
+      "remote": "Afstandsbediening",
+      "sensor": "Sensor",
+      "unknown": "Onbekend"
+    },
+    "device_count": "apparaten",
+    "packet_count": "pakketten"
+  }
+}

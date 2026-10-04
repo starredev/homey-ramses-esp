@@ -1,0 +1,38 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Bus",
+      "nl": "Bus"
+    },
+    "children": [
+      {
+        "id": "model",
+        "type": "label",
+        "label": {
+          "en": "Model",
+          "nl": "Type"
+        },
+        "value": "-"
+      },
+      {
+        "id": "address",
+        "type": "label",
+        "label": {
+          "en": "Address",
+          "nl": "Adres"
+        },
+        "value": "-"
+      },
+      {
+        "id": "gateway",
+        "type": "label",
+        "label": {
+          "en": "Found through gateway",
+          "nl": "Gevonden via gateway"
+        },
+        "value": "-"
+      }
+    ]
+  }
+]

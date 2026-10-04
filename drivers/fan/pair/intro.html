@@ -1,0 +1,36 @@
+<style>
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    text-align: center;
+    padding-top: 24px;
+  }
+
+  .intro svg {
+    width: 96px;
+    height: 96px;
+    color: #0E7C66;
+  }
+</style>
+
+<div class="intro" data-role="fan">
+  <svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" aria-hidden="true">
+    <circle cx="48" cy="48" r="6" fill="currentColor" stroke="none" />
+    <path d="M32 32a22.6 22.6 0 0 0 0 32" />
+    <path d="M64 32a22.6 22.6 0 0 1 0 32" />
+    <path d="M21 21a38 38 0 0 0 0 54" />
+    <path d="M75 21a38 38 0 0 1 0 54" />
+  </svg>
+  <p class="homey-subtitle" id="intro-text"></p>
+</div>
+
+<script type="text/javascript">
+  (function showIntro() {
+    const role = document.querySelector('.intro').dataset.role;
+
+    Homey.setTitle(Homey.__(`pair.intro.${role}.title`));
+    document.getElementById('intro-text').textContent = Homey.__(`pair.intro.${role}.text`);
+  })();
+</script>

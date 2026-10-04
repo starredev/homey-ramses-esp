@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Last button",
+    "nl": "Laatste knop"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/remote.svg"
+}

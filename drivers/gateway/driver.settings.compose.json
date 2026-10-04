@@ -1,0 +1,80 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "MQTT broker",
+      "nl": "MQTT-broker"
+    },
+    "children": [
+      {
+        "id": "host",
+        "type": "text",
+        "label": {
+          "en": "Host",
+          "nl": "Host"
+        },
+        "value": "",
+        "hint": {
+          "en": "IP address of the MQTT broker, often your Homey with the MQTT Broker app.",
+          "nl": "IP-adres van de MQTT-broker, vaak je Homey met de MQTT Broker-app."
+        }
+      },
+      {
+        "id": "port",
+        "type": "number",
+        "label": {
+          "en": "Port",
+          "nl": "Poort"
+        },
+        "value": 1883,
+        "min": 1,
+        "max": 65535
+      },
+      {
+        "id": "username",
+        "type": "text",
+        "label": {
+          "en": "User name",
+          "nl": "Gebruikersnaam"
+        },
+        "value": ""
+      },
+      {
+        "id": "password",
+        "type": "password",
+        "label": {
+          "en": "Password",
+          "nl": "Wachtwoord"
+        },
+        "value": ""
+      },
+      {
+        "id": "tls",
+        "type": "checkbox",
+        "label": {
+          "en": "Use TLS (mqtts)",
+          "nl": "TLS gebruiken (mqtts)"
+        },
+        "value": false
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
+      "en": "Gateway",
+      "nl": "Gateway"
+    },
+    "children": [
+      {
+        "id": "gateway_id",
+        "type": "label",
+        "label": {
+          "en": "Gateway address",
+          "nl": "Gateway-adres"
+        },
+        "value": "-"
+      }
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Air quality",
+    "nl": "Luchtkwaliteit"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/air.svg",
+  "decimals": 0,
+  "min": 0,
+  "insights": true,
+  "units": {
+    "en": "%"
+  },
+  "max": 100
+}

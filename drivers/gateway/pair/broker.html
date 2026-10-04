@@ -1,0 +1,146 @@
+<style>
+  .broker {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .broker .row {
+    display: grid;
+    grid-template-columns: 1fr 96px;
+    gap: 8px;
+  }
+
+  .broker .error {
+    color: #DC2626;
+    min-height: 20px;
+  }
+
+  .broker .hint {
+    opacity: 0.7;
+  }
+</style>
+
+<form class="broker" id="broker-form">
+  <p class="homey-subtitle" data-i18n="pair.broker.intro"></p>
+
+  <div class="row">
+    <fieldset class="homey-form-fieldset">
+      <label class="homey-form-label" for="broker-host" data-i18n="pair.broker.host"></label>
+      <input class="homey-form-input" id="broker-host" type="text" placeholder="192.168.1.20"
+        autocomplete="off" autocapitalize="off" spellcheck="false" required>
+    </fieldset>
+    <fieldset class="homey-form-fieldset">
+      <label class="homey-form-label" for="broker-port" data-i18n="pair.broker.port"></label>
+      <input class="homey-form-input" id="broker-port" type="number" min="1" max="65535" value="1883" required>
+    </fieldset>
+  </div>
+
+  <fieldset class="homey-form-fieldset">
+    <label class="homey-form-label" for="broker-username" data-i18n="pair.broker.username"></label>
+    <input class="homey-form-input" id="broker-username" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+  </fieldset>
+
+  <fieldset class="homey-form-fieldset">
+    <label class="homey-form-label" for="broker-password" data-i18n="pair.broker.password"></label>
+    <input class="homey-form-input" id="broker-password" type="password" autocomplete="off">
+  </fieldset>
+
+  <label class="homey-form-checkbox">
+    <input class="homey-form-checkbox-input" id="broker-tls" type="checkbox">
+    <span class="homey-form-checkbox-checkmark"></span>
+    <span class="homey-form-checkbox-text" data-i18n="pair.broker.tls"></span>
+  </label>
+
+  <fieldset class="homey-form-fieldset">
+    <label class="homey-form-label" for="broker-gateway" data-i18n="pair.broker.gateway_id"></label>
+    <input class="homey-form-input" id="broker-gateway" type="text" placeholder="18:203612"
+      autocomplete="off" autocapitalize="off" spellcheck="false">
+  </fieldset>
+  <p class="homey-text-small hint" data-i18n="pair.broker.gateway_hint"></p>
+
+  <p class="homey-text-small error" id="broker-error" role="alert"></p>
+
+  <button class="homey-button-primary-full" id="broker-submit" type="submit" data-i18n="pair.broker.search"></button>
+</form>
+
+<script type="text/javascript">
+  /**
+   * Pairing view: connect to the MQTT broker and look for ramses_esp gateways.
+   */
+  class BrokerView {
+    #form = document.getElementById('broker-form');
+
+    #fields = {
+      host: document.getElementById('broker-host'),
+      port: document.getElementById('broker-port'),
+      username: document.getElementById('broker-username'),
+      password: document.getElementById('broker-password'),
+      tls: document.getElementById('broker-tls'),
+      gatewayId: document.getElementById('broker-gateway'),
+    };
+
+    #error = document.getElementById('broker-error');
+
+    #submit = document.getElementById('broker-submit');
+
+    async start() {
+      Homey.setTitle(Homey.__('pair.broker.title'));
+
+      for (const node of this.#form.querySelectorAll('[data-i18n]')) {
+        node.textContent = Homey.__(node.dataset.i18n);
+      }
+
+      this.#form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        this.#search();
+      });
+
+      try {
+        const defaults = await Homey.emit('broker_defaults');
+
+        if (defaults?.host && !this.#fields.host.value) {
+          this.#fields.host.value = defaults.host;
+        }
+      } catch {
+        // Defaults are a convenience; the user can always type the address.
+      }
+
+      this.#fields.host.focus();
+    }
+
+    async #search() {
+      this.#setBusy(true);
+      this.#error.textContent = '';
+
+      try {
+        await Homey.emit('find_gateways', this.#input());
+        Homey.showView('list_devices');
+      } catch (error) {
+        this.#error.textContent = error?.message ?? String(error);
+        this.#setBusy(false);
+      }
+    }
+
+    #input() {
+      return {
+        host: this.#fields.host.value,
+        port: this.#fields.port.value,
+        username: this.#fields.username.value,
+        password: this.#fields.password.value,
+        tls: this.#fields.tls.checked,
+        gatewayId: this.#fields.gatewayId.value,
+      };
+    }
+
+    /**
+     * @param {boolean} busy
+     */
+    #setBusy(busy) {
+      this.#submit.disabled = busy;
+      this.#submit.classList.toggle('is-loading', busy);
+    }
+  }
+
+  new BrokerView().start();
+</script>

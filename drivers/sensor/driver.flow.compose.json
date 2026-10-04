@@ -1,0 +1,103 @@
+{
+  "triggers": [
+    {
+      "id": "sensor_button_pressed",
+      "title": {
+        "en": "A button was pressed",
+        "nl": "Er werd een knop ingedrukt"
+      },
+      "titleFormatted": {
+        "en": "The [[button]] button was pressed",
+        "nl": "De knop [[button]] werd ingedrukt"
+      },
+      "args": [
+        {
+          "name": "button",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "low",
+              "label": {
+                "en": "Low",
+                "nl": "Laag"
+              }
+            },
+            {
+              "id": "medium",
+              "label": {
+                "en": "Medium",
+                "nl": "Midden"
+              }
+            },
+            {
+              "id": "high",
+              "label": {
+                "en": "High",
+                "nl": "Hoog"
+              }
+            },
+            {
+              "id": "auto",
+              "label": {
+                "en": "Auto",
+                "nl": "Auto"
+              }
+            },
+            {
+              "id": "away",
+              "label": {
+                "en": "Away",
+                "nl": "Afwezig"
+              }
+            },
+            {
+              "id": "boost",
+              "label": {
+                "en": "Boost / timer",
+                "nl": "Boost / timer"
+              }
+            }
+          ]
+        }
+      ],
+      "tokens": [
+        {
+          "name": "minutes",
+          "type": "number",
+          "title": {
+            "en": "Boost minutes",
+            "nl": "Boost-minuten"
+          },
+          "example": 30
+        }
+      ]
+    },
+    {
+      "id": "sensor_any_button_pressed",
+      "title": {
+        "en": "Any button was pressed",
+        "nl": "Een willekeurige knop werd ingedrukt"
+      },
+      "tokens": [
+        {
+          "name": "button",
+          "type": "string",
+          "title": {
+            "en": "Button",
+            "nl": "Knop"
+          },
+          "example": "high"
+        },
+        {
+          "name": "minutes",
+          "type": "number",
+          "title": {
+            "en": "Boost minutes",
+            "nl": "Boost-minuten"
+          },
+          "example": 0
+        }
+      ]
+    }
+  ]
+}

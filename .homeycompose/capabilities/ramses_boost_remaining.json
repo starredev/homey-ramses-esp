@@ -1,0 +1,17 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Boost time left",
+    "nl": "Boost: resterende tijd"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/timer.svg",
+  "decimals": 0,
+  "min": 0,
+  "insights": false,
+  "units": {
+    "en": "min"
+  }
+}

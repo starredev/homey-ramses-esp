@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Devices on the bus",
+    "nl": "Apparaten op de bus"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/bus.svg",
+  "decimals": 0,
+  "min": 0,
+  "insights": false
+}

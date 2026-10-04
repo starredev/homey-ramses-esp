@@ -1,0 +1,77 @@
+{
+  "id": "io.github.starredev.ramses",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "RAMSES ESP",
+    "nl": "RAMSES ESP"
+  },
+  "description": {
+    "en": "Control your 868 MHz ventilation unit and use its remotes and sensors in flows.",
+    "nl": "Bedien je 868 MHz-ventilatie-unit en gebruik de remotes en sensoren in flows."
+  },
+  "category": [
+    "climate"
+  ],
+  "tags": {
+    "en": [
+      "ramses",
+      "ramses_esp",
+      "ventilation",
+      "orcon",
+      "itho",
+      "vasco",
+      "evohome",
+      "mqtt",
+      "868"
+    ],
+    "nl": [
+      "ramses",
+      "ramses_esp",
+      "ventilatie",
+      "wtw",
+      "orcon",
+      "itho",
+      "vasco",
+      "mqtt",
+      "868"
+    ]
+  },
+  "brandColor": "#0E7C66",
+  "permissions": [],
+  "author": {
+    "name": "Bryan"
+  },
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "api": {
+    "getGateways": {
+      "method": "GET",
+      "path": "/gateways"
+    },
+    "getDevices": {
+      "method": "GET",
+      "path": "/devices"
+    },
+    "getPackets": {
+      "method": "GET",
+      "path": "/packets"
+    },
+    "sendFrame": {
+      "method": "POST",
+      "path": "/send"
+    }
+  },
+  "source": "https://github.com/starredev/homey-ramses-esp",
+  "bugs": {
+    "url": "https://github.com/starredev/homey-ramses-esp/issues"
+  }
+}

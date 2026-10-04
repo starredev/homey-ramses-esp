@@ -1,0 +1,79 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Control",
+      "nl": "Bediening"
+    },
+    "children": [
+      {
+        "id": "remote_id",
+        "type": "text",
+        "label": {
+          "en": "Remote address",
+          "nl": "Adres van de afstandsbediening"
+        },
+        "value": "",
+        "hint": {
+          "en": "Homey sends commands in the name of a remote the unit is bound to, e.g. 29:173894. It is filled in automatically when the remote was seen on the bus.",
+          "nl": "Homey verstuurt commando's namens een afstandsbediening waaraan de unit gekoppeld is, bv. 29:173894. Wordt automatisch ingevuld als de remote op de bus gezien is."
+        }
+      },
+      {
+        "id": "poll_interval",
+        "type": "number",
+        "label": {
+          "en": "Ask for status every",
+          "nl": "Status opvragen elke"
+        },
+        "value": 5,
+        "min": 0,
+        "max": 60,
+        "units": {
+          "en": "min",
+          "nl": "min"
+        },
+        "hint": {
+          "en": "0 turns asking off; the unit still reports on its own.",
+          "nl": "0 zet opvragen uit; de unit meldt zich daarnaast zelf."
+        }
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
+      "en": "Bus",
+      "nl": "Bus"
+    },
+    "children": [
+      {
+        "id": "model",
+        "type": "label",
+        "label": {
+          "en": "Model",
+          "nl": "Type"
+        },
+        "value": "-"
+      },
+      {
+        "id": "address",
+        "type": "label",
+        "label": {
+          "en": "Address",
+          "nl": "Adres"
+        },
+        "value": "-"
+      },
+      {
+        "id": "gateway",
+        "type": "label",
+        "label": {
+          "en": "Found through gateway",
+          "nl": "Gevonden via gateway"
+        },
+        "value": "-"
+      }
+    ]
+  }
+]

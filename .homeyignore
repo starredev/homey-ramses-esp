@@ -1,0 +1,6 @@
+# Development files that are not part of the app bundle.
+test/
+coverage/
+eslint.config.js
+jsconfig.json
+*.md

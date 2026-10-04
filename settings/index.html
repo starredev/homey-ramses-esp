@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script>
+      // Homey calls onHomeyReady once the bridge is available; expose it as a promise for the module.
+      window.homeyReady = new Promise((resolve) => {
+        window.onHomeyReady = resolve;
+      });
+    </script>
+    <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+    <script type="module" src="bus-view.js"></script>
+    <style>
+      :root {
+        --accent: #0E7C66;
+        --line: rgba(127, 127, 127, 0.25);
+        --muted: rgba(127, 127, 127, 0.9);
+      }
+
+      section {
+        margin-bottom: 24px;
+      }
+
+      .gateways {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .gateway {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #DC2626;
+        flex: none;
+      }
+
+      .dot.ok {
+        background: #16A34A;
+      }
+
+      .dot.warn {
+        background: #F59E0B;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .mono,
+      .homey-form-input.mono,
+      .homey-form-input.mono::placeholder {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 12px;
+        font-variant-ligatures: none;
+        letter-spacing: 0;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 6px 8px 6px 0;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      th {
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .role {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 1px 8px;
+        font-size: 12px;
+        border: 1px solid var(--line);
+        white-space: nowrap;
+      }
+
+      .role.fan {
+        background: rgba(14, 124, 102, 0.15);
+      }
+
+      .role.remote {
+        background: rgba(59, 130, 246, 0.15);
+      }
+
+      .role.sensor {
+        background: rgba(245, 158, 11, 0.18);
+      }
+
+      .role.gateway {
+        background: rgba(127, 127, 127, 0.18);
+      }
+
+      .bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin: 8px 0;
+      }
+
+      .bar input {
+        flex: 1;
+        min-width: 140px;
+      }
+
+      .packets {
+        max-height: 360px;
+        overflow-y: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 6px 8px;
+      }
+
+      .packet {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        gap: 2px 8px;
+        padding: 4px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .packet:last-child {
+        border-bottom: none;
+      }
+
+      .packet.echo {
+        opacity: 0.6;
+      }
+
+      .packet .name {
+        grid-column: 2;
+      }
+
+      .packet .decoded {
+        grid-column: 2;
+        color: var(--accent);
+      }
+
+      .status {
+        min-height: 20px;
+      }
+
+      .status.error {
+        color: #DC2626;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="homey-title" data-i18n="settings.title"></h1>
+
+    <section>
+      <h2 class="homey-subtitle" data-i18n="settings.gateways"></h2>
+      <div class="gateways" id="gateways"></div>
+    </section>
+
+    <section>
+      <h2 class="homey-subtitle" data-i18n="settings.devices"></h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="settings.address"></th>
+              <th data-i18n="settings.role"></th>
+              <th data-i18n="settings.codes"></th>
+              <th data-i18n="settings.seen"></th>
+            </tr>
+          </thead>
+          <tbody id="devices"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="homey-subtitle" data-i18n="settings.live"></h2>
+      <div class="bar">
+        <input class="homey-form-input" id="filter" type="search" autocomplete="off" spellcheck="false">
+        <button class="homey-button-secondary-small" id="pause" type="button" data-i18n="settings.pause"></button>
+        <button class="homey-button-secondary-small" id="clear" type="button" data-i18n="settings.clear"></button>
+      </div>
+      <div class="packets mono" id="packets" aria-live="polite"></div>
+    </section>
+
+    <section>
+      <h2 class="homey-subtitle" data-i18n="settings.send"></h2>
+      <form class="bar" id="send-form">
+        <input class="homey-form-input mono" id="frame" type="text" autocomplete="off" spellcheck="false"
+          placeholder=" I --- 29:173894 29:233244 --:------ 22F1 003 000304">
+        <button class="homey-button-primary-small" type="submit" data-i18n="settings.send_button"></button>
+      </form>
+      <p class="homey-text-small muted" data-i18n="settings.send_hint"></p>
+      <p class="homey-text-small status" id="send-status" role="status"></p>
+    </section>
+  </body>
+</html>

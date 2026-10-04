@@ -1,0 +1,6 @@
+{
+  "1.0.0": {
+    "en": "First release: ramses_esp gateways over MQTT, ventilation units with modes, boost and status, remotes and sensors as devices, flow cards for every packet on the bus and a live bus view.",
+    "nl": "Eerste versie: ramses_esp-gateways via MQTT, ventilatie-units met standen, boost en status, afstandsbedieningen en sensoren als apparaten, flowkaarten voor elk pakket op de bus en een live busweergave."
+  }
+}

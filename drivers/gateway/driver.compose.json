@@ -1,0 +1,40 @@
+{
+  "name": {
+    "en": "Ramses Gateway",
+    "nl": "Ramses Gateway"
+  },
+  "class": "other",
+  "capabilities": [
+    "ramses_gateway_address",
+    "measure_ramses_bus_devices",
+    "ramses_last_packet"
+  ],
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/small.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "broker"
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "prev": "broker",
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

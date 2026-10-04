@@ -1,0 +1,27 @@
+{
+  "name": {
+    "en": "Ventilation",
+    "nl": "Ventilatie"
+  },
+  "height": 178,
+  "settings": [
+    {
+      "id": "device",
+      "type": "autocomplete",
+      "title": {
+        "en": "Ventilation unit",
+        "nl": "Ventilatie-unit"
+      }
+    }
+  ],
+  "api": {
+    "getState": {
+      "method": "GET",
+      "path": "/"
+    },
+    "setMode": {
+      "method": "PUT",
+      "path": "/mode"
+    }
+  }
+}

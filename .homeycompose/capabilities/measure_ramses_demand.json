@@ -1,0 +1,18 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Ventilation demand",
+    "nl": "Ventilatievraag"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/air.svg",
+  "units": {
+    "en": "%"
+  },
+  "decimals": 0,
+  "min": 0,
+  "max": 100,
+  "insights": true
+}

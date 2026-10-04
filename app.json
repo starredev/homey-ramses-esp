@@ -1,0 +1,1642 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "io.github.starredev.ramses",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "RAMSES ESP",
+    "nl": "RAMSES ESP"
+  },
+  "description": {
+    "en": "Control your 868 MHz ventilation unit and use its remotes and sensors in flows.",
+    "nl": "Bedien je 868 MHz-ventilatie-unit en gebruik de remotes en sensoren in flows."
+  },
+  "category": [
+    "climate"
+  ],
+  "tags": {
+    "en": [
+      "ramses",
+      "ramses_esp",
+      "ventilation",
+      "orcon",
+      "itho",
+      "vasco",
+      "evohome",
+      "mqtt",
+      "868"
+    ],
+    "nl": [
+      "ramses",
+      "ramses_esp",
+      "ventilatie",
+      "wtw",
+      "orcon",
+      "itho",
+      "vasco",
+      "mqtt",
+      "868"
+    ]
+  },
+  "brandColor": "#0E7C66",
+  "permissions": [],
+  "author": {
+    "name": "Bryan"
+  },
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "api": {
+    "getGateways": {
+      "method": "GET",
+      "path": "/gateways"
+    },
+    "getDevices": {
+      "method": "GET",
+      "path": "/devices"
+    },
+    "getPackets": {
+      "method": "GET",
+      "path": "/packets"
+    },
+    "sendFrame": {
+      "method": "POST",
+      "path": "/send"
+    }
+  },
+  "source": "https://github.com/starredev/homey-ramses-esp",
+  "bugs": {
+    "url": "https://github.com/starredev/homey-ramses-esp/issues"
+  },
+  "esm": true,
+  "flow": {
+    "triggers": [
+      {
+        "id": "fan_mode_changed",
+        "title": {
+          "en": "The fan mode changed",
+          "nl": "De ventilatiestand veranderde"
+        },
+        "tokens": [
+          {
+            "name": "mode",
+            "type": "string",
+            "title": {
+              "en": "Mode",
+              "nl": "Stand"
+            },
+            "example": "high"
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Changed by",
+              "nl": "Veranderd door"
+            },
+            "example": "remote"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          }
+        ]
+      },
+      {
+        "id": "fan_mode_changed_to",
+        "title": {
+          "en": "The fan mode changed to…",
+          "nl": "De ventilatiestand veranderde naar…"
+        },
+        "titleFormatted": {
+          "en": "The fan mode changed to [[mode]]",
+          "nl": "De ventilatiestand veranderde naar [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low",
+                  "nl": "Laag"
+                }
+              },
+              {
+                "id": "medium",
+                "label": {
+                  "en": "Medium",
+                  "nl": "Midden"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High",
+                  "nl": "Hoog"
+                }
+              },
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto",
+                  "nl": "Auto"
+                }
+              },
+              {
+                "id": "away",
+                "label": {
+                  "en": "Away",
+                  "nl": "Afwezig"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "boost_started",
+        "title": {
+          "en": "A boost started",
+          "nl": "Een boost is gestart"
+        },
+        "tokens": [
+          {
+            "name": "minutes",
+            "type": "number",
+            "title": {
+              "en": "Minutes",
+              "nl": "Minuten"
+            },
+            "example": 30
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Started by",
+              "nl": "Gestart door"
+            },
+            "example": "remote"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          }
+        ]
+      },
+      {
+        "id": "packet_received",
+        "title": {
+          "en": "A packet was received",
+          "nl": "Er werd een pakket ontvangen"
+        },
+        "hint": {
+          "en": "Fires for every packet on the bus.",
+          "nl": "Gaat af bij elk pakket op de bus."
+        },
+        "tokens": [
+          {
+            "name": "verb",
+            "type": "string",
+            "title": {
+              "en": "Verb",
+              "nl": "Werkwoord"
+            },
+            "example": "I"
+          },
+          {
+            "name": "src",
+            "type": "string",
+            "title": {
+              "en": "From",
+              "nl": "Van"
+            },
+            "example": "29:173894"
+          },
+          {
+            "name": "dst",
+            "type": "string",
+            "title": {
+              "en": "To",
+              "nl": "Naar"
+            },
+            "example": "29:233244"
+          },
+          {
+            "name": "code",
+            "type": "string",
+            "title": {
+              "en": "Code",
+              "nl": "Code"
+            },
+            "example": "22F1"
+          },
+          {
+            "name": "payload",
+            "type": "string",
+            "title": {
+              "en": "Payload",
+              "nl": "Payload"
+            },
+            "example": "000304"
+          },
+          {
+            "name": "frame",
+            "type": "string",
+            "title": {
+              "en": "Frame",
+              "nl": "Frame"
+            },
+            "example": " I --- 29:173894 29:233244 --:------ 22F1 003 000304"
+          },
+          {
+            "name": "rssi",
+            "type": "number",
+            "title": {
+              "en": "Signal (RSSI)",
+              "nl": "Signaal (RSSI)"
+            },
+            "example": 45
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=gateway"
+          }
+        ]
+      },
+      {
+        "id": "code_received",
+        "title": {
+          "en": "A packet with a code was received",
+          "nl": "Er werd een pakket met een code ontvangen"
+        },
+        "titleFormatted": {
+          "en": "A [[code]] packet was received from or to [[address]]",
+          "nl": "Er werd een [[code]]-pakket ontvangen van of naar [[address]]"
+        },
+        "hint": {
+          "en": "Address * matches any device.",
+          "nl": "Adres * past op elk apparaat."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=gateway"
+          },
+          {
+            "name": "code",
+            "type": "text",
+            "placeholder": {
+              "en": "22F1",
+              "nl": "22F1"
+            }
+          },
+          {
+            "name": "address",
+            "type": "text",
+            "placeholder": {
+              "en": "* or 29:123456",
+              "nl": "* of 29:123456"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "verb",
+            "type": "string",
+            "title": {
+              "en": "Verb",
+              "nl": "Werkwoord"
+            },
+            "example": "I"
+          },
+          {
+            "name": "src",
+            "type": "string",
+            "title": {
+              "en": "From",
+              "nl": "Van"
+            },
+            "example": "29:173894"
+          },
+          {
+            "name": "dst",
+            "type": "string",
+            "title": {
+              "en": "To",
+              "nl": "Naar"
+            },
+            "example": "29:233244"
+          },
+          {
+            "name": "code",
+            "type": "string",
+            "title": {
+              "en": "Code",
+              "nl": "Code"
+            },
+            "example": "22F1"
+          },
+          {
+            "name": "payload",
+            "type": "string",
+            "title": {
+              "en": "Payload",
+              "nl": "Payload"
+            },
+            "example": "000304"
+          },
+          {
+            "name": "frame",
+            "type": "string",
+            "title": {
+              "en": "Frame",
+              "nl": "Frame"
+            },
+            "example": " I --- 29:173894 29:233244 --:------ 22F1 003 000304"
+          },
+          {
+            "name": "rssi",
+            "type": "number",
+            "title": {
+              "en": "Signal (RSSI)",
+              "nl": "Signaal (RSSI)"
+            },
+            "example": 45
+          }
+        ]
+      },
+      {
+        "id": "device_discovered",
+        "title": {
+          "en": "A new device was found on the bus",
+          "nl": "Er werd een nieuw apparaat op de bus gevonden"
+        },
+        "tokens": [
+          {
+            "name": "address",
+            "type": "string",
+            "title": {
+              "en": "Address",
+              "nl": "Adres"
+            },
+            "example": "29:233244"
+          },
+          {
+            "name": "role",
+            "type": "string",
+            "title": {
+              "en": "Role",
+              "nl": "Rol"
+            },
+            "example": "fan"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=gateway"
+          }
+        ]
+      },
+      {
+        "id": "gateway_went_offline",
+        "title": {
+          "en": "The gateway went offline",
+          "nl": "De gateway ging offline"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=gateway"
+          }
+        ]
+      },
+      {
+        "id": "gateway_came_online",
+        "title": {
+          "en": "The gateway came online",
+          "nl": "De gateway kwam online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=gateway"
+          }
+        ]
+      },
+      {
+        "id": "button_pressed",
+        "title": {
+          "en": "A button was pressed",
+          "nl": "Er werd een knop ingedrukt"
+        },
+        "titleFormatted": {
+          "en": "The [[button]] button was pressed",
+          "nl": "De knop [[button]] werd ingedrukt"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=remote"
+          },
+          {
+            "name": "button",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low",
+                  "nl": "Laag"
+                }
+              },
+              {
+                "id": "medium",
+                "label": {
+                  "en": "Medium",
+                  "nl": "Midden"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High",
+                  "nl": "Hoog"
+                }
+              },
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto",
+                  "nl": "Auto"
+                }
+              },
+              {
+                "id": "away",
+                "label": {
+                  "en": "Away",
+                  "nl": "Afwezig"
+                }
+              },
+              {
+                "id": "boost",
+                "label": {
+                  "en": "Boost / timer",
+                  "nl": "Boost / timer"
+                }
+              }
+            ]
+          }
+        ],
+        "tokens": [
+          {
+            "name": "minutes",
+            "type": "number",
+            "title": {
+              "en": "Boost minutes",
+              "nl": "Boost-minuten"
+            },
+            "example": 30
+          }
+        ]
+      },
+      {
+        "id": "any_button_pressed",
+        "title": {
+          "en": "Any button was pressed",
+          "nl": "Een willekeurige knop werd ingedrukt"
+        },
+        "tokens": [
+          {
+            "name": "button",
+            "type": "string",
+            "title": {
+              "en": "Button",
+              "nl": "Knop"
+            },
+            "example": "high"
+          },
+          {
+            "name": "minutes",
+            "type": "number",
+            "title": {
+              "en": "Boost minutes",
+              "nl": "Boost-minuten"
+            },
+            "example": 0
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=remote"
+          }
+        ]
+      },
+      {
+        "id": "sensor_button_pressed",
+        "title": {
+          "en": "A button was pressed",
+          "nl": "Er werd een knop ingedrukt"
+        },
+        "titleFormatted": {
+          "en": "The [[button]] button was pressed",
+          "nl": "De knop [[button]] werd ingedrukt"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          },
+          {
+            "name": "button",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low",
+                  "nl": "Laag"
+                }
+              },
+              {
+                "id": "medium",
+                "label": {
+                  "en": "Medium",
+                  "nl": "Midden"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High",
+                  "nl": "Hoog"
+                }
+              },
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto",
+                  "nl": "Auto"
+                }
+              },
+              {
+                "id": "away",
+                "label": {
+                  "en": "Away",
+                  "nl": "Afwezig"
+                }
+              },
+              {
+                "id": "boost",
+                "label": {
+                  "en": "Boost / timer",
+                  "nl": "Boost / timer"
+                }
+              }
+            ]
+          }
+        ],
+        "tokens": [
+          {
+            "name": "minutes",
+            "type": "number",
+            "title": {
+              "en": "Boost minutes",
+              "nl": "Boost-minuten"
+            },
+            "example": 30
+          }
+        ]
+      },
+      {
+        "id": "sensor_any_button_pressed",
+        "title": {
+          "en": "Any button was pressed",
+          "nl": "Een willekeurige knop werd ingedrukt"
+        },
+        "tokens": [
+          {
+            "name": "button",
+            "type": "string",
+            "title": {
+              "en": "Button",
+              "nl": "Knop"
+            },
+            "example": "high"
+          },
+          {
+            "name": "minutes",
+            "type": "number",
+            "title": {
+              "en": "Boost minutes",
+              "nl": "Boost-minuten"
+            },
+            "example": 0
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sensor"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "fan_mode_is",
+        "title": {
+          "en": "The fan mode !{{is|isn't}}…",
+          "nl": "De ventilatiestand !{{is|is niet}}…"
+        },
+        "titleFormatted": {
+          "en": "The fan mode !{{is|isn't}} [[mode]]",
+          "nl": "De ventilatiestand !{{is|is niet}} [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low",
+                  "nl": "Laag"
+                }
+              },
+              {
+                "id": "medium",
+                "label": {
+                  "en": "Medium",
+                  "nl": "Midden"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High",
+                  "nl": "Hoog"
+                }
+              },
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto",
+                  "nl": "Auto"
+                }
+              },
+              {
+                "id": "away",
+                "label": {
+                  "en": "Away",
+                  "nl": "Afwezig"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "gateway_is_online",
+        "title": {
+          "en": "The gateway !{{is|isn't}} online",
+          "nl": "De gateway !{{is|is niet}} online"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=gateway"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "set_fan_mode",
+        "title": {
+          "en": "Set the fan mode",
+          "nl": "Zet de ventilatiestand"
+        },
+        "titleFormatted": {
+          "en": "Set the fan mode to [[mode]]",
+          "nl": "Zet de ventilatiestand op [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "low",
+                "label": {
+                  "en": "Low",
+                  "nl": "Laag"
+                }
+              },
+              {
+                "id": "medium",
+                "label": {
+                  "en": "Medium",
+                  "nl": "Midden"
+                }
+              },
+              {
+                "id": "high",
+                "label": {
+                  "en": "High",
+                  "nl": "Hoog"
+                }
+              },
+              {
+                "id": "auto",
+                "label": {
+                  "en": "Auto",
+                  "nl": "Auto"
+                }
+              },
+              {
+                "id": "away",
+                "label": {
+                  "en": "Away",
+                  "nl": "Afwezig"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "start_boost",
+        "title": {
+          "en": "Start a boost",
+          "nl": "Start een boost"
+        },
+        "titleFormatted": {
+          "en": "Run on high for [[minutes]] minutes",
+          "nl": "Draai [[minutes]] minuten op hoog"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          },
+          {
+            "name": "minutes",
+            "type": "number",
+            "min": 1,
+            "max": 255,
+            "step": 1,
+            "placeholder": {
+              "en": "30",
+              "nl": "30"
+            }
+          }
+        ]
+      },
+      {
+        "id": "reset_filter",
+        "title": {
+          "en": "Reset the filter counter",
+          "nl": "Zet de filterteller terug"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          }
+        ]
+      },
+      {
+        "id": "request_status",
+        "title": {
+          "en": "Ask the unit for its status",
+          "nl": "Vraag de status van de unit op"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=fan"
+          }
+        ]
+      },
+      {
+        "id": "send_frame",
+        "title": {
+          "en": "Send a raw frame",
+          "nl": "Verstuur een ruw frame"
+        },
+        "titleFormatted": {
+          "en": "Send frame [[frame]]",
+          "nl": "Verstuur frame [[frame]]"
+        },
+        "hint": {
+          "en": "A complete RAMSES II frame, e.g.  I --- 29:173894 29:233244 --:------ 22F1 003 000304",
+          "nl": "Een volledig RAMSES II-frame, bv.  I --- 29:173894 29:233244 --:------ 22F1 003 000304"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=gateway"
+          },
+          {
+            "name": "frame",
+            "type": "text",
+            "placeholder": {
+              "en": " I --- 29:173894 29:233244 --:------ 22F1 003 000304",
+              "nl": " I --- 29:173894 29:233244 --:------ 22F1 003 000304"
+            }
+          }
+        ]
+      },
+      {
+        "id": "send_command",
+        "title": {
+          "en": "Send a command",
+          "nl": "Verstuur een commando"
+        },
+        "titleFormatted": {
+          "en": "Send [[verb]] [[code]] with payload [[payload]] to [[address]]",
+          "nl": "Verstuur [[verb]] [[code]] met payload [[payload]] naar [[address]]"
+        },
+        "hint": {
+          "en": "Sent from the gateway's own address.",
+          "nl": "Wordt verstuurd vanaf het eigen adres van de gateway."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=gateway"
+          },
+          {
+            "name": "verb",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "I",
+                "label": {
+                  "en": "I (inform)",
+                  "nl": "I (melden)"
+                }
+              },
+              {
+                "id": "RQ",
+                "label": {
+                  "en": "RQ (request)",
+                  "nl": "RQ (opvragen)"
+                }
+              },
+              {
+                "id": "W",
+                "label": {
+                  "en": "W (write)",
+                  "nl": "W (schrijven)"
+                }
+              },
+              {
+                "id": "RP",
+                "label": {
+                  "en": "RP (reply)",
+                  "nl": "RP (antwoord)"
+                }
+              }
+            ]
+          },
+          {
+            "name": "code",
+            "type": "text",
+            "placeholder": {
+              "en": "31DA",
+              "nl": "31DA"
+            }
+          },
+          {
+            "name": "payload",
+            "type": "text",
+            "placeholder": {
+              "en": "00",
+              "nl": "00"
+            }
+          },
+          {
+            "name": "address",
+            "type": "text",
+            "placeholder": {
+              "en": "29:123456",
+              "nl": "29:123456"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Ventilation unit",
+        "nl": "Ventilatie-unit"
+      },
+      "class": "fan",
+      "capabilities": [
+        "ramses_fan_mode",
+        "measure_ramses_fan_mode_label"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "rf868"
+      ],
+      "images": {
+        "small": "/drivers/fan/assets/images/small.png",
+        "large": "/drivers/fan/assets/images/large.png",
+        "xlarge": "/drivers/fan/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "intro",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "intro",
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "fan",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Control",
+            "nl": "Bediening"
+          },
+          "children": [
+            {
+              "id": "remote_id",
+              "type": "text",
+              "label": {
+                "en": "Remote address",
+                "nl": "Adres van de afstandsbediening"
+              },
+              "value": "",
+              "hint": {
+                "en": "Homey sends commands in the name of a remote the unit is bound to, e.g. 29:173894. It is filled in automatically when the remote was seen on the bus.",
+                "nl": "Homey verstuurt commando's namens een afstandsbediening waaraan de unit gekoppeld is, bv. 29:173894. Wordt automatisch ingevuld als de remote op de bus gezien is."
+              }
+            },
+            {
+              "id": "poll_interval",
+              "type": "number",
+              "label": {
+                "en": "Ask for status every",
+                "nl": "Status opvragen elke"
+              },
+              "value": 5,
+              "min": 0,
+              "max": 60,
+              "units": {
+                "en": "min",
+                "nl": "min"
+              },
+              "hint": {
+                "en": "0 turns asking off; the unit still reports on its own.",
+                "nl": "0 zet opvragen uit; de unit meldt zich daarnaast zelf."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Bus",
+            "nl": "Bus"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model",
+                "nl": "Type"
+              },
+              "value": "-"
+            },
+            {
+              "id": "address",
+              "type": "label",
+              "label": {
+                "en": "Address",
+                "nl": "Adres"
+              },
+              "value": "-"
+            },
+            {
+              "id": "gateway",
+              "type": "label",
+              "label": {
+                "en": "Found through gateway",
+                "nl": "Gevonden via gateway"
+              },
+              "value": "-"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "Ramses Gateway",
+        "nl": "Ramses Gateway"
+      },
+      "class": "other",
+      "capabilities": [
+        "ramses_gateway_address",
+        "measure_ramses_bus_devices",
+        "ramses_last_packet"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/gateway/assets/images/small.png",
+        "large": "/drivers/gateway/assets/images/large.png",
+        "xlarge": "/drivers/gateway/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "broker"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "broker",
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "gateway",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "MQTT broker",
+            "nl": "MQTT-broker"
+          },
+          "children": [
+            {
+              "id": "host",
+              "type": "text",
+              "label": {
+                "en": "Host",
+                "nl": "Host"
+              },
+              "value": "",
+              "hint": {
+                "en": "IP address of the MQTT broker, often your Homey with the MQTT Broker app.",
+                "nl": "IP-adres van de MQTT-broker, vaak je Homey met de MQTT Broker-app."
+              }
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "label": {
+                "en": "Port",
+                "nl": "Poort"
+              },
+              "value": 1883,
+              "min": 1,
+              "max": 65535
+            },
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "User name",
+                "nl": "Gebruikersnaam"
+              },
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password",
+                "nl": "Wachtwoord"
+              },
+              "value": ""
+            },
+            {
+              "id": "tls",
+              "type": "checkbox",
+              "label": {
+                "en": "Use TLS (mqtts)",
+                "nl": "TLS gebruiken (mqtts)"
+              },
+              "value": false
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Gateway",
+            "nl": "Gateway"
+          },
+          "children": [
+            {
+              "id": "gateway_id",
+              "type": "label",
+              "label": {
+                "en": "Gateway address",
+                "nl": "Gateway-adres"
+              },
+              "value": "-"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "Remote",
+        "nl": "Afstandsbediening"
+      },
+      "class": "remote",
+      "capabilities": [
+        "ramses_last_button"
+      ],
+      "energy": {
+        "batteries": [
+          "OTHER"
+        ]
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "rf868"
+      ],
+      "images": {
+        "small": "/drivers/remote/assets/images/small.png",
+        "large": "/drivers/remote/assets/images/large.png",
+        "xlarge": "/drivers/remote/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "intro",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "intro",
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "remote",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Bus",
+            "nl": "Bus"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model",
+                "nl": "Type"
+              },
+              "value": "-"
+            },
+            {
+              "id": "address",
+              "type": "label",
+              "label": {
+                "en": "Address",
+                "nl": "Adres"
+              },
+              "value": "-"
+            },
+            {
+              "id": "gateway",
+              "type": "label",
+              "label": {
+                "en": "Found through gateway",
+                "nl": "Gevonden via gateway"
+              },
+              "value": "-"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "Sensor",
+        "nl": "Sensor"
+      },
+      "class": "sensor",
+      "capabilities": [],
+      "energy": {
+        "batteries": [
+          "OTHER"
+        ]
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "rf868"
+      ],
+      "images": {
+        "small": "/drivers/sensor/assets/images/small.png",
+        "large": "/drivers/sensor/assets/images/large.png",
+        "xlarge": "/drivers/sensor/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "intro",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "prev": "intro",
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "sensor",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Bus",
+            "nl": "Bus"
+          },
+          "children": [
+            {
+              "id": "model",
+              "type": "label",
+              "label": {
+                "en": "Model",
+                "nl": "Type"
+              },
+              "value": "-"
+            },
+            {
+              "id": "address",
+              "type": "label",
+              "label": {
+                "en": "Address",
+                "nl": "Adres"
+              },
+              "value": "-"
+            },
+            {
+              "id": "gateway",
+              "type": "label",
+              "label": {
+                "en": "Found through gateway",
+                "nl": "Gevonden via gateway"
+              },
+              "value": "-"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "widgets": {
+    "fan": {
+      "name": {
+        "en": "Ventilation",
+        "nl": "Ventilatie"
+      },
+      "height": 178,
+      "settings": [
+        {
+          "id": "device",
+          "type": "autocomplete",
+          "title": {
+            "en": "Ventilation unit",
+            "nl": "Ventilatie-unit"
+          }
+        }
+      ],
+      "api": {
+        "getState": {
+          "method": "GET",
+          "path": "/"
+        },
+        "setMode": {
+          "method": "PUT",
+          "path": "/mode"
+        }
+      },
+      "id": "fan"
+    }
+  },
+  "capabilities": {
+    "measure_ramses_bus_devices": {
+      "type": "number",
+      "title": {
+        "en": "Devices on the bus",
+        "nl": "Apparaten op de bus"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/bus.svg",
+      "decimals": 0,
+      "min": 0,
+      "insights": false
+    },
+    "measure_ramses_demand": {
+      "type": "number",
+      "title": {
+        "en": "Ventilation demand",
+        "nl": "Ventilatievraag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/air.svg",
+      "units": {
+        "en": "%"
+      },
+      "decimals": 0,
+      "min": 0,
+      "max": 100,
+      "insights": true
+    },
+    "measure_ramses_fan_mode_label": {
+      "type": "string",
+      "title": {
+        "en": "Status",
+        "nl": "Status"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/fan.svg"
+    },
+    "measure_ramses_fan_speed": {
+      "type": "number",
+      "title": {
+        "en": "Fan speed",
+        "nl": "Ventilatorsnelheid"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/fan.svg",
+      "decimals": 0,
+      "min": 0,
+      "insights": true,
+      "units": {
+        "en": "%"
+      },
+      "max": 100
+    },
+    "ramses_air_quality": {
+      "type": "number",
+      "title": {
+        "en": "Air quality",
+        "nl": "Luchtkwaliteit"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/air.svg",
+      "decimals": 0,
+      "min": 0,
+      "insights": true,
+      "units": {
+        "en": "%"
+      },
+      "max": 100
+    },
+    "ramses_boost_remaining": {
+      "type": "number",
+      "title": {
+        "en": "Boost time left",
+        "nl": "Boost: resterende tijd"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/timer.svg",
+      "decimals": 0,
+      "min": 0,
+      "insights": false,
+      "units": {
+        "en": "min"
+      }
+    },
+    "ramses_bypass": {
+      "type": "number",
+      "title": {
+        "en": "Bypass position",
+        "nl": "Bypass-stand"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/bypass.svg",
+      "decimals": 0,
+      "min": 0,
+      "insights": true,
+      "units": {
+        "en": "%"
+      },
+      "max": 100
+    },
+    "ramses_fan_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Fan mode",
+        "nl": "Ventilatiestand"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "icon": "/assets/capabilities/fan.svg",
+      "values": [
+        {
+          "id": "low",
+          "title": {
+            "en": "Low",
+            "nl": "Laag"
+          }
+        },
+        {
+          "id": "medium",
+          "title": {
+            "en": "Medium",
+            "nl": "Midden"
+          }
+        },
+        {
+          "id": "high",
+          "title": {
+            "en": "High",
+            "nl": "Hoog"
+          }
+        },
+        {
+          "id": "auto",
+          "title": {
+            "en": "Auto",
+            "nl": "Auto"
+          }
+        },
+        {
+          "id": "away",
+          "title": {
+            "en": "Away",
+            "nl": "Afwezig"
+          }
+        }
+      ]
+    },
+    "ramses_filter_days": {
+      "type": "number",
+      "title": {
+        "en": "Filter days left",
+        "nl": "Filter: dagen over"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/filter.svg",
+      "decimals": 0,
+      "min": 0,
+      "insights": true,
+      "units": {
+        "en": "days",
+        "nl": "dagen"
+      },
+      "max": 255
+    },
+    "ramses_gateway_address": {
+      "type": "string",
+      "title": {
+        "en": "Gateway address",
+        "nl": "Gateway-adres"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/bus.svg"
+    },
+    "ramses_last_button": {
+      "type": "string",
+      "title": {
+        "en": "Last button",
+        "nl": "Laatste knop"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/remote.svg"
+    },
+    "ramses_last_packet": {
+      "type": "string",
+      "title": {
+        "en": "Last packet",
+        "nl": "Laatste pakket"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/bus.svg"
+    }
+  }
+}

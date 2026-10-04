@@ -1,0 +1,86 @@
+{
+  "device": {
+    "no_gateway": "No ramses_esp gateway is connected. Check the gateway device in Homey.",
+    "no_remote": "Set the address of a remote the unit is bound to (device settings) so Homey can control it.",
+    "invalid_remote": "That is not a valid address. Use the form 29:123456.",
+    "invalid_address": "That is not a valid address. Use the form 29:123456."
+  },
+  "gateway": {
+    "connecting": "Connecting to the MQTT broker…",
+    "disconnected": "MQTT broker not reachable",
+    "auth_failed": "The MQTT broker refused the user name or password. Check the device settings.",
+    "offline": "The ramses_esp reports that it is offline. Check its power and WiFi."
+  },
+  "pair": {
+    "no_gateway": "Add your ramses_esp gateway first; Homey finds the other devices through it.",
+    "name": {
+      "fan": "Ventilation unit __id__",
+      "remote": "Remote __id__",
+      "sensor": "Sensor __id__"
+    },
+    "intro": {
+      "fan": {
+        "title": "Find the ventilation unit",
+        "text": "Homey lists the ventilation units the gateway has heard. Not listed? Press a button on the remote, wait a few seconds and continue: the unit answers and shows up. Searching takes up to 30 seconds. In an apartment building you may also see your neighbours' units: pick yours by its address (on the unit, or the FAN ID in your old Home Assistant config)."
+      },
+      "remote": {
+        "title": "Find the remote",
+        "text": "Press any button on the remote now, then continue. Searching takes up to 30 seconds."
+      },
+      "sensor": {
+        "title": "Find the sensor",
+        "text": "Sensors report every few minutes. Pressing the button on a sensor (if it has one) makes it report at once. Searching takes up to 30 seconds."
+      }
+    },
+    "broker": {
+      "title": "Connect to the MQTT broker",
+      "intro": "The ramses_esp sends what it hears on 868 MHz to an MQTT broker. Enter the broker it uses; with the MQTT Broker app on Homey that is the address of your Homey.",
+      "host": "Broker address",
+      "port": "Port",
+      "username": "User name",
+      "password": "Password",
+      "tls": "Use TLS (mqtts)",
+      "gateway_id": "Gateway address (optional)",
+      "gateway_hint": "Only needed when the gateway is not found automatically, e.g. 18:203612.",
+      "search": "Find gateways",
+      "invalid": "Enter a valid broker address and port.",
+      "not_reachable": "No MQTT broker answered at this address. Check the address, port and that the broker is running.",
+      "auth_failed": "The broker refused the user name or password.",
+      "no_gateways": "Connected, but no ramses_esp published anything on this broker. Check the MQTT settings of the ramses_esp, or enter its address below."
+    }
+  },
+  "settings": {
+    "title": "RAMSES bus",
+    "gateways": "Gateways",
+    "no_gateways": "No gateway added yet. Add a ramses_esp gateway as a device first.",
+    "connected": "connected",
+    "disconnected": "not connected",
+    "offline": "gateway offline",
+    "devices": "Devices on the bus",
+    "no_devices": "No devices heard yet.",
+    "address": "Address",
+    "role": "Role",
+    "codes": "Sends",
+    "seen": "Last seen",
+    "in_homey": "In Homey",
+    "live": "Live traffic",
+    "pause": "Pause",
+    "resume": "Resume",
+    "clear": "Clear",
+    "filter": "Filter (address or code)",
+    "no_packets": "Waiting for packets…",
+    "send": "Send a frame",
+    "send_hint": "Sent as is through the first connected gateway.",
+    "send_button": "Send",
+    "sent": "Sent",
+    "roles": {
+      "gateway": "Gateway",
+      "fan": "Ventilation unit",
+      "remote": "Remote",
+      "sensor": "Sensor",
+      "unknown": "Unknown"
+    },
+    "device_count": "devices",
+    "packet_count": "packets"
+  }
+}

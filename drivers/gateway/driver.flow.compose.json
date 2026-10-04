@@ -1,0 +1,330 @@
+{
+  "triggers": [
+    {
+      "id": "packet_received",
+      "title": {
+        "en": "A packet was received",
+        "nl": "Er werd een pakket ontvangen"
+      },
+      "hint": {
+        "en": "Fires for every packet on the bus.",
+        "nl": "Gaat af bij elk pakket op de bus."
+      },
+      "tokens": [
+        {
+          "name": "verb",
+          "type": "string",
+          "title": {
+            "en": "Verb",
+            "nl": "Werkwoord"
+          },
+          "example": "I"
+        },
+        {
+          "name": "src",
+          "type": "string",
+          "title": {
+            "en": "From",
+            "nl": "Van"
+          },
+          "example": "29:173894"
+        },
+        {
+          "name": "dst",
+          "type": "string",
+          "title": {
+            "en": "To",
+            "nl": "Naar"
+          },
+          "example": "29:233244"
+        },
+        {
+          "name": "code",
+          "type": "string",
+          "title": {
+            "en": "Code",
+            "nl": "Code"
+          },
+          "example": "22F1"
+        },
+        {
+          "name": "payload",
+          "type": "string",
+          "title": {
+            "en": "Payload",
+            "nl": "Payload"
+          },
+          "example": "000304"
+        },
+        {
+          "name": "frame",
+          "type": "string",
+          "title": {
+            "en": "Frame",
+            "nl": "Frame"
+          },
+          "example": " I --- 29:173894 29:233244 --:------ 22F1 003 000304"
+        },
+        {
+          "name": "rssi",
+          "type": "number",
+          "title": {
+            "en": "Signal (RSSI)",
+            "nl": "Signaal (RSSI)"
+          },
+          "example": 45
+        }
+      ]
+    },
+    {
+      "id": "code_received",
+      "title": {
+        "en": "A packet with a code was received",
+        "nl": "Er werd een pakket met een code ontvangen"
+      },
+      "titleFormatted": {
+        "en": "A [[code]] packet was received from or to [[address]]",
+        "nl": "Er werd een [[code]]-pakket ontvangen van of naar [[address]]"
+      },
+      "hint": {
+        "en": "Address * matches any device.",
+        "nl": "Adres * past op elk apparaat."
+      },
+      "args": [
+        {
+          "name": "code",
+          "type": "text",
+          "placeholder": {
+            "en": "22F1",
+            "nl": "22F1"
+          }
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "placeholder": {
+            "en": "* or 29:123456",
+            "nl": "* of 29:123456"
+          }
+        }
+      ],
+      "tokens": [
+        {
+          "name": "verb",
+          "type": "string",
+          "title": {
+            "en": "Verb",
+            "nl": "Werkwoord"
+          },
+          "example": "I"
+        },
+        {
+          "name": "src",
+          "type": "string",
+          "title": {
+            "en": "From",
+            "nl": "Van"
+          },
+          "example": "29:173894"
+        },
+        {
+          "name": "dst",
+          "type": "string",
+          "title": {
+            "en": "To",
+            "nl": "Naar"
+          },
+          "example": "29:233244"
+        },
+        {
+          "name": "code",
+          "type": "string",
+          "title": {
+            "en": "Code",
+            "nl": "Code"
+          },
+          "example": "22F1"
+        },
+        {
+          "name": "payload",
+          "type": "string",
+          "title": {
+            "en": "Payload",
+            "nl": "Payload"
+          },
+          "example": "000304"
+        },
+        {
+          "name": "frame",
+          "type": "string",
+          "title": {
+            "en": "Frame",
+            "nl": "Frame"
+          },
+          "example": " I --- 29:173894 29:233244 --:------ 22F1 003 000304"
+        },
+        {
+          "name": "rssi",
+          "type": "number",
+          "title": {
+            "en": "Signal (RSSI)",
+            "nl": "Signaal (RSSI)"
+          },
+          "example": 45
+        }
+      ]
+    },
+    {
+      "id": "device_discovered",
+      "title": {
+        "en": "A new device was found on the bus",
+        "nl": "Er werd een nieuw apparaat op de bus gevonden"
+      },
+      "tokens": [
+        {
+          "name": "address",
+          "type": "string",
+          "title": {
+            "en": "Address",
+            "nl": "Adres"
+          },
+          "example": "29:233244"
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "title": {
+            "en": "Role",
+            "nl": "Rol"
+          },
+          "example": "fan"
+        }
+      ]
+    },
+    {
+      "id": "gateway_went_offline",
+      "title": {
+        "en": "The gateway went offline",
+        "nl": "De gateway ging offline"
+      }
+    },
+    {
+      "id": "gateway_came_online",
+      "title": {
+        "en": "The gateway came online",
+        "nl": "De gateway kwam online"
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "id": "gateway_is_online",
+      "title": {
+        "en": "The gateway !{{is|isn't}} online",
+        "nl": "De gateway !{{is|is niet}} online"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "send_frame",
+      "title": {
+        "en": "Send a raw frame",
+        "nl": "Verstuur een ruw frame"
+      },
+      "titleFormatted": {
+        "en": "Send frame [[frame]]",
+        "nl": "Verstuur frame [[frame]]"
+      },
+      "hint": {
+        "en": "A complete RAMSES II frame, e.g.  I --- 29:173894 29:233244 --:------ 22F1 003 000304",
+        "nl": "Een volledig RAMSES II-frame, bv.  I --- 29:173894 29:233244 --:------ 22F1 003 000304"
+      },
+      "args": [
+        {
+          "name": "frame",
+          "type": "text",
+          "placeholder": {
+            "en": " I --- 29:173894 29:233244 --:------ 22F1 003 000304",
+            "nl": " I --- 29:173894 29:233244 --:------ 22F1 003 000304"
+          }
+        }
+      ]
+    },
+    {
+      "id": "send_command",
+      "title": {
+        "en": "Send a command",
+        "nl": "Verstuur een commando"
+      },
+      "titleFormatted": {
+        "en": "Send [[verb]] [[code]] with payload [[payload]] to [[address]]",
+        "nl": "Verstuur [[verb]] [[code]] met payload [[payload]] naar [[address]]"
+      },
+      "hint": {
+        "en": "Sent from the gateway's own address.",
+        "nl": "Wordt verstuurd vanaf het eigen adres van de gateway."
+      },
+      "args": [
+        {
+          "name": "verb",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "I",
+              "label": {
+                "en": "I (inform)",
+                "nl": "I (melden)"
+              }
+            },
+            {
+              "id": "RQ",
+              "label": {
+                "en": "RQ (request)",
+                "nl": "RQ (opvragen)"
+              }
+            },
+            {
+              "id": "W",
+              "label": {
+                "en": "W (write)",
+                "nl": "W (schrijven)"
+              }
+            },
+            {
+              "id": "RP",
+              "label": {
+                "en": "RP (reply)",
+                "nl": "RP (antwoord)"
+              }
+            }
+          ]
+        },
+        {
+          "name": "code",
+          "type": "text",
+          "placeholder": {
+            "en": "31DA",
+            "nl": "31DA"
+          }
+        },
+        {
+          "name": "payload",
+          "type": "text",
+          "placeholder": {
+            "en": "00",
+            "nl": "00"
+          }
+        },
+        {
+          "name": "address",
+          "type": "text",
+          "placeholder": {
+            "en": "29:123456",
+            "nl": "29:123456"
+          }
+        }
+      ]
+    }
+  ]
+}

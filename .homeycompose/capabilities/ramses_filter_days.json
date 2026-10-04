@@ -1,0 +1,19 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Filter days left",
+    "nl": "Filter: dagen over"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/filter.svg",
+  "decimals": 0,
+  "min": 0,
+  "insights": true,
+  "units": {
+    "en": "days",
+    "nl": "dagen"
+  },
+  "max": 255
+}

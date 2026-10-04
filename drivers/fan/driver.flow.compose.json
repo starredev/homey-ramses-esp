@@ -1,0 +1,262 @@
+{
+  "triggers": [
+    {
+      "id": "fan_mode_changed",
+      "title": {
+        "en": "The fan mode changed",
+        "nl": "De ventilatiestand veranderde"
+      },
+      "tokens": [
+        {
+          "name": "mode",
+          "type": "string",
+          "title": {
+            "en": "Mode",
+            "nl": "Stand"
+          },
+          "example": "high"
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Changed by",
+            "nl": "Veranderd door"
+          },
+          "example": "remote"
+        }
+      ]
+    },
+    {
+      "id": "fan_mode_changed_to",
+      "title": {
+        "en": "The fan mode changed to…",
+        "nl": "De ventilatiestand veranderde naar…"
+      },
+      "titleFormatted": {
+        "en": "The fan mode changed to [[mode]]",
+        "nl": "De ventilatiestand veranderde naar [[mode]]"
+      },
+      "args": [
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "low",
+              "label": {
+                "en": "Low",
+                "nl": "Laag"
+              }
+            },
+            {
+              "id": "medium",
+              "label": {
+                "en": "Medium",
+                "nl": "Midden"
+              }
+            },
+            {
+              "id": "high",
+              "label": {
+                "en": "High",
+                "nl": "Hoog"
+              }
+            },
+            {
+              "id": "auto",
+              "label": {
+                "en": "Auto",
+                "nl": "Auto"
+              }
+            },
+            {
+              "id": "away",
+              "label": {
+                "en": "Away",
+                "nl": "Afwezig"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boost_started",
+      "title": {
+        "en": "A boost started",
+        "nl": "Een boost is gestart"
+      },
+      "tokens": [
+        {
+          "name": "minutes",
+          "type": "number",
+          "title": {
+            "en": "Minutes",
+            "nl": "Minuten"
+          },
+          "example": 30
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Started by",
+            "nl": "Gestart door"
+          },
+          "example": "remote"
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "fan_mode_is",
+      "title": {
+        "en": "The fan mode !{{is|isn't}}…",
+        "nl": "De ventilatiestand !{{is|is niet}}…"
+      },
+      "titleFormatted": {
+        "en": "The fan mode !{{is|isn't}} [[mode]]",
+        "nl": "De ventilatiestand !{{is|is niet}} [[mode]]"
+      },
+      "args": [
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "low",
+              "label": {
+                "en": "Low",
+                "nl": "Laag"
+              }
+            },
+            {
+              "id": "medium",
+              "label": {
+                "en": "Medium",
+                "nl": "Midden"
+              }
+            },
+            {
+              "id": "high",
+              "label": {
+                "en": "High",
+                "nl": "Hoog"
+              }
+            },
+            {
+              "id": "auto",
+              "label": {
+                "en": "Auto",
+                "nl": "Auto"
+              }
+            },
+            {
+              "id": "away",
+              "label": {
+                "en": "Away",
+                "nl": "Afwezig"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "set_fan_mode",
+      "title": {
+        "en": "Set the fan mode",
+        "nl": "Zet de ventilatiestand"
+      },
+      "titleFormatted": {
+        "en": "Set the fan mode to [[mode]]",
+        "nl": "Zet de ventilatiestand op [[mode]]"
+      },
+      "args": [
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "low",
+              "label": {
+                "en": "Low",
+                "nl": "Laag"
+              }
+            },
+            {
+              "id": "medium",
+              "label": {
+                "en": "Medium",
+                "nl": "Midden"
+              }
+            },
+            {
+              "id": "high",
+              "label": {
+                "en": "High",
+                "nl": "Hoog"
+              }
+            },
+            {
+              "id": "auto",
+              "label": {
+                "en": "Auto",
+                "nl": "Auto"
+              }
+            },
+            {
+              "id": "away",
+              "label": {
+                "en": "Away",
+                "nl": "Afwezig"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "start_boost",
+      "title": {
+        "en": "Start a boost",
+        "nl": "Start een boost"
+      },
+      "titleFormatted": {
+        "en": "Run on high for [[minutes]] minutes",
+        "nl": "Draai [[minutes]] minuten op hoog"
+      },
+      "args": [
+        {
+          "name": "minutes",
+          "type": "number",
+          "min": 1,
+          "max": 255,
+          "step": 1,
+          "placeholder": {
+            "en": "30",
+            "nl": "30"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reset_filter",
+      "title": {
+        "en": "Reset the filter counter",
+        "nl": "Zet de filterteller terug"
+      }
+    },
+    {
+      "id": "request_status",
+      "title": {
+        "en": "Ask the unit for its status",
+        "nl": "Vraag de status van de unit op"
+      }
+    }
+  ]
+}

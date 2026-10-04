@@ -1,0 +1,18 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Bypass position",
+    "nl": "Bypass-stand"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/bypass.svg",
+  "decimals": 0,
+  "min": 0,
+  "insights": true,
+  "units": {
+    "en": "%"
+  },
+  "max": 100
+}
