@@ -2,6 +2,84 @@
   {
     "type": "group",
     "label": {
+      "en": "Ventilation demand",
+      "nl": "Ventilatievraag"
+    },
+    "children": [
+      {
+        "id": "auto_demand",
+        "type": "checkbox",
+        "label": {
+          "en": "Derive from CO₂ and humidity",
+          "nl": "Uitrekenen uit CO₂ en vochtigheid"
+        },
+        "value": true,
+        "hint": {
+          "en": "The demand rises linearly from the low to the high point; the higher of CO₂ and humidity counts. Off: flows set the demand with “Ask for ventilation”.",
+          "nl": "De vraag loopt lineair op van het lage naar het hoge punt; de hoogste van CO₂ en vochtigheid telt. Uit: flows zetten de vraag met “Vraag om ventilatie”."
+        }
+      },
+      {
+        "id": "co2_low",
+        "type": "number",
+        "label": {
+          "en": "CO₂ from",
+          "nl": "CO₂ vanaf"
+        },
+        "value": 400,
+        "min": 300,
+        "max": 2000,
+        "units": {
+          "en": "ppm"
+        }
+      },
+      {
+        "id": "co2_high",
+        "type": "number",
+        "label": {
+          "en": "CO₂ full demand at",
+          "nl": "CO₂ volle vraag bij"
+        },
+        "value": 1000,
+        "min": 400,
+        "max": 5000,
+        "units": {
+          "en": "ppm"
+        }
+      },
+      {
+        "id": "humidity_low",
+        "type": "number",
+        "label": {
+          "en": "Humidity from",
+          "nl": "Vochtigheid vanaf"
+        },
+        "value": 60,
+        "min": 0,
+        "max": 100,
+        "units": {
+          "en": "%"
+        }
+      },
+      {
+        "id": "humidity_high",
+        "type": "number",
+        "label": {
+          "en": "Humidity full demand at",
+          "nl": "Vochtigheid volle vraag bij"
+        },
+        "value": 80,
+        "min": 0,
+        "max": 100,
+        "units": {
+          "en": "%"
+        }
+      }
+    ]
+  },
+  {
+    "type": "group",
+    "label": {
       "en": "Bus",
       "nl": "Bus"
     },

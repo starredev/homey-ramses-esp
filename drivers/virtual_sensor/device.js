@@ -2,10 +2,15 @@ import Homey from 'homey';
 import { RamsesError } from '../../lib/errors.js';
 import { loggerFrom } from '../../lib/utils.js';
 import { VirtualSensor } from '../../lib/domain/VirtualSensor.js';
+
 import { CapabilityStore } from '../../lib/homey/CapabilityStore.js';
 import { SENSOR_OFFER } from '../../lib/ramses/binding.js';
 
 /** @typedef {import('../../app.js').default} RamsesApp */
+/** @typedef {import('../../lib/domain/VirtualSensor.js').DemandCurve} DemandCurve */
+
+/** Settings that shape the demand curve. */
+const CURVE_SETTINGS = Object.freeze(['auto_demand', 'co2_low', 'co2_high', 'humidity_low', 'humidity_high']);
 
 /** Maintenance action that binds the sensor to a unit. */
 const BIND_ACTION = 'button.bind_sensor';
@@ -32,6 +37,7 @@ export default class VirtualSensorDevice extends Homey.Device {
     this.#sensor = new VirtualSensor({
       address: this.getData().id,
       unit: this.getStoreValue('unit') ?? null,
+      curve: VirtualSensorDevice.curveOf(this.getSettings()),
       send: (packet) => this.#app.gateways.send(packet),
     });
 
@@ -50,6 +56,32 @@ export default class VirtualSensorDevice extends Homey.Device {
 
   async onDeleted() {
     this.#stop();
+  }
+
+  /**
+   * @param {{ newSettings: Record<string, any>, changedKeys: string[] }} event
+   */
+  async onSettings({ newSettings, changedKeys }) {
+    if (changedKeys.some((key) => CURVE_SETTINGS.includes(key))) {
+      this.#sensor.useCurve(VirtualSensorDevice.curveOf(newSettings));
+    }
+  }
+
+  /**
+   * @param {Record<string, any>} settings
+   * @returns {DemandCurve | null} null when flows set the demand themselves
+   */
+  static curveOf(settings) {
+    if (settings.auto_demand === false) {
+      return null;
+    }
+
+    return {
+      co2Low: Number(settings.co2_low ?? 400),
+      co2High: Number(settings.co2_high ?? 1000),
+      humidityLow: Number(settings.humidity_low ?? 60),
+      humidityHigh: Number(settings.humidity_high ?? 80),
+    };
   }
 
   /** @returns {VirtualSensor} used by the flow cards */

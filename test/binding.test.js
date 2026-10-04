@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import { ValidationError } from '../lib/errors.js';
 import { BindingSession, BindingTimeoutError } from '../lib/domain/BindingSession.js';
-import { VirtualSensor } from '../lib/domain/VirtualSensor.js';
+import { DEFAULT_CURVE, ventilationDemand, VirtualSensor } from '../lib/domain/VirtualSensor.js';
 import {
   confirmPacket,
   decodeAddress,
@@ -194,6 +194,7 @@ describe('VirtualSensor', () => {
     return {
       sensor: new VirtualSensor({
         address: SELF,
+        curve: null,
         send: async (frame) => {
           sent.push(frame);
         },
@@ -220,6 +221,27 @@ describe('VirtualSensor', () => {
     assert.equal(virtual.address, SELF);
   });
 
+  it('derives the demand from CO₂ and humidity once bound, as a 15RF does', async () => {
+    /** @type {Packet[]} */
+    const sent = [];
+    const virtual = new VirtualSensor({
+      address: SELF,
+      send: async (frame) => {
+        sent.push(frame);
+      },
+    });
+
+    assert.equal(await virtual.reportCo2(700), null, 'not bound yet');
+
+    virtual.bindTo(UNIT);
+    assert.equal(await virtual.reportCo2(700), 50);
+    assert.equal(await virtual.reportHumidity(75), 75);
+    assert.equal(sent.at(-1)?.toFrame(), ` I --- ${SELF} ${UNIT} --:------ 31E0 008 0000000001009600`);
+
+    virtual.useCurve(null);
+    assert.equal(await virtual.reportCo2(1200), null);
+  });
+
   it('repeats its last reports, and refuses nonsense', async () => {
     const { sensor: virtual, sent } = sensor();
 
@@ -232,5 +254,24 @@ describe('VirtualSensor', () => {
     await assert.rejects(virtual.reportCo2(-5), ValidationError);
     await assert.rejects(virtual.reportHumidity(140), ValidationError);
     await assert.rejects(virtual.reportDemand(50), /Bind the sensor/);
+  });
+});
+
+describe('ventilationDemand', () => {
+  it('asks the highest of what CO₂ and humidity ask', () => {
+    assert.equal(ventilationDemand({ co2: 450 }), 8);
+    assert.equal(ventilationDemand({ co2: 700 }), 50);
+    assert.equal(ventilationDemand({ co2: 1500 }), 100);
+    assert.equal(ventilationDemand({ co2: 300 }), 0);
+    assert.equal(ventilationDemand({ humidity: 70 }), 50);
+    assert.equal(ventilationDemand({ co2: 700, humidity: 78 }), 90);
+    assert.equal(ventilationDemand({}), null);
+  });
+
+  it('follows a custom curve, also a step', () => {
+    const step = { ...DEFAULT_CURVE, humidityLow: 70, humidityHigh: 70 };
+
+    assert.equal(ventilationDemand({ humidity: 69 }, step), 0);
+    assert.equal(ventilationDemand({ humidity: 70 }, step), 100);
   });
 });

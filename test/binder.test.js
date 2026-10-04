@@ -82,8 +82,16 @@ describe('VirtualSensorFlowCards', () => {
     const calls = [];
     const device = {
       sensor: {
-        reportCo2: async (/** @type {number} */ ppm) => calls.push(['co2', ppm]),
-        reportHumidity: async (/** @type {number} */ percent) => calls.push(['humidity', percent]),
+        reportCo2: async (/** @type {number} */ ppm) => {
+          calls.push(['co2', ppm]);
+
+          return 55;
+        },
+        reportHumidity: async (/** @type {number} */ percent) => {
+          calls.push(['humidity', percent]);
+
+          return null;
+        },
         reportDemand: async (/** @type {number} */ percent) => calls.push(['demand', percent]),
       },
       show: async (/** @type {string} */ capability, /** @type {number} */ value) => calls.push([capability, value]),
@@ -95,7 +103,7 @@ describe('VirtualSensorFlowCards', () => {
     await flow.actions.get(VirtualSensorCards.REPORT_DEMAND)?.({ device, percent: 40 });
 
     assert.deepEqual(calls, [
-      ['co2', 900], ['measure_co2', 900],
+      ['co2', 900], ['measure_co2', 900], ['measure_ramses_demand', 55],
       ['humidity', 60], ['measure_humidity', 60],
       ['demand', 40], ['measure_ramses_demand', 40],
     ]);
