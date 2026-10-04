@@ -1151,6 +1151,101 @@
             }
           }
         ]
+      },
+      {
+        "id": "report_co2",
+        "title": {
+          "en": "Report CO₂",
+          "nl": "Meld CO₂"
+        },
+        "titleFormatted": {
+          "en": "Report [[ppm]] ppm CO₂",
+          "nl": "Meld [[ppm]] ppm CO₂"
+        },
+        "hint": {
+          "en": "Use a CO₂ value from any Homey sensor; the unit treats it as its own sensor.",
+          "nl": "Gebruik een CO₂-waarde van een willekeurige Homey-sensor; de unit ziet hem als eigen sensor."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=virtual_sensor"
+          },
+          {
+            "name": "ppm",
+            "type": "number",
+            "min": 0,
+            "max": 10000,
+            "step": 1,
+            "placeholder": {
+              "en": "ppm",
+              "nl": "ppm"
+            }
+          }
+        ]
+      },
+      {
+        "id": "report_humidity",
+        "title": {
+          "en": "Report humidity",
+          "nl": "Meld vochtigheid"
+        },
+        "titleFormatted": {
+          "en": "Report [[percent]] % humidity",
+          "nl": "Meld [[percent]] % vochtigheid"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=virtual_sensor"
+          },
+          {
+            "name": "percent",
+            "type": "number",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "placeholder": {
+              "en": "%",
+              "nl": "%"
+            }
+          }
+        ]
+      },
+      {
+        "id": "report_demand",
+        "title": {
+          "en": "Ask for ventilation",
+          "nl": "Vraag om ventilatie"
+        },
+        "titleFormatted": {
+          "en": "Ask the unit for [[percent]] % ventilation",
+          "nl": "Vraag de unit om [[percent]] % ventilatie"
+        },
+        "hint": {
+          "en": "In auto mode the unit ventilates more as the demand rises.",
+          "nl": "In de autostand ventileert de unit harder naarmate de vraag stijgt."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=virtual_sensor"
+          },
+          {
+            "name": "percent",
+            "type": "number",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "placeholder": {
+              "en": "%",
+              "nl": "%"
+            }
+          }
+        ]
       }
     ]
   },
@@ -1163,7 +1258,8 @@
       "class": "fan",
       "capabilities": [
         "ramses_fan_mode",
-        "measure_ramses_fan_mode_label"
+        "measure_ramses_fan_mode_label",
+        "button.bind_remote"
       ],
       "platforms": [
         "local"
@@ -1196,6 +1292,19 @@
           "template": "add_devices"
         }
       ],
+      "capabilitiesOptions": {
+        "button.bind_remote": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Bind Homey as a remote",
+            "nl": "Koppel Homey als afstandsbediening"
+          },
+          "desc": {
+            "en": "Put the unit in binding mode first (Orcon: switch its power off and on, then bind within 2 minutes). Homey then gets its own remote address.",
+            "nl": "Zet de unit eerst in koppelmodus (Orcon: stroom eraf en erop, daarna binnen 2 minuten koppelen). Homey krijgt dan een eigen afstandsbedieningsadres."
+          }
+        }
+      },
       "id": "fan",
       "settings": [
         {
@@ -2016,6 +2125,90 @@
                 "nl": "Gevonden via gateway"
               },
               "value": "-"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "Homey CO₂ sensor",
+        "nl": "Homey CO₂-sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_co2",
+        "measure_humidity",
+        "measure_ramses_demand",
+        "button.bind_sensor"
+      ],
+      "capabilitiesOptions": {
+        "button.bind_sensor": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Bind to a unit",
+            "nl": "Koppel aan een unit"
+          },
+          "desc": {
+            "en": "Put the unit in binding mode first (Orcon: switch its power off and on, then bind within 2 minutes).",
+            "nl": "Zet de unit eerst in koppelmodus (Orcon: stroom eraf en erop, daarna binnen 2 minuten koppelen)."
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "rf868"
+      ],
+      "images": {
+        "small": "/drivers/virtual_sensor/assets/images/small.png",
+        "large": "/drivers/virtual_sensor/assets/images/large.png",
+        "xlarge": "/drivers/virtual_sensor/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "virtual_sensor",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Bus",
+            "nl": "Bus"
+          },
+          "children": [
+            {
+              "id": "address",
+              "type": "label",
+              "label": {
+                "en": "Address Homey plays",
+                "nl": "Adres dat Homey speelt"
+              },
+              "value": "-"
+            },
+            {
+              "id": "bound_unit",
+              "type": "label",
+              "label": {
+                "en": "Bound to unit",
+                "nl": "Gekoppeld aan unit"
+              },
+              "value": "-",
+              "hint": {
+                "en": "Use the maintenance action “Bind to a unit” while the unit is in binding mode.",
+                "nl": "Gebruik de onderhoudsactie “Koppel aan een unit” terwijl de unit in koppelmodus staat."
+              }
             }
           ]
         }

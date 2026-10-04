@@ -1,0 +1,50 @@
+{
+  "name": {
+    "en": "Homey CO₂ sensor",
+    "nl": "Homey CO₂-sensor"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "measure_co2",
+    "measure_humidity",
+    "measure_ramses_demand",
+    "button.bind_sensor"
+  ],
+  "capabilitiesOptions": {
+    "button.bind_sensor": {
+      "maintenanceAction": true,
+      "title": {
+        "en": "Bind to a unit",
+        "nl": "Koppel aan een unit"
+      },
+      "desc": {
+        "en": "Put the unit in binding mode first (Orcon: switch its power off and on, then bind within 2 minutes).",
+        "nl": "Zet de unit eerst in koppelmodus (Orcon: stroom eraf en erop, daarna binnen 2 minuten koppelen)."
+      }
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "rf868"
+  ],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/small.png",
+    "large": "{{driverAssetsPath}}/images/large.png",
+    "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Bus",
+      "nl": "Bus"
+    },
+    "children": [
+      {
+        "id": "address",
+        "type": "label",
+        "label": {
+          "en": "Address Homey plays",
+          "nl": "Adres dat Homey speelt"
+        },
+        "value": "-"
+      },
+      {
+        "id": "bound_unit",
+        "type": "label",
+        "label": {
+          "en": "Bound to unit",
+          "nl": "Gekoppeld aan unit"
+        },
+        "value": "-",
+        "hint": {
+          "en": "Use the maintenance action “Bind to a unit” while the unit is in binding mode.",
+          "nl": "Gebruik de onderhoudsactie “Koppel aan een unit” terwijl de unit in koppelmodus staat."
+        }
+      }
+    ]
+  }
+]

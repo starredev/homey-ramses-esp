@@ -6,7 +6,8 @@
     "invalid_address": "Dat is geen geldig adres. Gebruik de vorm 29:123456.",
     "params_supported": "Ja",
     "params_unsupported": "Nee",
-    "unknown_param": "Onbekende parameter."
+    "unknown_param": "Onbekende parameter.",
+    "binding_timeout": "Geen unit antwoordde. Zet de unit eerst in koppelmodus (Orcon: stroom eraf en erop) en probeer het daarna binnen 2 minuten opnieuw."
   },
   "gateway": {
     "connecting": "Verbinden met de MQTT-broker…",
@@ -19,7 +20,8 @@
     "name": {
       "fan": "Ventilatie-unit __id__",
       "remote": "Afstandsbediening __id__",
-      "sensor": "Sensor __id__"
+      "sensor": "Sensor __id__",
+      "virtual_sensor": "Homey CO₂-sensor"
     },
     "intro": {
       "fan": {

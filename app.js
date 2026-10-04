@@ -1,5 +1,6 @@
 import Homey from 'homey';
 import { loggerFrom } from './lib/utils.js';
+import { Binder } from './lib/homey/Binder.js';
 import { FanPresenter } from './lib/homey/FanPresenter.js';
 import { GatewayRegistry } from './lib/homey/GatewayRegistry.js';
 import { PacketPresenter, RingBuffer } from './lib/homey/PacketPresenter.js';
@@ -11,7 +12,7 @@ import { RealtimeHub } from './lib/homey/RealtimeHub.js';
 /** @typedef {import('./drivers/fan/device.js').default} FanDevice */
 
 /** Drivers whose devices are identified by a bus address. */
-const DRIVER_IDS = Object.freeze(['gateway', 'fan', 'remote', 'sensor']);
+const DRIVER_IDS = Object.freeze(['gateway', 'fan', 'remote', 'sensor', 'virtual_sensor']);
 
 /**
  * Composition root. Creates the app-wide services: the register of gateways
@@ -27,6 +28,9 @@ export default class RamsesApp extends Homey.App {
   /** @type {GatewayRegistry} */
   #gateways;
 
+  /** @type {Binder} */
+  #binder;
+
   /** @type {RingBuffer<PacketView>} */
   #log;
 
@@ -38,6 +42,7 @@ export default class RamsesApp extends Homey.App {
 
   async onInit() {
     this.#gateways = new GatewayRegistry();
+    this.#binder = new Binder({ registry: this.#gateways, timers: this.homey });
     this.#log = new RingBuffer(RamsesApp.LOG_SIZE);
     this.#realtime = new RealtimeHub({
       api: this.homey.api,
@@ -63,6 +68,11 @@ export default class RamsesApp extends Homey.App {
   /** @returns {GatewayRegistry} */
   get gateways() {
     return this.#gateways;
+  }
+
+  /** @returns {Binder} binds devices Homey plays to units */
+  get binder() {
+    return this.#binder;
   }
 
   /** @returns {RamsesApi} */

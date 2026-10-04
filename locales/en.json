@@ -6,7 +6,8 @@
     "invalid_address": "That is not a valid address. Use the form 29:123456.",
     "params_supported": "Yes",
     "params_unsupported": "No",
-    "unknown_param": "Unknown parameter."
+    "unknown_param": "Unknown parameter.",
+    "binding_timeout": "No unit answered. Put the unit in binding mode first (Orcon: switch its power off and on), then try again within 2 minutes."
   },
   "gateway": {
     "connecting": "Connecting to the MQTT broker…",
@@ -19,7 +20,8 @@
     "name": {
       "fan": "Ventilation unit __id__",
       "remote": "Remote __id__",
-      "sensor": "Sensor __id__"
+      "sensor": "Sensor __id__",
+      "virtual_sensor": "Homey CO₂ sensor"
     },
     "intro": {
       "fan": {

@@ -3,6 +3,7 @@ import {
   BypassModeChanged, FanModeChanged, ParamChanged, ReadingChanged, SchemeDetected,
 } from '../../lib/domain/events.js';
 import { FAN_PARAMS } from '../../lib/ramses/FanParams.js';
+import { REMOTE_OFFER } from '../../lib/ramses/binding.js';
 import { FanUnit } from '../../lib/domain/FanUnit.js';
 import { FanStatus } from '../../lib/homey/FanStatus.js';
 import { RamsesDevice } from '../../lib/homey/RamsesDevice.js';
@@ -29,9 +30,13 @@ export default class FanDevice extends RamsesDevice {
   /**
    * Version of the capability layout. 2: readings lent by a linked CO₂ sensor
    * are gone (the sensor is its own device). 3: the mode as a word for the
-   * tile. 4: the numeric status indicator is gone again.
+   * tile. 4: the numeric status indicator is gone again. 5: binding Homey as
+   * a remote, as a maintenance action.
    */
-  static SCHEMA = 4;
+  static SCHEMA = 5;
+
+  /** Maintenance action that binds Homey to the unit as a remote. */
+  static BIND_ACTION = 'button.bind_remote';
 
   /** Time between two parameter requests, so the bus is not flooded. */
   static PARAM_SPACING_MS = 1500;
@@ -60,6 +65,12 @@ export default class FanDevice extends RamsesDevice {
 
     if (this.hasCapability('ramses_bypass_mode')) {
       this.#listenToBypass();
+    }
+
+    if (this.hasCapability(FanDevice.BIND_ACTION)) {
+      this.registerCapabilityListener(FanDevice.BIND_ACTION, async () => {
+        await this.#bindAsRemote();
+      });
     }
 
     await this.#showRemoteWarning(this.getSetting('remote_id'));
@@ -182,6 +193,33 @@ export default class FanDevice extends RamsesDevice {
   }
 
   /**
+   * Binds Homey to the unit as a remote of its own, so it no longer needs to
+   * speak in the name of a physical remote. The unit must be in binding mode.
+   */
+  async #bindAsRemote() {
+    const binder = this.app.binder;
+    const remote = this.getStoreValue('own_remote') ?? binder.freeAddress('29');
+
+    await this.setStoreValue('own_remote', remote);
+
+    try {
+      await binder.bind({
+        supplicant: remote,
+        offer: REMOTE_OFFER,
+        unit: this.getData().id,
+        gateway: this.gatewayId,
+      });
+    } catch (error) {
+      throw this.toUserError(error);
+    }
+
+    this.log(`Bound as remote ${remote}`);
+    this.unit.configure({ remote });
+    await this.setSettings({ remote_id: remote });
+    await this.#showRemoteWarning(remote);
+  }
+
+  /**
    * Shows the mode as a word, for the indicator on the device tile.
    * @param {unknown} mode
    */
@@ -279,6 +317,10 @@ export default class FanDevice extends RamsesDevice {
 
     await this.capabilities.remove('measure_ramses_fan_status');
     await this.capabilities.add(FanStatus.LABEL_CAPABILITY);
+    await this.capabilities.add(FanDevice.BIND_ACTION, {
+      maintenanceAction: true,
+      title: { en: 'Bind Homey as a remote', nl: 'Koppel Homey als afstandsbediening' },
+    });
     await this.setStoreValue('schema', FanDevice.SCHEMA);
   }
 

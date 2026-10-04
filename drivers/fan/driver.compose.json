@@ -6,7 +6,8 @@
   "class": "fan",
   "capabilities": [
     "ramses_fan_mode",
-    "measure_ramses_fan_mode_label"
+    "measure_ramses_fan_mode_label",
+    "button.bind_remote"
   ],
   "platforms": [
     "local"
@@ -38,5 +39,18 @@
       "id": "add_devices",
       "template": "add_devices"
     }
-  ]
+  ],
+  "capabilitiesOptions": {
+    "button.bind_remote": {
+      "maintenanceAction": true,
+      "title": {
+        "en": "Bind Homey as a remote",
+        "nl": "Koppel Homey als afstandsbediening"
+      },
+      "desc": {
+        "en": "Put the unit in binding mode first (Orcon: switch its power off and on, then bind within 2 minutes). Homey then gets its own remote address.",
+        "nl": "Zet de unit eerst in koppelmodus (Orcon: stroom eraf en erop, daarna binnen 2 minuten koppelen). Homey krijgt dan een eigen afstandsbedieningsadres."
+      }
+    }
+  }
 }

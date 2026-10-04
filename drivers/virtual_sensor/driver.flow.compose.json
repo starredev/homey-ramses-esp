@@ -1,0 +1,84 @@
+{
+  "actions": [
+    {
+      "id": "report_co2",
+      "title": {
+        "en": "Report CO₂",
+        "nl": "Meld CO₂"
+      },
+      "titleFormatted": {
+        "en": "Report [[ppm]] ppm CO₂",
+        "nl": "Meld [[ppm]] ppm CO₂"
+      },
+      "hint": {
+        "en": "Use a CO₂ value from any Homey sensor; the unit treats it as its own sensor.",
+        "nl": "Gebruik een CO₂-waarde van een willekeurige Homey-sensor; de unit ziet hem als eigen sensor."
+      },
+      "args": [
+        {
+          "name": "ppm",
+          "type": "number",
+          "min": 0,
+          "max": 10000,
+          "step": 1,
+          "placeholder": {
+            "en": "ppm",
+            "nl": "ppm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "report_humidity",
+      "title": {
+        "en": "Report humidity",
+        "nl": "Meld vochtigheid"
+      },
+      "titleFormatted": {
+        "en": "Report [[percent]] % humidity",
+        "nl": "Meld [[percent]] % vochtigheid"
+      },
+      "args": [
+        {
+          "name": "percent",
+          "type": "number",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "placeholder": {
+            "en": "%",
+            "nl": "%"
+          }
+        }
+      ]
+    },
+    {
+      "id": "report_demand",
+      "title": {
+        "en": "Ask for ventilation",
+        "nl": "Vraag om ventilatie"
+      },
+      "titleFormatted": {
+        "en": "Ask the unit for [[percent]] % ventilation",
+        "nl": "Vraag de unit om [[percent]] % ventilatie"
+      },
+      "hint": {
+        "en": "In auto mode the unit ventilates more as the demand rises.",
+        "nl": "In de autostand ventileert de unit harder naarmate de vraag stijgt."
+      },
+      "args": [
+        {
+          "name": "percent",
+          "type": "number",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "placeholder": {
+            "en": "%",
+            "nl": "%"
+          }
+        }
+      ]
+    }
+  ]
+}
