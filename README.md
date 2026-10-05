@@ -8,6 +8,9 @@ Orcon, Itho, Vasco and ClimaRad) through a [ramses_esp](https://github.com/Indal
 The app talks to the MQTT broker the ramses_esp already publishes to, for example the MQTT Broker app on Homey
 itself. No Home Assistant, no websocket bridge, and no reflashing needed.
 
+📖 **Documentatie (NL):** [starredev.github.io/homey-ramses-esp](https://starredev.github.io/homey-ramses-esp/)
+— installatie, koppelen, flows, widget en probleemoplossing.
+
 > **Unofficial community project.** Not made or endorsed by any of the brands above or by the ramses_esp authors.
 
 ## Features
