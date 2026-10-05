@@ -127,44 +127,21 @@ je sensoren en, in een appartementencomplex, ook van de buren.
 
 ## 3. De app installeren
 
-### Uit de Homey App Store
+De app staat als **testversie** in de Homey App Store. Je installeert hem met één klik:
 
-Zodra de app in de App Store staat: zoek op **RAMSES ESP** en klik op *Installeren*.
+[Installeer RAMSES ESP op je Homey](https://homey.app/a/io.github.starredev.ramses/test/){: .btn .btn-primary }
 
-### Met de Homey CLI (tot de app in de store staat)
+1. Open de link hierboven en log in met je Homey-account.
+2. Klik op **Installeren** en kies je Homey.
+3. Na een paar seconden staat de app onder *Apps* op je Homey.
 
-Je hebt [Node.js 22](https://nodejs.org/) of nieuwer nodig.
+Je hebt geen computer, Node.js of Homey CLI nodig.
 
-```bash
-git clone https://github.com/starredev/homey-ramses-esp.git
-```
+{: .info }
+Een testversie is nog niet door Athom gekeurd en is niet te vinden via de zoekfunctie van de App Store, alleen via
+deze link. Zodra de app officieel gepubliceerd is, vind je hem ook door op **RAMSES ESP** te zoeken.
 
-```bash
-cd homey-ramses-esp
-```
-
-```bash
-npm install
-```
-
-```bash
-npm install --global homey
-```
-
-```bash
-homey login
-```
-
-```bash
-homey select
-```
-
-```bash
-homey app install
-```
-
-`homey select` vraagt welke Homey je wilt gebruiken als je er meer dan één hebt. Na `homey app install` staat de app
-onder *Apps* op je Homey.
+Wil je zelf aan de app sleutelen? Zie dan [Ontwikkelen](ontwikkelen).
 
 ## 4. Apparaten toevoegen
 

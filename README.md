@@ -57,14 +57,9 @@ role of every device on the bus and whether it is added to Homey, and a form to 
 
 ## Installation
 
-Until the app is in the Homey App Store, install it with the Homey CLI:
-
-```bash
-npm install
-homey login
-homey select
-homey app install
-```
+Install the test version from the Homey App Store:
+**[homey.app/a/io.github.starredev.ramses/test](https://homey.app/a/io.github.starredev.ramses/test/)**.
+No computer or Homey CLI needed. To run your own build, see [Development](#development).
 
 Then add the devices in this order:
 
