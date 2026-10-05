@@ -3,3 +3,4 @@
 /coverage/
 /env.json
 *.log
+!test/fixtures/**/*.log
