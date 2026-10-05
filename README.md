@@ -36,7 +36,8 @@ of identical radio frames; the app counts it once. Commands Homey sends in the r
 **Sensor**. CO₂, humidity, temperature and battery of room sensors.
 
 **Homey CO₂ sensor**. Homey plays a RAMSES CO₂ sensor of its own and binds it to your unit from the device's
-maintenance menu: power-cycle the unit, tap *Bind to a unit*, done. A flow then passes on the CO₂ or humidity of
+maintenance menu: power-cycle the unit, tap *Bind to a unit*, done. It offers itself as an Orcon CO2 15RF and as a
+plain sensor in turn, so the unit picks the form it knows. A flow then passes on the CO₂ or humidity of
 any Homey sensor (Zigbee, Wi-Fi, a Sensy, a Netatmo), and the unit in *Auto* ventilates on it next to its own
 sensors. Homey derives the ventilation demand from a configurable curve and repeats it every 5 minutes, like a real
 sensor. Verified on an Orcon unit with a CO2 15RF already bound; see

@@ -15,6 +15,7 @@ import {
   PLAIN_SENSOR_OFFER,
   REMOTE_OFFER,
   SENSOR_OFFER,
+  SENSOR_OFFERS,
 } from '../lib/ramses/binding.js';
 import { decode } from '../lib/ramses/decoders.js';
 import { Packet } from '../lib/ramses/Packet.js';
@@ -117,7 +118,7 @@ describe('BindingSession', () => {
     return {
       session: new BindingSession({
         supplicant: HOMEY,
-        offer: REMOTE_OFFER,
+        offers: [REMOTE_OFFER],
         unit,
         timers,
         send: async (frame) => {
@@ -146,6 +147,33 @@ describe('BindingSession', () => {
     assert.equal(binding.supplicant, HOMEY);
   });
 
+  it('sends several offers in turn, so the unit can accept the one it knows', async () => {
+    /** @type {Packet[]} */
+    const sent = [];
+    const timers = new FakeTimers();
+    const binding = new BindingSession({
+      supplicant: '37:155617',
+      offers: SENSOR_OFFERS,
+      timers,
+      send: async (frame) => {
+        sent.push(frame);
+      },
+    });
+
+    binding.start().catch(() => {});
+    timers.tick(BindingSession.OFFER_INTERVAL_MS * 2);
+
+    assert.deepEqual(
+      sent.map((frame) => frame.payload),
+      [
+        offerPacket('37:155617', SENSOR_OFFER).payload,
+        offerPacket('37:155617', PLAIN_SENSOR_OFFER).payload,
+        offerPacket('37:155617', SENSOR_OFFER).payload,
+      ],
+    );
+    binding.cancel();
+  });
+
   it('ignores accepts from other units and for other devices', () => {
     const { session: binding } = session(UNIT);
 
@@ -170,7 +198,7 @@ describe('BindingSession', () => {
   it('stops when sending fails, and can be cancelled', async () => {
     const binding = new BindingSession({
       supplicant: HOMEY,
-      offer: REMOTE_OFFER,
+      offers: [REMOTE_OFFER],
       timers: new FakeTimers(),
       send: async () => {
         throw new Error('no gateway');

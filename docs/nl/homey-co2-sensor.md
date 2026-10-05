@@ -37,12 +37,13 @@ flowchart LR
 1. Ga naar **Apparaten → + → RAMSES ESP → Homey CO₂-sensor**. Homey kiest een vrij adres op de bus.
 2. Zet de unit in **koppelmodus** (Orcon: stekker eruit en er weer in; daarna 2 minuten de tijd).
 3. Open de Homey CO₂-sensor → **Instellingen** → **Onderhoud** → **Koppel aan een unit**.
-4. Homey biedt zich aan zoals een echte Orcon CO2 15RF dat doet. Na het accepteren staat het adres van de unit bij
+4. Homey biedt zich aan als sensor (zie hieronder). Na het accepteren staat het adres van de unit bij
    *Gekoppeld aan unit*.
 
 {: .let_op }
-De sensor bindt als *bediening*, net als een Orcon CO2 15RF. Een Orcon-unit negeerde de aanbieding van een kale
-sensor; deze vorm accepteerde hij wel. Bij andere merken kan het gedrag verschillen.
+Homey stuurt om de 5 seconden om beurten twee aanbiedingen: eerst als *bediening*, zoals een Orcon CO2 15RF, dan als
+*kale sensor* (`31E0`, `1298`, `2E10`). De unit accepteert de vorm die hij kent. Orcon-units nemen de eerste;
+andere merken mogelijk de tweede. Tot nu toe is alleen Orcon getest.
 
 ### Hoe koppelen eruitziet op de bus
 

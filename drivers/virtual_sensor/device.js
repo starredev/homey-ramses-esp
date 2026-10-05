@@ -4,7 +4,7 @@ import { loggerFrom } from '../../lib/utils.js';
 import { VirtualSensor } from '../../lib/domain/VirtualSensor.js';
 
 import { CapabilityStore } from '../../lib/homey/CapabilityStore.js';
-import { SENSOR_OFFER } from '../../lib/ramses/binding.js';
+import { SENSOR_OFFERS } from '../../lib/ramses/binding.js';
 
 /** @typedef {import('../../app.js').default} RamsesApp */
 /** @typedef {import('../../lib/domain/VirtualSensor.js').DemandCurve} DemandCurve */
@@ -100,7 +100,7 @@ export default class VirtualSensorDevice extends Homey.Device {
 
   async #bind() {
     try {
-      const unit = await this.#app.binder.bind({ supplicant: this.#sensor.address, offer: SENSOR_OFFER });
+      const unit = await this.#app.binder.bind({ supplicant: this.#sensor.address, offers: SENSOR_OFFERS });
 
       this.#sensor.bindTo(unit);
       await this.setStoreValue('unit', unit);

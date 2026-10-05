@@ -205,7 +205,7 @@ export default class FanDevice extends RamsesDevice {
     try {
       await binder.bind({
         supplicant: remote,
-        offer: REMOTE_OFFER,
+        offers: [REMOTE_OFFER],
         unit: this.getData().id,
         gateway: this.gatewayId,
       });

@@ -5,7 +5,7 @@ import { BindingTimeoutError } from '../lib/domain/BindingSession.js';
 import { Binder } from '../lib/homey/Binder.js';
 import { GatewayRegistry } from '../lib/homey/GatewayRegistry.js';
 import { VirtualSensorCards, VirtualSensorFlowCards } from '../lib/homey/flows/VirtualSensorFlowCards.js';
-import { REMOTE_OFFER, SENSOR_OFFER } from '../lib/ramses/binding.js';
+import { REMOTE_OFFER, SENSOR_OFFERS } from '../lib/ramses/binding.js';
 import { Packet } from '../lib/ramses/Packet.js';
 import {
   FakeConnection, FakeFlow, FakeTimers, flush, recordingLogger,
@@ -51,7 +51,7 @@ describe('Binder', () => {
 
   it('binds through the gateways and confirms to the unit that accepted', async () => {
     const { binder, connection } = setup();
-    const result = binder.bind({ supplicant: '29:100001', offer: REMOTE_OFFER, unit: UNIT });
+    const result = binder.bind({ supplicant: '29:100001', offers: [REMOTE_OFFER], unit: UNIT });
 
     await flush();
     assert.equal(connection.sent[0]?.code, '1FC9');
@@ -65,7 +65,7 @@ describe('Binder', () => {
 
   it('stops listening after a timeout', async () => {
     const { binder, timers, connection } = setup();
-    const result = binder.bind({ supplicant: '37:100001', offer: SENSOR_OFFER });
+    const result = binder.bind({ supplicant: '37:100001', offers: SENSOR_OFFERS });
 
     await flush();
     timers.tick(90000);

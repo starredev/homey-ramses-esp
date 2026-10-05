@@ -39,12 +39,13 @@ flowchart LR
 1. Go to **Devices → + → RAMSES ESP → Homey CO₂ sensor**. Homey picks a free address on the bus.
 2. Put the unit in **binding mode** (Orcon: unplug and plug back in; you then have 2 minutes).
 3. Open the Homey CO₂ sensor → **Settings** → **Maintenance** → **Bind to a unit**.
-4. Homey offers itself the way a real Orcon CO2 15RF does. Once accepted, the unit's address is shown under
+4. Homey offers itself as a sensor (see below). Once accepted, the unit's address is shown under
    *Bound to unit*.
 
 {: .note }
-The sensor binds as a *control*, like an Orcon CO2 15RF. An Orcon unit ignored the offer of a plain sensor; it did
-accept this form. Other brands may behave differently.
+Homey sends two offers in turn, every 5 seconds: first as a *control*, like an Orcon CO2 15RF, then as a *plain
+sensor* (`31E0`, `1298`, `2E10`). The unit accepts the one it knows. Orcon units accept the first; other brands
+may accept the second. Only Orcon has been verified so far.
 
 ### What binding looks like on the bus
 
