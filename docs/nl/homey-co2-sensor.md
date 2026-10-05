@@ -60,8 +60,14 @@ De unit antwoordde binnen een seconde op het eerste aanbod. Direct daarna komen 
 
 ```text
  I --- 37:215483 --:------ 37:215483 1298 003 000229              CO₂ 553 ppm
- I --- 37:215483 29:233244 --:------ 31E0 008 0000000001003400    ventilatievraag
+ I --- 37:215483 29:233244 --:------ 31E0 008 0000260001002600    ventilatievraag 19 %
 ```
+
+{: .let_op }
+De vraag staat in de **eerste** groep van de `31E0` (`00 00 DD 00`), in halve procenten. Een Orcon CO2 15RF laat
+die groep meelopen met het CO₂-niveau; de tweede groep (`01 00 DD 00`) stuurt de unit niet. Versie 1.0.0 zette de
+vraag alleen in de tweede groep, en daar reageerde de unit niet op: getest met 100 % in beide vormen op dezelfde
+unit.
 
 Je kunt dit zelf volgen in de [busweergave](dashboard#busweergave). Alleen de unit die je verwacht hoort met de
 `W 1FC9` te antwoorden; een buurunit doet dat alleen als die op hetzelfde moment in koppelmodus staat.

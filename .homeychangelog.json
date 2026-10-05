@@ -4,7 +4,7 @@
     "nl": "Eerste versie: ramses_esp-gateways via MQTT, ventilatie-units met standen, boost en status, afstandsbedieningen en sensoren als apparaten, flowkaarten voor elk pakket op de bus en een live busweergave."
   },
   "1.0.1": {
-    "en": "The Homey CO₂ sensor now binds to Orcon units: it offers itself the way an Orcon CO2 15RF does, in turn with a plain sensor offer for other brands. Verified on a real Orcon unit. Documentation is now in English by default, Dutch under /nl/.",
-    "nl": "De Homey CO₂-sensor koppelt nu aan Orcon-units: hij biedt zich aan zoals een Orcon CO2 15RF, om beurten met een kale-sensoraanbieding voor andere merken. Getest op een echte Orcon-unit. De documentatie is nu standaard Engels, Nederlands staat onder /nl/."
+    "en": "The Homey CO₂ sensor now really drives an Orcon unit: the ventilation demand goes in the part of the message the unit reads, as an Orcon CO2 15RF sends it. Verified on a real unit. Binding offers itself as an Orcon CO2 15RF and as a plain sensor in turn. Documentation is now in English by default, Dutch under /nl/.",
+    "nl": "De Homey CO₂-sensor stuurt een Orcon-unit nu echt aan: de ventilatievraag staat in het deel van het bericht dat de unit leest, zoals een Orcon CO2 15RF hem stuurt. Getest op een echte unit. Bij het koppelen biedt hij zich om beurten aan als Orcon CO2 15RF en als kale sensor. De documentatie is nu standaard Engels, Nederlands staat onder /nl/."
   }
 }

@@ -62,8 +62,14 @@ The unit answered within a second of the first offer. Right after, Homey's repor
 
 ```text
  I --- 37:215483 --:------ 37:215483 1298 003 000229              CO₂ 553 ppm
- I --- 37:215483 29:233244 --:------ 31E0 008 0000000001003400    ventilation demand
+ I --- 37:215483 29:233244 --:------ 31E0 008 0000260001002600    ventilation demand 19 %
 ```
+
+{: .note }
+The demand goes in the **first** group of the `31E0` (`00 00 DD 00`), in half percent. An Orcon CO2 15RF raises
+and lowers that group with the CO₂ level; the second group (`01 00 DD 00`) does not drive the unit. Version 1.0.0
+put the demand only in the second group, and the unit did not respond: verified with 100 % in either form on the
+same unit.
 
 You can follow this yourself in the [bus view](dashboard#bus-view). Only the unit you expect should answer with the
 `W 1FC9`; a neighbour's unit only does when it is in binding mode at the same moment.

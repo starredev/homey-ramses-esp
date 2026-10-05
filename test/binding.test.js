@@ -247,7 +247,7 @@ describe('VirtualSensor', () => {
     assert.deepEqual(sent.map((frame) => frame.toFrame()), [
       ` I --- ${SELF} --:------ ${SELF} 1298 003 0001C4`,
       ` I --- ${SELF} --:------ ${SELF} 12A0 002 003A`,
-      ` I --- ${SELF} ${UNIT} --:------ 31E0 008 0000000001001E00`,
+      ` I --- ${SELF} ${UNIT} --:------ 31E0 008 00001E0001001E00`,
     ]);
     assert.deepEqual(sent.map((frame) => decode(frame).readings), [{ co2: 452 }, { humidity: 58 }, { demand: 15 }]);
     assert.equal(virtual.unit, UNIT);
@@ -269,7 +269,7 @@ describe('VirtualSensor', () => {
     virtual.bindTo(UNIT);
     assert.equal(await virtual.reportCo2(700), 50);
     assert.equal(await virtual.reportHumidity(75), 75);
-    assert.equal(sent.at(-1)?.toFrame(), ` I --- ${SELF} ${UNIT} --:------ 31E0 008 0000000001009600`);
+    assert.equal(sent.at(-1)?.toFrame(), ` I --- ${SELF} ${UNIT} --:------ 31E0 008 0000960001009600`);
 
     virtual.useCurve(null);
     assert.equal(await virtual.reportCo2(1200), null);

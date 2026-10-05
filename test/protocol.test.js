@@ -299,8 +299,12 @@ describe('decode', () => {
   });
 
   it('reads the ventilation demand of a sensor (31E0)', () => {
-    assert.deepEqual(decode(parsed(' I --- 37:044778 29:233244 --:------ 31E0 008 0000000001001E00')).readings, {
-      demand: 15,
+    // A 15RF at rest and after someone breathed on it: the first group follows the CO₂.
+    assert.deepEqual(decode(parsed(' I --- 37:044778 29:233244 --:------ 31E0 008 0000000001006400')).readings, {
+      demand: 0,
+    });
+    assert.deepEqual(decode(parsed(' I --- 37:044778 29:233244 --:------ 31E0 008 000060000100AA00')).readings, {
+      demand: 48,
     });
     assert.deepEqual(decode(parsed(' I --- 29:146052 32:023459 --:------ 31E0 003 0000C8')).readings, { demand: 100 });
     assert.deepEqual(decode(parsed(' I --- 37:044778 29:233244 --:------ 31E0 008 0000FF000100FF00')), {});
