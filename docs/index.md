@@ -15,7 +15,8 @@ triggers in flows.
 {: .fs-6 .fw-300 }
 
 [Aan de slag](installatie){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[Bekijk op GitHub](https://github.com/starredev/homey-ramses-esp){: .btn .fs-5 .mb-4 .mb-md-0 }
+[Bekijk op GitHub](https://github.com/starredev/homey-ramses-esp){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[English](en/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
@@ -71,7 +72,7 @@ volledig lokaal op je Homey.
 2. [Installeer de app](installatie#3-de-app-installeren) op je Homey.
 3. [Voeg de gateway toe](gateway): vul het adres van de broker in, Homey vindt de ramses_esp vanzelf.
 4. [Voeg je ventilatie-unit toe](ventilatie-unit) en zorg dat Homey hem mag bedienen
-   (via het adres van een gekoppelde remote, of door Homey zelf te [koppelen](ventilatie-unit#homey-koppelen-als-afstandsbediening)).
+   (via het adres van een gekoppelde remote, of door Homey zelf te [koppelen](ventilatie-unit#manier-2-homey-koppelen-als-afstandsbediening)).
 5. Optioneel: [remotes en sensoren](remotes-en-sensoren), de [Homey CO₂-sensor](homey-co2-sensor) en
    [flows](flows).
 

@@ -20,8 +20,10 @@ mermaid:
   version: "10.9.1"
 
 aux_links:
+  English: /homey-ramses-esp/en/
+  Nederlands: /homey-ramses-esp/
   GitHub: https://github.com/starredev/homey-ramses-esp
-aux_links_new_tab: true
+aux_links_new_tab: false
 
 gh_edit_link: true
 gh_edit_link_text: Bewerk deze pagina op GitHub
@@ -46,4 +48,13 @@ callouts:
     color: red
   info:
     title: Achtergrond
+    color: blue
+  note:
+    title: Note
+    color: yellow
+  warning:
+    title: Warning
+    color: red
+  background:
+    title: Background
     color: blue
