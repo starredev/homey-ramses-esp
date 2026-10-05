@@ -1,16 +1,17 @@
 ---
-title: Widget en busweergave
-nav_order: 8
+title: Widget and bus view
+parent: English
+nav_order: 7
 ---
 
-# Widget en busweergave
+# Widget and bus view
 {: .no_toc }
 
-De ventilatie op je dashboard, en een blik onder de motorkap.
+The ventilation on your dashboard, and a look under the hood.
 {: .fs-6 .fw-300 }
 
 <details open markdown="block">
-  <summary>Op deze pagina</summary>
+  <summary>On this page</summary>
   {: .text-delta }
 1. TOC
 {:toc}
@@ -18,69 +19,69 @@ De ventilatie op je dashboard, en een blik onder de motorkap.
 
 ---
 
-## Dashboardwidget *Ventilatie*
+## Dashboard widget *Ventilation*
 
-De app heeft een widget voor de Homey-dashboards.
+The app has a widget for Homey dashboards.
 
-1. Open een dashboard en kies **Bewerken → + Widget → RAMSES ESP → Ventilatie**.
-2. Kies bij *Ventilatie-unit* welke unit de widget toont.
+1. Open a dashboard and choose **Edit → + Widget → RAMSES ESP → Ventilation**.
+2. Under *Ventilation unit*, choose which unit the widget shows.
 
-De widget laat zien:
+The widget shows:
 
-- een **draaiende ventilator** die sneller draait naarmate de stand hoger is,
-- de **huidige stand**, en waar beschikbaar snelheid en CO₂,
-- een groen of grijs bolletje voor **beschikbaar / onbeschikbaar**,
-- **knoppen** om direct een stand te kiezen.
+- a **spinning fan** that turns faster the higher the mode,
+- the **current mode**, and where available the speed and CO₂,
+- a green or grey dot for **available / unavailable**,
+- **buttons** to pick a mode right away.
 
-De widget werkt in licht en donker thema.
+The widget works in the light and dark theme.
 
-## Busweergave
+## Bus view
 
-Ga naar **Apps → RAMSES ESP → Instellen**. Daar vind je vier onderdelen.
+Go to **Apps → RAMSES ESP → Configure**. There you'll find four parts.
 
 ### Gateways
 
-Elke toegevoegde gateway met zijn status: *verbonden*, *niet verbonden* of *gateway offline*.
+Every gateway you added, with its status: *connected*, *not connected* or *gateway offline*.
 
-### Apparatenzoeker
+### Device finder
 
-Een tabel met **elk apparaat dat de gateways gehoord hebben**:
+A table of **every device the gateways have heard**:
 
-| Kolom | Betekenis |
+| Column | Meaning |
 |---|---|
-| **Adres** | Het RAMSES-adres, bv. `29:233244` |
-| **Rol** | Gateway, Ventilatie-unit, Afstandsbediening, Sensor of Onbekend |
-| **Verstuurt** | De berichtcodes die het apparaat verstuurt |
-| **Laatst gezien** | Wanneer het apparaat voor het laatst iets zei |
-| **In Homey** | Of het apparaat al als Homey-apparaat is toegevoegd |
+| **Address** | The RAMSES address, e.g. `29:233244` |
+| **Role** | Gateway, Ventilation unit, Remote, Sensor or Unknown |
+| **Sends** | The message codes the device sends |
+| **Last seen** | When the device last said something |
+| **In Homey** | Whether the device has been added as a Homey device |
 
-De rol wordt bepaald aan de hand van welke berichten een apparaat verstuurt. Een apparaat dat `31DA` of `31D9`
-meldt is een unit, een apparaat dat `22F1` verstuurt een remote, enzovoort.
+The role is determined from the messages a device sends. A device reporting `31DA` or `31D9` is a unit, a device
+sending `22F1` is a remote, and so on.
 
 {: .tip }
-Handig om je **eigen** unit te vinden in een appartementencomplex: druk op je remote en kijk welke unit kort daarna
-iets meldt.
+Handy to find your **own** unit in an apartment building: press your remote and see which unit reports something
+shortly after.
 
-### Live verkeer
+### Live traffic
 
-Een doorlopende lijst van alle pakketten op de bus, **met gedecodeerde waarden** (bv. *stand: hoog*, *CO₂: 612 ppm*).
+A running list of all packets on the bus, **with decoded values** (e.g. *mode: high*, *CO₂: 612 ppm*).
 
-- **Pauzeren / Hervatten**: zet de lijst stil om rustig te lezen.
-- **Wissen**: maak de lijst leeg.
-- **Filter**: toon alleen pakketten met een bepaald adres of een bepaalde code, bv. `29:233244` of `31DA`.
+- **Pause / Resume**: freeze the list to read it at your leisure.
+- **Clear**: empty the list.
+- **Filter**: only show packets with a certain address or code, e.g. `29:233244` or `31DA`.
 
-Pakketten die Homey zelf verstuurde, worden als **echo** gemarkeerd.
+Packets Homey sent itself are marked as **echo**.
 
-### Een frame versturen
+### Sending a frame
 
-Typ een volledig RAMSES II-frame en klik op **Versturen**. Het gaat ongewijzigd via de eerste verbonden gateway de
-lucht in. Bijvoorbeeld:
+Type a complete RAMSES II frame and click **Send**. It goes on air unchanged through the first connected gateway. For
+example:
 
 ```text
 RQ --- 18:203612 29:233244 --:------ 31DA 001 00
 ```
 
-vraagt unit `29:233244` om zijn volledige status. Zie [Protocol](protocol) voor de opbouw van een frame.
+asks unit `29:233244` for its full status. See [Protocol](protocol) for how a frame is built.
 
-{: .waarschuwing }
-Een verkeerd frame kan de instellingen van een unit veranderen. Stuur alleen naar je eigen apparaten.
+{: .warning }
+A wrong frame can change a unit's settings. Only send to your own devices.

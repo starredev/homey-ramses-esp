@@ -1,16 +1,17 @@
 ---
 title: Flows
-nav_order: 7
+parent: English
+nav_order: 6
 ---
 
 # Flows
 {: .no_toc }
 
-Alle flowkaarten van de app, met voorbeelden.
+All flow cards of the app, with examples.
 {: .fs-6 .fw-300 }
 
 <details open markdown="block">
-  <summary>Op deze pagina</summary>
+  <summary>On this page</summary>
   {: .text-delta }
 1. TOC
 {:toc}
@@ -18,152 +19,152 @@ Alle flowkaarten van de app, met voorbeelden.
 
 ---
 
-## Ventilatie-unit
+## Ventilation unit
 
-### Als…
+### When…
 
-| Kaart | Tags | Toelichting |
+| Card | Tokens | Notes |
 |---|---|---|
-| **De ventilatiestand veranderde** | *Stand*, *Veranderd door* | Bij elke standwijziging. *Veranderd door* is `homey`, `remote` of `unit`. |
-| **De ventilatiestand veranderde naar [stand]** | | Alleen bij een bepaalde stand. |
-| **Een boost is gestart** | *Minuten*, *Gestart door* | Ook als iemand de boost op de remote start. |
-| **De unit meldde een storing** | | |
-| **De storing van de unit is weg** | | |
-| **Het filter moet vervangen worden** | | Als de unit zijn filteralarm aanzet. |
+| **The fan mode changed** | *Mode*, *Changed by* | On every mode change. *Changed by* is `homey`, `remote` or `unit`. |
+| **The fan mode changed to [mode]** | | Only for a particular mode. |
+| **A boost started** | *Minutes*, *Started by* | Also when someone starts the boost on the remote. |
+| **The unit reported a fault** | | |
+| **The fault of the unit is gone** | | |
+| **The filter needs replacing** | | When the unit turns on its filter alarm. |
 
-### En…
+### And…
 
-| Kaart |
+| Card |
 |---|
-| **De ventilatiestand is / is niet [stand]** |
-| **De unit heeft / heeft geen storing** |
+| **The fan mode is / isn't [mode]** |
+| **The unit has / has no fault** |
 
-### Dan…
+### Then…
 
-| Kaart | Toelichting |
+| Card | Notes |
 |---|---|
-| **Zet de ventilatiestand op [stand]** | Laag, midden, hoog, auto, afwezig of uit (wat je merk ondersteunt). |
-| **Draai [minuten] minuten op hoog** | Boost van 1–255 minuten; daarna valt de unit terug. |
-| **Zet de bypass op [auto / open / dicht]** | Alleen voor units met bypass. |
-| **Zet [parameter] op [waarde]** | Voor WTW-units met parameters. Begin te typen om een parameter te zoeken. |
-| **Zet de filterteller terug** | Na het vervangen van het filter. |
-| **Vraag de status van de unit op** | Laat de unit direct al zijn waarden melden. |
+| **Set the fan mode to [mode]** | Low, medium, high, auto, away or off (what your brand supports). |
+| **Run on high for [minutes] minutes** | Boost of 1–255 minutes; the unit then falls back. |
+| **Set the bypass to [auto / open / closed]** | Only for units with a bypass. |
+| **Set [parameter] to [value]** | For heat recovery units with parameters. Start typing to search for a parameter. |
+| **Reset the filter counter** | After replacing the filter. |
+| **Ask the unit for its status** | Makes the unit report all its values right away. |
 
-## Afstandsbediening en sensor
+## Remote and sensor
 
-### Als…
+### When…
 
-| Kaart | Tags |
+| Card | Tokens |
 |---|---|
-| **De knop [Laag / Midden / Hoog / Auto / Afwezig / Uit / Boost] werd ingedrukt** | *Boost-minuten* |
-| **Een willekeurige knop werd ingedrukt** | *Knop*, *Boost-minuten* |
+| **The [Low / Medium / High / Auto / Away / Off / Boost] button was pressed** | *Boost minutes* |
+| **Any button was pressed** | *Button*, *Boost minutes* |
 
-De kaart *Een willekeurige knop* geeft in *Knop* het woord `low`, `medium`, `high`, `auto`, `away`, `off` of `boost`.
+The card *Any button was pressed* gives in *Button* the word `low`, `medium`, `high`, `auto`, `away`, `off` or `boost`.
 
-## Homey CO₂-sensor
+## Homey CO₂ sensor
 
-### Dan…
+### Then…
 
-| Kaart |
+| Card |
 |---|
-| **Meld [ppm] ppm CO₂** |
-| **Meld [%] % vochtigheid** |
-| **Vraag de unit om [%] % ventilatie** |
+| **Report [ppm] ppm CO₂** |
+| **Report [%] % humidity** |
+| **Ask the unit for [%] % ventilation** |
 
-Zie [Homey CO₂-sensor](homey-co2-sensor) voor de uitleg.
+See [Homey CO₂ sensor](homey-co2-sensor) for the explanation.
 
 ## Gateway
 
-Deze kaarten zijn voor wie dieper wil gaan. Je hebt er wat kennis van het [protocol](protocol) voor nodig.
+These cards are for those who want to go deeper. You'll need some knowledge of the [protocol](protocol).
 
-### Als…
+### When…
 
-| Kaart | Toelichting |
+| Card | Notes |
 |---|---|
-| **Er werd een pakket ontvangen** | Gaat af bij **elk** pakket op de bus. Kan druk zijn! |
-| **Er werd een [code]-pakket ontvangen van of naar [adres]** | Filter op berichtcode en adres. Adres `*` past op elk apparaat. |
-| **Er werd een nieuw apparaat op de bus gevonden** | Tags *Adres* en *Rol* (`fan`, `remote`, `sensor`, `gateway`, `unknown`). |
-| **De gateway ging offline** | |
-| **De gateway kwam online** | |
+| **A packet was received** | Fires for **every** packet on the bus. Can be busy! |
+| **A [code] packet was received from or to [address]** | Filter on message code and address. Address `*` matches any device. |
+| **A new device was found on the bus** | Tokens *Address* and *Role* (`fan`, `remote`, `sensor`, `gateway`, `unknown`). |
+| **The gateway went offline** | |
+| **The gateway came online** | |
 
-De pakkettriggers hebben deze tags:
+The packet triggers have these tokens:
 
-| Tag | Voorbeeld |
+| Token | Example |
 |---|---|
-| *Werkwoord* | `I`, `RQ`, `RP` of `W` |
-| *Van* | `29:173894` |
-| *Naar* | `29:233244` |
+| *Verb* | `I`, `RQ`, `RP` or `W` |
+| *From* | `29:173894` |
+| *To* | `29:233244` |
 | *Code* | `22F1` |
 | *Payload* | `000304` |
 | *Frame* | ` I --- 29:173894 29:233244 --:------ 22F1 003 000304` |
-| *Signaal (RSSI)* | `45` |
+| *Signal (RSSI)* | `45` |
 
-### En…
+### And…
 
-| Kaart |
+| Card |
 |---|
-| **De gateway is / is niet online** |
+| **The gateway is / isn't online** |
 
-### Dan…
+### Then…
 
-| Kaart | Toelichting |
+| Card | Notes |
 |---|---|
-| **Verstuur frame [frame]** | Een volledig RAMSES II-frame, precies zoals het op de bus hoort. |
-| **Verstuur [werkwoord] [code] met payload [payload] naar [adres]** | Wordt verstuurd vanaf het eigen adres van de gateway. |
+| **Send frame [frame]** | A complete RAMSES II frame, exactly as it appears on the bus. |
+| **Send [verb] [code] with payload [payload] to [address]** | Sent from the gateway's own address. |
 
-{: .waarschuwing }
-Met ruwe frames kun je alles versturen, ook naar de units van je buren. Stuur alleen commando's naar je eigen
-apparaten en test met *RQ* (opvragen) voordat je *W* (schrijven) gebruikt.
+{: .warning }
+With raw frames you can send anything, including to your neighbours' units. Only send commands to your own devices
+and test with *RQ* (request) before using *W* (write).
 
-## Voorbeelden
+## Examples
 
-### Douche: boost bij hoge luchtvochtigheid
+### Shower: boost on high humidity
 
-> **Als** de luchtvochtigheid van *Sensor badkamer* veranderde<br>
-> **En** de luchtvochtigheid is groter dan 75 %<br>
-> **En** *Ventilatie* — de ventilatiestand is niet *Hoog*<br>
-> **Dan** *Ventilatie* — Draai **30** minuten op hoog
+> **When** the humidity of *Bathroom sensor* changed<br>
+> **And** the humidity is greater than 75 %<br>
+> **And** *Ventilation* — the fan mode isn't *High*<br>
+> **Then** *Ventilation* — Run on high for **30** minutes
 
-### Iedereen weg: afwezigstand
+### Everybody out: away mode
 
-> **Als** de laatste persoon het huis verliet<br>
-> **Dan** *Ventilatie* — Zet de ventilatiestand op **Afwezig**
+> **When** the last person left home<br>
+> **Then** *Ventilation* — Set the fan mode to **Away**
 
-> **Als** de eerste persoon thuiskwam<br>
-> **Dan** *Ventilatie* — Zet de ventilatiestand op **Auto**
+> **When** the first person came home<br>
+> **Then** *Ventilation* — Set the fan mode to **Auto**
 
-### Koken: boost als de afzuigkap aangaat
+### Cooking: boost when the cooker hood turns on
 
-> **Als** het vermogen van *Stekker afzuigkap* groter werd dan 50 W<br>
-> **Dan** *Ventilatie* — Draai **20** minuten op hoog
+> **When** the power of *Cooker hood plug* became greater than 50 W<br>
+> **Then** *Ventilation* — Run on high for **20** minutes
 
-### Melding bij een vuil filter
+### Notification for a dirty filter
 
-> **Als** *Ventilatie* — Het filter moet vervangen worden<br>
-> **Dan** stuur een pushmelding: *Het WTW-filter moet vervangen worden.*
+> **When** *Ventilation* — The filter needs replacing<br>
+> **Then** send a push notification: *The ventilation filter needs replacing.*
 
-En na het vervangen, met een knop of een spraakopdracht:
+And after replacing it, with a button or a voice command:
 
-> **Dan** *Ventilatie* — Zet de filterteller terug
+> **Then** *Ventilation* — Reset the filter counter
 
-### Remote als scèneknop
+### Remote as a scene button
 
-> **Als** *Remote woonkamer* — De knop **Hoog** werd ingedrukt<br>
-> **Dan** zet de lampen in de woonkamer op 100 %
+> **When** *Living room remote* — The **High** button was pressed<br>
+> **Then** set the living room lights to 100 %
 
-De unit reageert ook gewoon op de knop; Homey luistert alleen mee.
+The unit still responds to the button as usual; Homey only listens in.
 
-### Weten wie de stand veranderde
+### Knowing who changed the mode
 
-> **Als** *Ventilatie* — De ventilatiestand veranderde<br>
-> **En** *Veranderd door* is `remote`<br>
-> **Dan** log: *Iemand zette de ventilatie op [Stand].*
+> **When** *Ventilation* — The fan mode changed<br>
+> **And** *Changed by* is `remote`<br>
+> **Then** log: *Someone set the ventilation to [Mode].*
 
-### Waarschuwing bij een offline gateway
+### Warning for an offline gateway
 
-> **Als** *Ramses Gateway* — De gateway ging offline<br>
-> **Dan** stuur een pushmelding: *De ramses_esp is offline.*
+> **When** *Ramses Gateway* — The gateway went offline<br>
+> **Then** send a push notification: *The ramses_esp is offline.*
 
-### Elke CO₂-sensor in huis laat de unit reageren
+### Any CO₂ sensor in your home drives the unit
 
-Zie [Homey CO₂-sensor](homey-co2-sensor#waarden-doorgeven-met-flows).
+See [Homey CO₂ sensor](homey-co2-sensor#passing-on-values-with-flows).

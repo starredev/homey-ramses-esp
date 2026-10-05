@@ -1,16 +1,17 @@
 ---
-title: Gateway toevoegen
-nav_order: 3
+title: Adding the gateway
+parent: English
+nav_order: 2
 ---
 
-# De gateway toevoegen
+# Adding the gateway
 {: .no_toc }
 
-De gateway is de verbinding tussen Homey en je ramses_esp. Alle andere apparaten lopen erdoorheen.
+The gateway is the link between Homey and your ramses_esp. All other devices go through it.
 {: .fs-6 .fw-300 }
 
 <details open markdown="block">
-  <summary>Op deze pagina</summary>
+  <summary>On this page</summary>
   {: .text-delta }
 1. TOC
 {:toc}
@@ -18,66 +19,66 @@ De gateway is de verbinding tussen Homey en je ramses_esp. Alle andere apparaten
 
 ---
 
-## Toevoegen
+## Adding
 
-1. Ga naar **Apparaten → + → RAMSES ESP → Ramses Gateway**.
-2. Vul de gegevens van de **MQTT-broker** in:
+1. Go to **Devices → + → RAMSES ESP → Ramses Gateway**.
+2. Fill in the details of the **MQTT broker**:
 
-   | Veld | Voorbeeld | Toelichting |
+   | Field | Example | Notes |
    |---|---|---|
-   | Brokeradres | `192.168.1.20` | Met de MQTT Broker-app is dit het IP-adres van je Homey. Homey vult het vaak al in. |
-   | Poort | `1883` | `8883` bij TLS, tenzij je broker anders is ingesteld. |
-   | Gebruikersnaam / wachtwoord | | Leeg laten als je broker geen inlog vraagt. |
-   | TLS gebruiken (mqtts) | uit | Alleen aanzetten als je broker versleuteld luistert. |
-   | Gateway-adres (optioneel) | `18:203612` | Alleen nodig als Homey de ramses_esp niet zelf vindt. |
+   | Broker address | `192.168.1.20` | With the MQTT Broker app this is your Homey's IP address. Homey often fills it in already. |
+   | Port | `1883` | `8883` with TLS, unless your broker is set up differently. |
+   | User name / password | | Leave empty if your broker needs no login. |
+   | Use TLS (mqtts) | off | Only turn on if your broker listens encrypted. |
+   | Gateway address (optional) | `18:203612` | Only needed when Homey doesn't find the ramses_esp by itself. |
 
-3. Klik op **Gateways zoeken**. Homey verbindt met de broker, luistert een paar seconden naar alle
-   `RAMSES/GATEWAY/...`-topics en toont elke ramses_esp die het hoort.
-4. Kies je gateway en klik op **Volgende**.
+3. Click **Find gateways**. Homey connects to the broker, listens a few seconds to all `RAMSES/GATEWAY/...` topics and
+   shows every ramses_esp it hears.
+4. Pick your gateway and click **Next**.
 
-Het nieuwe apparaat heet *Ramses Gateway*. Hernoem het gerust.
+The new device is called *Ramses Gateway*. Feel free to rename it.
 
-## Wat de gateway laat zien
+## What the gateway shows
 
-| Capability | Betekenis |
+| Capability | Meaning |
 |---|---|
-| **Gateway-adres** | Het RAMSES-adres van de ramses_esp, bv. `18:203612`. |
-| **Apparaten op de bus** | Hoeveel verschillende apparaten de gateway tot nu toe heeft gehoord. |
-| **Laatste pakket** | Het laatste ontvangen pakket, in leesbare vorm. |
+| **Gateway address** | The RAMSES address of the ramses_esp, e.g. `18:203612`. |
+| **Devices on the bus** | How many different devices the gateway has heard so far. |
+| **Last packet** | The last packet received, in readable form. |
 
-De gateway luistert continu en **onthoudt elk apparaat** dat hij hoort, ook na een herstart van Homey. Daardoor kan
-Homey bij het toevoegen van een unit, remote of sensor meteen een lijst laten zien.
+The gateway listens all the time and **remembers every device** it hears, also after a Homey restart. That's why Homey
+can show a list right away when you add a unit, remote or sensor.
 
-### Beschikbaarheid
+### Availability
 
-| Situatie | Wat je ziet |
+| Situation | What you see |
 |---|---|
-| Homey verbindt nog met de broker | *Verbinden met de MQTT-broker…* |
-| De broker is onbereikbaar | Apparaat onbeschikbaar: *MQTT-broker niet bereikbaar*. Homey blijft opnieuw proberen. |
-| Gebruikersnaam of wachtwoord fout | *De MQTT-broker weigerde de gebruikersnaam of het wachtwoord.* Pas ze aan in de instellingen. |
-| De ramses_esp meldt zich offline | *De ramses_esp meldt dat hij offline is. Controleer stroom en wifi.* |
+| Homey is still connecting to the broker | *Connecting to the MQTT broker…* |
+| The broker cannot be reached | Device unavailable: *MQTT broker not reachable*. Homey keeps retrying. |
+| Wrong user name or password | *The MQTT broker refused the user name or password.* Change them in the settings. |
+| The ramses_esp reports offline | *The ramses_esp reports that it is offline. Check its power and WiFi.* |
 
-## Instellingen
+## Settings
 
-Onder *Apparaat → Instellingen* kun je de brokergegevens later wijzigen (host, poort, gebruiker, wachtwoord, TLS).
-Na opslaan verbindt de gateway opnieuw. Het gateway-adres is alleen ter informatie.
+Under *Device → Settings* you can change the broker details later (host, port, user, password, TLS). After saving, the
+gateway reconnects. The gateway address is for information only.
 
-## Meerdere gateways
+## Several gateways
 
-Je kunt meer dan één ramses_esp toevoegen, bijvoorbeeld als je huis te groot is voor één radio. Elke ventilatie-unit,
-remote en sensor onthoudt via welke gateway hij gevonden is en verstuurt zijn commando's ook via die gateway.
+You can add more than one ramses_esp, for example when your home is too large for one radio. Every ventilation unit,
+remote and sensor remembers the gateway it was found through and also sends its commands through that gateway.
 
-## Flowkaarten van de gateway
+## Gateway flow cards
 
-De gateway heeft kaarten voor geavanceerd gebruik: reageren op elk pakket op de bus, ruwe frames versturen en
-weten of de gateway online is. Zie [Flows → Gateway](flows#gateway).
+The gateway has cards for advanced use: reacting to any packet on the bus, sending raw frames and knowing whether the
+gateway is online. See [Flows → Gateway](flows#gateway).
 
-## Als het niet lukt
+## When it doesn't work
 
-| Melding bij het zoeken | Oplossing |
+| Message while searching | Solution |
 |---|---|
-| *Geen MQTT-broker antwoordde op dit adres.* | Controleer IP-adres en poort, en of de broker-app draait. |
-| *De broker weigerde de gebruikersnaam of het wachtwoord.* | Controleer de inloggegevens in de broker-app. |
-| *Verbonden, maar geen ramses_esp publiceerde iets op deze broker.* | De ramses_esp is niet met deze broker verbonden. Controleer zijn MQTT-instellingen, of vul zijn adres (`18:xxxxxx`) in bij *Gateway-adres*. |
+| *No MQTT broker answered at this address.* | Check IP address and port, and that the broker app is running. |
+| *The broker refused the user name or password.* | Check the credentials in the broker app. |
+| *Connected, but no ramses_esp published anything on this broker.* | The ramses_esp is not connected to this broker. Check its MQTT settings, or enter its address (`18:xxxxxx`) under *Gateway address*. |
 
-Meer in [Problemen oplossen](problemen-oplossen).
+More in [Troubleshooting](troubleshooting).

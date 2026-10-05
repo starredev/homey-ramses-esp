@@ -12,6 +12,7 @@ import {
   offerPacket,
   parseBinding,
   Phase,
+  PLAIN_SENSOR_OFFER,
   REMOTE_OFFER,
   SENSOR_OFFER,
 } from '../lib/ramses/binding.js';
@@ -80,7 +81,11 @@ describe('binding packets', () => {
       ' I --- 37:155617 --:------ 37:155617 1FC9 024 0022F1965FE10022F3965FE16710E0965FE1001FC9965FE1',
     );
     assert.equal(offerPacket('29:091138', REMOTE_OFFER).payload.length, 48);
-    assert.equal(offerPacket('37:154011', SENSOR_OFFER).payload, '0031E096599B00129896599B002E1096599B0110E096599B001FC996599B');
+    assert.equal(offerPacket('37:154011', PLAIN_SENSOR_OFFER).payload, '0031E096599B00129896599B002E1096599B0110E096599B001FC996599B');
+    assert.equal(
+      offerPacket('37:155617', SENSOR_OFFER).payload,
+      '0022F1965FE10022F3965FE16710E0965FE1001FC9965FE1',
+    );
     assert.equal(confirmPacket('29:091138', '32:022222').toFrame(), ' I --- 29:091138 32:022222 --:------ 1FC9 001 00');
   });
 

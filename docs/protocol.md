@@ -1,17 +1,18 @@
 ---
 title: Protocol
-nav_order: 10
+parent: English
+nav_order: 9
 ---
 
-# Het RAMSES II-protocol
+# The RAMSES II protocol
 {: .no_toc }
 
-Technische achtergrond voor wie de [gateway-flowkaarten](flows#gateway) of het
-[frameformulier](dashboard#een-frame-versturen) wil gebruiken.
+Technical background for those who want to use the [gateway flow cards](flows#gateway) or the
+[frame form](dashboard#sending-a-frame).
 {: .fs-6 .fw-300 }
 
 <details open markdown="block">
-  <summary>Op deze pagina</summary>
+  <summary>On this page</summary>
   {: .text-delta }
 1. TOC
 {:toc}
@@ -19,93 +20,93 @@ Technische achtergrond voor wie de [gateway-flowkaarten](flows#gateway) of het
 
 ---
 
-## Een frame
+## A frame
 
-Elk pakket op de bus is één regel tekst:
+Every packet on the bus is one line of text:
 
 ```text
  I --- 29:173894 29:233244 --:------ 22F1 003 000304
 ```
 
-| Deel | Voorbeeld | Betekenis |
+| Part | Example | Meaning |
 |---|---|---|
-| Werkwoord | ` I` | `I` melden, `RQ` opvragen, `RP` antwoord, `W` schrijven |
-| Volgnummer | `---` | Meestal leeg |
-| Adres 1 | `29:173894` | Afzender |
-| Adres 2 | `29:233244` | Ontvanger (`--:------` = niemand in het bijzonder) |
-| Adres 3 | `--:------` | Soms nogmaals afzender (bij uitzendingen) |
-| Code | `22F1` | Soort bericht |
-| Lengte | `003` | Aantal bytes in de payload |
-| Payload | `000304` | De inhoud, in hex |
+| Verb | ` I` | `I` inform, `RQ` request, `RP` reply, `W` write |
+| Sequence number | `---` | Usually empty |
+| Address 1 | `29:173894` | Sender |
+| Address 2 | `29:233244` | Receiver (`--:------` = nobody in particular) |
+| Address 3 | `--:------` | Sometimes the sender again (for broadcasts) |
+| Code | `22F1` | Kind of message |
+| Length | `003` | Number of bytes in the payload |
+| Payload | `000304` | The content, in hex |
 
-Via MQTT verpakt de ramses_esp elk frame als JSON: `{"msg": " I --- 29:173894 ..."}`. Op `rx` komt ook de
-signaalsterkte (RSSI) mee.
+Over MQTT the ramses_esp wraps every frame as JSON: `{"msg": " I --- 29:173894 ..."}`. On `rx` the signal strength
+(RSSI) comes along too.
 
-## Belangrijke codes
+## Important codes
 
-| Code | Naam | Wie stuurt het | Inhoud |
+| Code | Name | Sent by | Content |
 |---|---|---|---|
-| `22F1` | Ventilatiestand | Remote → unit | `00 RR SS`: RR = stand, SS = merkspecifiek slot (04, 06, 0A) |
-| `22F3` | Boost / timer | Remote → unit | `00 UU DD`: DD minuten (UU 00) of uren (UU 01). Orcon gebruikt een lange vorm. |
-| `22F7` | Bypass | Homey → unit | `00 MM EF`: auto, open of dicht |
-| `31D9` | Ventilatorstatus | Unit | Stand of snelheid; zie hieronder |
-| `31DA` | Uitgebreide status | Unit | CO₂, vocht, temperaturen, debiet, bypass, filter, storingen |
-| `10D0` | Filter | Unit / remote | Dagen tot vervanging; `W 10D0 00FF` zet de teller terug |
-| `10E0` | Apparaatinfo | Alle | Fabrikant en type, bv. `VMC-15RP01` |
+| `22F1` | Fan mode | Remote → unit | `00 RR SS`: RR = mode, SS = brand-specific suffix (04, 06, 0A) |
+| `22F3` | Boost / timer | Remote → unit | `00 UU DD`: DD minutes (UU 00) or hours (UU 01). Orcon uses a long form. |
+| `22F7` | Bypass | Homey → unit | `00 MM EF`: auto, open or closed |
+| `31D9` | Fan state | Unit | Mode or speed; see below |
+| `31DA` | Extended status | Unit | CO₂, humidity, temperatures, air flow, bypass, filter, faults |
+| `10D0` | Filter | Unit / remote | Days until replacement; `W 10D0 00FF` resets the counter |
+| `10E0` | Device info | All | Manufacturer and model, e.g. `VMC-15RP01` |
 | `1298` | CO₂ | Sensor | ppm |
-| `12A0` | Vochtigheid | Sensor / unit | % (soms met temperatuur) |
-| `31E0` | Ventilatievraag | CO₂-sensor | % |
-| `2E10` | Aanwezigheid | Sensor | |
-| `1060` | Batterij | Remote / sensor | Niveau en *bijna leeg* |
-| `2411` | Parameter | Unit ↔ Homey | Lezen (`RQ`) en schrijven (`W`) van WTW-parameters |
-| `1FC9` | Koppelen | Alle | Aanbieden, accepteren, bevestigen |
+| `12A0` | Humidity | Sensor / unit | % (sometimes with temperature) |
+| `31E0` | Ventilation demand | CO₂ sensor | % |
+| `2E10` | Presence | Sensor | |
+| `1060` | Battery | Remote / sensor | Level and *battery low* |
+| `2411` | Parameter | Unit ↔ Homey | Reading (`RQ`) and writing (`W`) heat recovery parameters |
+| `1FC9` | Binding | All | Offer, accept, confirm |
 
-## Standen per merk
+## Modes per brand
 
-Hetzelfde getal in `22F1` betekent per merk iets anders:
+The same number in `22F1` means something different per brand:
 
 | Byte | Orcon | Itho | Vasco / ClimaRad |
 |---|---|---|---|
-| `00` | afwezig | uit | uit |
-| `01` | laag | afwezig | afwezig |
-| `02` | midden | laag | laag |
-| `03` | hoog | midden | midden |
-| `04` | auto | hoog | hoog |
+| `00` | away | off | off |
+| `01` | low | away | away |
+| `02` | medium | low | low |
+| `03` | high | medium | medium |
+| `04` | auto | high | high |
 | `05` | auto | | auto |
-| `07` | uit | | |
+| `07` | off | | |
 
-Daarom heeft de unit een instelling [Merk](ventilatie-unit#merk). De tabellen volgen
-[ramses_rf](https://github.com/zxdavb/ramses_rf); die van Orcon is bevestigd op een echte unit.
+That's why the unit has a [Brand](ventilation-unit#brand) setting. The tables follow
+[ramses_rf](https://github.com/zxdavb/ramses_rf); the Orcon one is confirmed on a real unit.
 
-## `31D9`: stand of snelheid?
+## `31D9`: mode or speed?
 
-- Met statusbyte `FF` is de waarde een **snelheid** in halve procenten.
-- Met statusbyte `00` (live gezien als `000000` t/m `000004`) is het een **standnummer**.
-- **Orcon** meldt in byte 2 zijn **stand** (00 afwezig, 01 laag, 02 midden, 03 hoog, 04 auto) en geen snelheid.
+- With status byte `FF` the value is a **speed** in half percent.
+- With status byte `00` (seen live as `000000` to `000004`) it's a **step number**.
+- **Orcon** reports its **mode** in byte 2 (00 away, 01 low, 02 medium, 03 high, 04 auto), not a speed.
 
-## Koppelen (`1FC9`)
+## Binding (`1FC9`)
 
 ```mermaid
 sequenceDiagram
     participant H as Homey (29:xxxxxx)
-    participant U as Unit (in koppelmodus)
-    loop elke 5 s, max. 90 s
-        H->>U: I 1FC9 aanbod (22F1, 22F3, 10E0, 1FC9)
+    participant U as Unit (in binding mode)
+    loop every 5 s, max. 90 s
+        H->>U: I 1FC9 offer (22F1, 22F3, 10E0, 1FC9)
     end
-    U->>H: W 1FC9 accepteer
-    H->>U: I 1FC9 bevestig
+    U->>H: W 1FC9 accept
+    H->>U: I 1FC9 confirm
 ```
 
-Homey kiest een vrij adres dat nog niet op de bus voorkomt: `29:` als remote, `37:` als CO₂-sensor. Als je de
-koppeling vanaf een unit start, telt alleen het antwoord van *die* unit.
+Homey picks a free address that doesn't appear on the bus yet: `29:` as a remote, `37:` as a CO₂ sensor. When you
+start binding from a unit, only the answer of *that* unit counts.
 
-## Echo's
+## Echoes
 
-De ramses_esp hoort zijn eigen uitzendingen terug. Homey herkent die als **echo**: ze tellen niet als knopdruk van een
-remote en ze staan gemarkeerd in de busweergave. Een flow die de unit bedient, start dus nooit zijn eigen trigger.
+The ramses_esp hears its own transmissions back. Homey recognises them as an **echo**: they don't count as a remote
+button press and they're marked in the bus view. A flow that controls the unit therefore never fires its own trigger.
 
-## Meer lezen
+## Further reading
 
-- [ramses_rf](https://github.com/zxdavb/ramses_rf): de Python-bibliotheek waar veel van deze kennis vandaan komt
-- [ramses_esp](https://github.com/IndaloTech/ramses_esp): de gatewayfirmware
-- [ramses_cc](https://github.com/zxdavb/ramses_cc): de Home Assistant-integratie
+- [ramses_rf](https://github.com/zxdavb/ramses_rf): the Python library much of this knowledge comes from
+- [ramses_esp](https://github.com/IndaloTech/ramses_esp): the gateway firmware
+- [ramses_cc](https://github.com/zxdavb/ramses_cc): the Home Assistant integration
