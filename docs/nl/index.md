@@ -1,9 +1,11 @@
 ---
-title: Home
-layout: home
-nav_order: 1
+title: Nederlands
+nav_order: 20
+has_children: true
+has_toc: false
+permalink: /nl/
+lang: nl
 description: Bedien je 868 MHz-ventilatie-unit vanuit Homey via een ramses_esp-gateway.
-permalink: /
 ---
 
 # RAMSES ESP voor Homey
@@ -16,7 +18,7 @@ triggers in flows.
 
 [Aan de slag](installatie){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [Bekijk op GitHub](https://github.com/starredev/homey-ramses-esp){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[English](en/){: .btn .fs-5 .mb-4 .mb-md-0 }
+[English](../){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
@@ -35,7 +37,7 @@ Deze Homey-app maakt verbinding met die broker en maakt van wat er op de bus geb
 | **Ventilatie-unit** | Stand kiezen (laag, midden, hoog, auto, afwezig), boost, bypass, filterteller, sensoren en parameters. |
 | **Afstandsbediening** | Elke knopdruk op een fysieke remote wordt een flow-trigger. |
 | **Sensor** | CO₂, vocht, temperatuur en batterij van ruimtesensoren. |
-| **Homey CO₂-sensor** | Homey doet zich voor als CO₂-sensor, zodat je unit reageert op *elke* sensor in je huis. |
+| **Homey CO₂-sensor** | Homey doet zich voor als CO₂-sensor en koppelt zich als een echte aan je unit, zodat die reageert op *elke* sensor in je huis. |
 
 Daarnaast krijg je een **dashboardwidget** en een **busweergave** met live verkeer, een apparatenzoeker en een
 formulier om zelf frames te versturen.

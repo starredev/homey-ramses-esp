@@ -1,7 +1,9 @@
 ---
 title: Ventilation unit
-parent: English
-nav_order: 3
+nav_order: 4
+redirect_from:
+  - /en/ventilation-unit/
+  - /en/ventilation-unit.html
 ---
 
 # The ventilation unit

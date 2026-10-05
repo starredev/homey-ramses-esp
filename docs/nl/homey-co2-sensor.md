@@ -1,6 +1,7 @@
 ---
 title: Homey CO₂-sensor
-nav_order: 6
+parent: Nederlands
+nav_order: 5
 ---
 
 # De Homey CO₂-sensor
@@ -42,6 +43,32 @@ flowchart LR
 {: .let_op }
 De sensor bindt als *bediening*, net als een Orcon CO2 15RF. Een Orcon-unit negeerde de aanbieding van een kale
 sensor; deze vorm accepteerde hij wel. Bij andere merken kan het gedrag verschillen.
+
+### Hoe koppelen eruitziet op de bus
+
+Getest op een Orcon VMC-15RP01 waaraan al een CO2 15RF gekoppeld was. Homey speelt sensor `37:215483`, de unit is
+`29:233244`:
+
+```text
+ I --- 37:215483 --:------ 37:215483 1FC9 024 0022F19749BB0022F39749BB6710E09749BB001FC99749BB   Homey biedt zich aan
+ W --- 29:233244 37:215483 --:------ 1FC9 006 0031D9778F1C                                       de unit accepteert
+ I --- 37:215483 29:233244 --:------ 1FC9 001 00                                                 Homey bevestigt
+```
+
+De unit antwoordde binnen een seconde op het eerste aanbod. Direct daarna komen de meldingen van Homey bij de unit:
+
+```text
+ I --- 37:215483 --:------ 37:215483 1298 003 000229              CO₂ 553 ppm
+ I --- 37:215483 29:233244 --:------ 31E0 008 0000000001003400    ventilatievraag
+```
+
+Je kunt dit zelf volgen in de [busweergave](dashboard#busweergave). Alleen de unit die je verwacht hoort met de
+`W 1FC9` te antwoorden; een buurunit doet dat alleen als die op hetzelfde moment in koppelmodus staat.
+
+{: .waarschuwing }
+Een unit onthoudt gekoppelde apparaten. Ontkoppelen gaat meestal via een reset van alle koppelingen op de unit (zie
+de handleiding), waarna je je andere remotes en sensoren opnieuw koppelt. Bestaande sensoren blijven gekoppeld als
+je de Homey-sensor toevoegt.
 
 ## Waarden doorgeven met flows
 

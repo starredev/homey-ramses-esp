@@ -1,7 +1,9 @@
 ---
 title: Flows
-parent: English
-nav_order: 6
+nav_order: 7
+redirect_from:
+  - /en/flows/
+  - /en/flows.html
 ---
 
 # Flows

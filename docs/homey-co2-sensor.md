@@ -1,7 +1,9 @@
 ---
 title: Homey CO₂ sensor
-parent: English
-nav_order: 5
+nav_order: 6
+redirect_from:
+  - /en/homey-co2-sensor/
+  - /en/homey-co2-sensor.html
 ---
 
 # The Homey CO₂ sensor
@@ -43,6 +45,31 @@ flowchart LR
 {: .note }
 The sensor binds as a *control*, like an Orcon CO2 15RF. An Orcon unit ignored the offer of a plain sensor; it did
 accept this form. Other brands may behave differently.
+
+### What binding looks like on the bus
+
+Verified on an Orcon VMC-15RP01 that already had a CO2 15RF bound. Homey plays sensor `37:215483`, the unit is
+`29:233244`:
+
+```text
+ I --- 37:215483 --:------ 37:215483 1FC9 024 0022F19749BB0022F39749BB6710E09749BB001FC99749BB   Homey offers
+ W --- 29:233244 37:215483 --:------ 1FC9 006 0031D9778F1C                                       the unit accepts
+ I --- 37:215483 29:233244 --:------ 1FC9 001 00                                                 Homey confirms
+```
+
+The unit answered within a second of the first offer. Right after, Homey's reports reach the unit:
+
+```text
+ I --- 37:215483 --:------ 37:215483 1298 003 000229              CO₂ 553 ppm
+ I --- 37:215483 29:233244 --:------ 31E0 008 0000000001003400    ventilation demand
+```
+
+You can follow this yourself in the [bus view](dashboard#bus-view). Only the unit you expect should answer with the
+`W 1FC9`; a neighbour's unit only does when it is in binding mode at the same moment.
+
+{: .warning }
+A unit remembers bound devices. Unbinding usually means resetting all bindings on the unit (see its manual) and
+then binding your other remotes and sensors again. The existing sensors stay bound when you add the Homey sensor.
 
 ## Passing on values with flows
 

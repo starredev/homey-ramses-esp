@@ -1,7 +1,9 @@
 ---
 title: Remotes and sensors
-parent: English
-nav_order: 4
+nav_order: 5
+redirect_from:
+  - /en/remotes-and-sensors/
+  - /en/remotes-and-sensors.html
 ---
 
 # Remotes and sensors

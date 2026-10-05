@@ -1,10 +1,11 @@
 ---
-title: English
-nav_order: 20
-has_children: true
-has_toc: false
-permalink: /en/
+title: Home
+layout: home
+nav_order: 1
 description: Control your 868 MHz ventilation unit from Homey through a ramses_esp gateway.
+permalink: /
+redirect_from:
+  - /en/
 ---
 
 # RAMSES ESP for Homey
@@ -17,7 +18,7 @@ flow triggers.
 
 [Get started](installation){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [View on GitHub](https://github.com/starredev/homey-ramses-esp){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[Nederlands](../){: .btn .fs-5 .mb-4 .mb-md-0 }
+[Nederlands](nl/){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
@@ -36,7 +37,7 @@ This Homey app connects to that broker and turns what happens on the bus into re
 | **Ventilation unit** | Choose the mode (low, medium, high, auto, away), boost, bypass, filter counter, sensors and parameters. |
 | **Remote** | Every button press on a physical remote becomes a flow trigger. |
 | **Sensor** | CO₂, humidity, temperature and battery of room sensors. |
-| **Homey CO₂ sensor** | Homey poses as a CO₂ sensor, so your unit responds to *any* sensor in your home. |
+| **Homey CO₂ sensor** | Homey poses as a CO₂ sensor and binds to your unit like a real one, so the unit responds to *any* sensor in your home. |
 
 You also get a **dashboard widget** and a **bus view** with live traffic, a device finder and a form to send frames
 yourself.

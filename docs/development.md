@@ -1,7 +1,9 @@
 ---
 title: Development
-parent: English
-nav_order: 10
+nav_order: 11
+redirect_from:
+  - /en/development/
+  - /en/development.html
 ---
 
 # Development
@@ -82,7 +84,7 @@ The app is bilingual (English and Dutch). Texts are in `locales/en.json` and `lo
 ## This documentation
 
 The site lives in `docs/` and is built by GitHub Pages with the [Just the Docs](https://just-the-docs.com/) theme.
-The Dutch pages are at the root, the English ones in `docs/en/`. View it locally:
+The English pages are at the root, the Dutch ones in `docs/nl/`. View it locally:
 
 ```bash
 cd docs && bundle exec jekyll serve

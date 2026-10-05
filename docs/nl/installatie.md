@@ -1,6 +1,10 @@
 ---
 title: Installatie
-nav_order: 2
+parent: Nederlands
+nav_order: 1
+redirect_from:
+  - /installatie/
+  - /installatie.html
 ---
 
 # Installatie

@@ -1,6 +1,10 @@
 ---
 title: Ontwikkelen
-nav_order: 11
+parent: Nederlands
+nav_order: 10
+redirect_from:
+  - /ontwikkelen/
+  - /ontwikkelen.html
 ---
 
 # Ontwikkelen
@@ -81,7 +85,7 @@ De app is tweetalig (Engels en Nederlands). Teksten staan in `locales/en.json` e
 ## Deze documentatie
 
 De site staat in `docs/` en wordt door GitHub Pages gebouwd met het thema
-[Just the Docs](https://just-the-docs.com/). Lokaal bekijken:
+[Just the Docs](https://just-the-docs.com/). De Engelse pagina's staan in de root, de Nederlandse in `docs/nl/`. Lokaal bekijken:
 
 ```bash
 cd docs && bundle exec jekyll serve

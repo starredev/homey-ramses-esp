@@ -1,6 +1,10 @@
 ---
 title: Remotes en sensoren
-nav_order: 5
+parent: Nederlands
+nav_order: 4
+redirect_from:
+  - /remotes-en-sensoren/
+  - /remotes-en-sensoren.html
 ---
 
 # Afstandsbedieningen en sensoren

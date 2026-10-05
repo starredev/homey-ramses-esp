@@ -1,6 +1,7 @@
 ---
 title: Protocol
-nav_order: 10
+parent: Nederlands
+nav_order: 9
 ---
 
 # Het RAMSES II-protocol

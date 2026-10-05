@@ -1,7 +1,9 @@
 ---
 title: Installation
-parent: English
-nav_order: 1
+nav_order: 2
+redirect_from:
+  - /en/installation/
+  - /en/installation.html
 ---
 
 # Installation

@@ -1,6 +1,7 @@
 ---
 title: Gateway toevoegen
-nav_order: 3
+parent: Nederlands
+nav_order: 2
 ---
 
 # De gateway toevoegen

@@ -1,7 +1,9 @@
 ---
 title: Protocol
-parent: English
-nav_order: 9
+nav_order: 10
+redirect_from:
+  - /en/protocol/
+  - /en/protocol.html
 ---
 
 # The RAMSES II protocol

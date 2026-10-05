@@ -1,7 +1,9 @@
 ---
 title: Adding the gateway
-parent: English
-nav_order: 2
+nav_order: 3
+redirect_from:
+  - /en/gateway/
+  - /en/gateway.html
 ---
 
 # Adding the gateway

@@ -1,11 +1,12 @@
-title: RAMSES ESP voor Homey
-description: Bedien je 868 MHz-ventilatie (Orcon, Itho, Vasco, ClimaRad) vanuit Homey via een ramses_esp-gateway.
-lang: nl
+title: RAMSES ESP for Homey
+description: Control your 868 MHz ventilation (Orcon, Itho, Vasco, ClimaRad) from Homey through a ramses_esp gateway.
+lang: en
 
 remote_theme: just-the-docs/just-the-docs@v0.10.1
 plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
+  - jekyll-redirect-from
 
 url: https://starredev.github.io
 baseurl: /homey-ramses-esp
@@ -14,27 +15,27 @@ color_scheme: light
 search_enabled: true
 heading_anchors: true
 back_to_top: true
-back_to_top_text: Terug naar boven
+back_to_top_text: Back to top
 
 mermaid:
   version: "10.9.1"
 
 aux_links:
-  English: /homey-ramses-esp/en/
-  Nederlands: /homey-ramses-esp/
+  English: /homey-ramses-esp/
+  Nederlands: /homey-ramses-esp/nl/
   GitHub: https://github.com/starredev/homey-ramses-esp
 aux_links_new_tab: false
 
 gh_edit_link: true
-gh_edit_link_text: Bewerk deze pagina op GitHub
+gh_edit_link_text: Edit this page on GitHub
 gh_edit_repository: https://github.com/starredev/homey-ramses-esp
 gh_edit_branch: main
 gh_edit_source: docs
 gh_edit_view_mode: tree
 
 footer_content: >-
-  Onofficieel communityproject, niet gemaakt of goedgekeurd door de fabrikanten of door de makers van ramses_esp.
-  MIT-licentie © 2026 Bryan.
+  Unofficial community project, not made or endorsed by the manufacturers or by the ramses_esp authors.
+  MIT license © 2026 Bryan.
 
 callouts:
   tip:

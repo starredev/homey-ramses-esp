@@ -1,6 +1,10 @@
 ---
 title: Ventilatie-unit
-nav_order: 4
+parent: Nederlands
+nav_order: 3
+redirect_from:
+  - /ventilatie-unit/
+  - /ventilatie-unit.html
 ---
 
 # De ventilatie-unit

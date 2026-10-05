@@ -8,7 +8,7 @@ Orcon, Itho, Vasco and ClimaRad) through a [ramses_esp](https://github.com/Indal
 The app talks to the MQTT broker the ramses_esp already publishes to, for example the MQTT Broker app on Homey
 itself. No Home Assistant, no websocket bridge, and no reflashing needed.
 
-📖 **Documentation:** [English](https://starredev.github.io/homey-ramses-esp/en/) · [Nederlands](https://starredev.github.io/homey-ramses-esp/)
+📖 **Documentation:** [English](https://starredev.github.io/homey-ramses-esp/) · [Nederlands](https://starredev.github.io/homey-ramses-esp/nl/)
 — installation, binding, flows, widget and troubleshooting.
 
 > **Unofficial community project.** Not made or endorsed by any of the brands above or by the ramses_esp authors.
@@ -34,6 +34,13 @@ Homey asks the unit for its status every few minutes (configurable).
 of identical radio frames; the app counts it once. Commands Homey sends in the remote's name do not trigger it.
 
 **Sensor**. CO₂, humidity, temperature and battery of room sensors.
+
+**Homey CO₂ sensor**. Homey plays a RAMSES CO₂ sensor of its own and binds it to your unit from the device's
+maintenance menu: power-cycle the unit, tap *Bind to a unit*, done. A flow then passes on the CO₂ or humidity of
+any Homey sensor (Zigbee, Wi-Fi, a Sensy, a Netatmo), and the unit in *Auto* ventilates on it next to its own
+sensors. Homey derives the ventilation demand from a configurable curve and repeats it every 5 minutes, like a real
+sensor. Verified on an Orcon unit with a CO2 15RF already bound; see
+[the docs](https://starredev.github.io/homey-ramses-esp/homey-co2-sensor) for the frames.
 
 **Flow cards**
 

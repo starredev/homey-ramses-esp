@@ -1,7 +1,9 @@
 ---
 title: Troubleshooting
-parent: English
-nav_order: 8
+nav_order: 9
+redirect_from:
+  - /en/troubleshooting/
+  - /en/troubleshooting.html
 ---
 
 # Troubleshooting

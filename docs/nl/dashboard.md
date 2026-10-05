@@ -1,6 +1,7 @@
 ---
 title: Widget en busweergave
-nav_order: 8
+parent: Nederlands
+nav_order: 7
 ---
 
 # Widget en busweergave

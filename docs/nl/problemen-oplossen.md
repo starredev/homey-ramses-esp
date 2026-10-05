@@ -1,6 +1,10 @@
 ---
 title: Problemen oplossen
-nav_order: 9
+parent: Nederlands
+nav_order: 8
+redirect_from:
+  - /problemen-oplossen/
+  - /problemen-oplossen.html
 ---
 
 # Problemen oplossen
