@@ -154,6 +154,6 @@ Voeg de apparaten altijd in deze volgorde toe:
 1. **[Ramses Gateway](gateway)**: zonder gateway hoort Homey niets van de bus.
 2. **[Ventilatie-unit](ventilatie-unit)**
 3. **[Afstandsbedieningen en sensoren](remotes-en-sensoren)** (optioneel)
-4. **[Homey CO₂-sensor](homey-co2-sensor)** (optioneel)
+4. **[Virtuele CO₂-sensor](homey-co2-sensor)** (optioneel)
 
 Klaar? Ga verder met [de gateway toevoegen](gateway).

@@ -61,7 +61,7 @@ Alle flowkaarten van de app, met voorbeelden.
 
 De kaart *Een willekeurige knop* geeft in *Knop* het woord `low`, `medium`, `high`, `auto`, `away`, `off` of `boost`.
 
-## Homey CO₂-sensor
+## Virtuele CO₂-sensor
 
 ### Dan…
 
@@ -71,7 +71,7 @@ De kaart *Een willekeurige knop* geeft in *Knop* het woord `low`, `medium`, `hig
 | **Meld [%] % vochtigheid** |
 | **Vraag de unit om [%] % ventilatie** |
 
-Zie [Homey CO₂-sensor](homey-co2-sensor) voor de uitleg.
+Zie [Virtuele CO₂-sensor](homey-co2-sensor) voor de uitleg.
 
 ## Gateway
 
@@ -167,4 +167,4 @@ De unit reageert ook gewoon op de knop; Homey luistert alleen mee.
 
 ### Elke CO₂-sensor in huis laat de unit reageren
 
-Zie [Homey CO₂-sensor](homey-co2-sensor#waarden-doorgeven-met-flows).
+Zie [Virtuele CO₂-sensor](homey-co2-sensor#waarden-doorgeven-met-flows).

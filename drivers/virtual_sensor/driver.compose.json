@@ -1,7 +1,7 @@
 {
   "name": {
-    "en": "Homey CO₂ sensor",
-    "nl": "Homey CO₂-sensor"
+    "en": "Virtual CO₂ sensor",
+    "nl": "Virtuele CO₂-sensor"
   },
   "class": "sensor",
   "capabilities": [

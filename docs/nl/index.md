@@ -36,8 +36,8 @@ Deze Homey-app maakt verbinding met die broker en maakt van wat er op de bus geb
 | **Ramses Gateway** | De verbinding met je ramses_esp. Ziet elk pakket op de bus en onthoudt elk apparaat dat hij hoort. |
 | **Ventilatie-unit** | Stand kiezen (laag, midden, hoog, auto, afwezig), boost, bypass, filterteller, sensoren en parameters. |
 | **Afstandsbediening** | Elke knopdruk op een fysieke remote wordt een flow-trigger. |
-| **Sensor** | CO₂, vocht, temperatuur en batterij van ruimtesensoren. |
-| **Homey CO₂-sensor** | Homey doet zich voor als CO₂-sensor en koppelt zich als een echte aan je unit, zodat die reageert op *elke* sensor in je huis. |
+| **Ruimtesensor** | CO₂, vocht, temperatuur en batterij van ruimtesensoren. |
+| **Virtuele CO₂-sensor** | Homey doet zich voor als CO₂-sensor en koppelt zich als een echte aan je unit, zodat die reageert op *elke* sensor in je huis. |
 
 Daarnaast krijg je een **dashboardwidget** en een **busweergave** met live verkeer, een apparatenzoeker en een
 formulier om zelf frames te versturen.
@@ -75,7 +75,7 @@ volledig lokaal op je Homey.
 3. [Voeg de gateway toe](gateway): vul het adres van de broker in, Homey vindt de ramses_esp vanzelf.
 4. [Voeg je ventilatie-unit toe](ventilatie-unit) en zorg dat Homey hem mag bedienen
    (via het adres van een gekoppelde remote, of door Homey zelf te [koppelen](ventilatie-unit#manier-2-homey-koppelen-als-afstandsbediening)).
-5. Optioneel: [remotes en sensoren](remotes-en-sensoren), de [Homey CO₂-sensor](homey-co2-sensor) en
+5. Optioneel: [remotes en sensoren](remotes-en-sensoren), de [Virtuele CO₂-sensor](homey-co2-sensor) en
    [flows](flows).
 
 ## Ondersteunde apparaten

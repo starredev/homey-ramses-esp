@@ -36,8 +36,8 @@ This Homey app connects to that broker and turns what happens on the bus into re
 | **Ramses Gateway** | The link to your ramses_esp. Sees every packet on the bus and remembers every device it hears. |
 | **Ventilation unit** | Choose the mode (low, medium, high, auto, away), boost, bypass, filter counter, sensors and parameters. |
 | **Remote** | Every button press on a physical remote becomes a flow trigger. |
-| **Sensor** | CO₂, humidity, temperature and battery of room sensors. |
-| **Homey CO₂ sensor** | Homey poses as a CO₂ sensor and binds to your unit like a real one, so the unit responds to *any* sensor in your home. |
+| **Room sensor** | CO₂, humidity, temperature and battery of room sensors. |
+| **Virtual CO₂ sensor** | Homey poses as a CO₂ sensor and binds to your unit like a real one, so the unit responds to *any* sensor in your home. |
 
 You also get a **dashboard widget** and a **bus view** with live traffic, a device finder and a form to send frames
 yourself.
@@ -75,7 +75,7 @@ your Homey.
 3. [Add the gateway](gateway): enter the broker address, Homey finds the ramses_esp by itself.
 4. [Add your ventilation unit](ventilation-unit) and make sure Homey may control it
    (through the address of a bound remote, or by [binding Homey itself](ventilation-unit#option-2-bind-homey-as-a-remote)).
-5. Optional: [remotes and sensors](remotes-and-sensors), the [Homey CO₂ sensor](homey-co2-sensor) and
+5. Optional: [remotes and sensors](remotes-and-sensors), the [Virtual CO₂ sensor](homey-co2-sensor) and
    [flows](flows).
 
 ## Supported devices

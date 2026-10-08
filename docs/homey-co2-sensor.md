@@ -1,12 +1,12 @@
 ---
-title: Homey CO₂ sensor
+title: Virtual CO₂ sensor
 nav_order: 6
 redirect_from:
   - /en/homey-co2-sensor/
   - /en/homey-co2-sensor.html
 ---
 
-# The Homey CO₂ sensor
+# The Virtual CO₂ sensor
 {: .no_toc }
 
 Let your ventilation unit respond to any CO₂ or humidity sensor in Homey, as if it were an original RAMSES sensor.
@@ -24,21 +24,25 @@ Let your ventilation unit respond to any CO₂ or humidity sensor in Homey, as i
 ## Why?
 
 A unit in **auto mode** ventilates harder as its sensors ask for more. But maybe you already have a Netatmo, Aqara,
-Airthings or Zigbee sensor in the bedroom and no RAMSES sensor. With the **Homey CO₂ sensor**, Homey itself plays a
+Airthings or Zigbee sensor in the bedroom and no RAMSES sensor. With the **Virtual CO₂ sensor**, Homey itself plays a
 RAMSES CO₂ sensor (`37:xxxxxx`) and forwards the values of your Homey sensors to the unit. The unit then regulates
 itself, in its own auto mode.
 
 ```mermaid
 flowchart LR
-    Z["Any Homey sensor<br/>(Zigbee, Wi-Fi, ...)"] -- flow --> V["Homey CO₂ sensor<br/>37:xxxxxx"]
+    Z["Any Homey sensor<br/>(Zigbee, Wi-Fi, ...)"] -- flow --> V["Virtual CO₂ sensor<br/>37:xxxxxx"]
     V -- "1298 CO₂, 12A0 humidity,<br/>31E0 ventilation demand" --> U["Ventilation unit<br/>in auto"]
 ```
 
+{: .note }
+Not to be confused with a **Room sensor**. A real RAMSES sensor such as the Orcon CO2 15RF is added as a Room sensor. The
+virtual sensor has no measurement of its own: its tiles show *–* until a flow passes it a value.
+
 ## Adding and binding
 
-1. Go to **Devices → + → RAMSES ESP → Homey CO₂ sensor**. Homey picks a free address on the bus.
+1. Go to **Devices → + → RAMSES ESP → Virtual CO₂ sensor**. Homey picks a free address on the bus.
 2. Put the unit in **binding mode** (Orcon: unplug and plug back in; you then have 2 minutes).
-3. Open the Homey CO₂ sensor → **Settings** → **Maintenance** → **Bind to a unit**.
+3. Open the Virtual CO₂ sensor → **Settings** → **Maintenance** → **Bind to a unit**.
 4. Homey offers itself as a sensor (see below). Once accepted, the unit's address is shown under
    *Bound to unit*.
 
@@ -76,7 +80,7 @@ You can follow this yourself in the [bus view](dashboard#bus-view). Only the uni
 
 {: .warning }
 A unit remembers bound devices. Unbinding usually means resetting all bindings on the unit (see its manual) and
-then binding your other remotes and sensors again. The existing sensors stay bound when you add the Homey sensor.
+then binding your other remotes and sensors again. The existing sensors stay bound when you add the virtual sensor.
 
 ## Passing on values with flows
 
@@ -91,7 +95,7 @@ The sensor has three action cards:
 A typical flow:
 
 > **When** the CO₂ of *Netatmo bedroom* changed<br>
-> **Then** *Homey CO₂ sensor*: Report **[CO₂ token]** ppm CO₂
+> **Then** *Virtual CO₂ sensor*: Report **[CO₂ token]** ppm CO₂
 
 Do the same for the humidity of, for example, the bathroom sensor.
 

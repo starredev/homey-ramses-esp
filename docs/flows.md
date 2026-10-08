@@ -63,7 +63,7 @@ All flow cards of the app, with examples.
 
 The card *Any button was pressed* gives in *Button* the word `low`, `medium`, `high`, `auto`, `away`, `off` or `boost`.
 
-## Homey CO₂ sensor
+## Virtual CO₂ sensor
 
 ### Then…
 
@@ -73,7 +73,7 @@ The card *Any button was pressed* gives in *Button* the word `low`, `medium`, `h
 | **Report [%] % humidity** |
 | **Ask the unit for [%] % ventilation** |
 
-See [Homey CO₂ sensor](homey-co2-sensor) for the explanation.
+See [Virtual CO₂ sensor](homey-co2-sensor) for the explanation.
 
 ## Gateway
 
@@ -169,4 +169,4 @@ The unit still responds to the button as usual; Homey only listens in.
 
 ### Any CO₂ sensor in your home drives the unit
 
-See [Homey CO₂ sensor](homey-co2-sensor#passing-on-values-with-flows).
+See [Virtual CO₂ sensor](homey-co2-sensor#passing-on-values-with-flows).

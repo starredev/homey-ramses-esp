@@ -69,8 +69,9 @@ Ook hier verschijnen alleen de capabilities die de sensor echt meldt.
 
 ### Toevoegen
 
-1. Ga naar **Apparaten → + → RAMSES ESP → Sensor**.
-2. Sensoren melden zich om de paar minuten. Heeft je sensor een knop, druk er dan op; hij meldt zich dan meteen.
+1. Ga naar **Apparaten → + → RAMSES ESP → Ruimtesensor**.
+2. Sensoren melden zich om de paar minuten. Wil je dat de jouwe zich meteen meldt, druk dan op een knop of zet hem
+   in een andere stand (bv. van 1 naar 2, of naar auto).
 3. Kies de sensor en voeg hem toe.
 
 ### Sensoren met knoppen

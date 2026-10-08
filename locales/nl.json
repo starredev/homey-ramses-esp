@@ -20,8 +20,8 @@
     "name": {
       "fan": "Ventilatie-unit __id__",
       "remote": "Afstandsbediening __id__",
-      "sensor": "Sensor __id__",
-      "virtual_sensor": "Homey CO₂-sensor"
+      "sensor": "Ruimtesensor __id__",
+      "virtual_sensor": "Virtuele CO₂-sensor"
     },
     "intro": {
       "fan": {
@@ -30,11 +30,11 @@
       },
       "remote": {
         "title": "Afstandsbediening zoeken",
-        "text": "Druk nu op een willekeurige knop van de afstandsbediening en ga verder. Zoeken duurt maximaal 30 seconden."
+        "text": "Druk nu op een willekeurige knop van de afstandsbediening en ga verder. Zoeken duurt maximaal 30 seconden. Een CO₂-sensor met knoppen, zoals de Orcon CO2 15RF, staat hier niet tussen: voeg die toe als Ruimtesensor; zijn knoppen werken daar ook."
       },
       "sensor": {
-        "title": "Sensor zoeken",
-        "text": "Sensoren melden zich om de paar minuten. Met de knop op de sensor (als die er is) meldt hij zich meteen. Zoeken duurt maximaal 30 seconden."
+        "title": "Ruimtesensor zoeken",
+        "text": "Ruimtesensoren zoals de Orcon CO2 15RF melden zich om de paar minuten. Wil je dat hij zich meteen meldt, druk dan op een knop of zet hem in een andere stand (bv. van 1 naar 2, of naar auto) en ga verder. Zoeken duurt maximaal 30 seconden. De tegels verschijnen zodra hij waardes stuurt."
       }
     },
     "broker": {

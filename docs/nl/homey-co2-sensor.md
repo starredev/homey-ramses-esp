@@ -1,10 +1,10 @@
 ---
-title: Homey CO₂-sensor
+title: Virtuele CO₂-sensor
 parent: Nederlands
 nav_order: 5
 ---
 
-# De Homey CO₂-sensor
+# De Virtuele CO₂-sensor
 {: .no_toc }
 
 Laat je ventilatie-unit reageren op elke CO₂- of vochtsensor in Homey, alsof het een originele RAMSES-sensor is.
@@ -22,21 +22,25 @@ Laat je ventilatie-unit reageren op elke CO₂- of vochtsensor in Homey, alsof h
 ## Waarom?
 
 Een unit in de **autostand** ventileert harder naarmate zijn sensoren meer vragen. Maar misschien heb je al een
-Netatmo, een Aqara-, Airthings- of Zigbee-sensor in de slaapkamer en geen RAMSES-sensor. Met de **Homey CO₂-sensor**
+Netatmo, een Aqara-, Airthings- of Zigbee-sensor in de slaapkamer en geen RAMSES-sensor. Met de **Virtuele CO₂-sensor**
 speelt Homey zelf een RAMSES-CO₂-sensor (`37:xxxxxx`) en stuurt het de waarden van je Homey-sensoren door naar de
 unit. De unit regelt dan zelf, in zijn eigen autostand.
 
 ```mermaid
 flowchart LR
-    Z["Willekeurige Homey-sensor<br/>(Zigbee, Wi-Fi, ...)"] -- flow --> V["Homey CO₂-sensor<br/>37:xxxxxx"]
+    Z["Willekeurige Homey-sensor<br/>(Zigbee, Wi-Fi, ...)"] -- flow --> V["Virtuele CO₂-sensor<br/>37:xxxxxx"]
     V -- "1298 CO₂, 12A0 vocht,<br/>31E0 ventilatievraag" --> U["Ventilatie-unit<br/>in auto"]
 ```
 
+{: .let_op }
+Niet te verwarren met een **Ruimtesensor**. Een echte RAMSES-sensor zoals de Orcon CO2 15RF voeg je toe als Ruimtesensor.
+De virtuele sensor meet zelf niets: zijn tegels tonen *–* tot een flow hem een waarde geeft.
+
 ## Toevoegen en koppelen
 
-1. Ga naar **Apparaten → + → RAMSES ESP → Homey CO₂-sensor**. Homey kiest een vrij adres op de bus.
+1. Ga naar **Apparaten → + → RAMSES ESP → Virtuele CO₂-sensor**. Homey kiest een vrij adres op de bus.
 2. Zet de unit in **koppelmodus** (Orcon: stekker eruit en er weer in; daarna 2 minuten de tijd).
-3. Open de Homey CO₂-sensor → **Instellingen** → **Onderhoud** → **Koppel aan een unit**.
+3. Open de Virtuele CO₂-sensor → **Instellingen** → **Onderhoud** → **Koppel aan een unit**.
 4. Homey biedt zich aan als sensor (zie hieronder). Na het accepteren staat het adres van de unit bij
    *Gekoppeld aan unit*.
 
@@ -75,7 +79,7 @@ Je kunt dit zelf volgen in de [busweergave](dashboard#busweergave). Alleen de un
 {: .waarschuwing }
 Een unit onthoudt gekoppelde apparaten. Ontkoppelen gaat meestal via een reset van alle koppelingen op de unit (zie
 de handleiding), waarna je je andere remotes en sensoren opnieuw koppelt. Bestaande sensoren blijven gekoppeld als
-je de Homey-sensor toevoegt.
+je de virtuele sensor toevoegt.
 
 ## Waarden doorgeven met flows
 
@@ -90,7 +94,7 @@ De sensor heeft drie actiekaarten:
 Een typische flow:
 
 > **Als** de CO₂ van *Netatmo slaapkamer* veranderde<br>
-> **Dan** *Homey CO₂-sensor*: Meld **[CO₂-tag]** ppm CO₂
+> **Dan** *Virtuele CO₂-sensor*: Meld **[CO₂-tag]** ppm CO₂
 
 Doe hetzelfde voor de vochtigheid van bijvoorbeeld de badkamersensor.
 

@@ -20,8 +20,8 @@
     "name": {
       "fan": "Ventilation unit __id__",
       "remote": "Remote __id__",
-      "sensor": "Sensor __id__",
-      "virtual_sensor": "Homey CO₂ sensor"
+      "sensor": "Room sensor __id__",
+      "virtual_sensor": "Virtual CO₂ sensor"
     },
     "intro": {
       "fan": {
@@ -30,11 +30,11 @@
       },
       "remote": {
         "title": "Find the remote",
-        "text": "Press any button on the remote now, then continue. Searching takes up to 30 seconds."
+        "text": "Press any button on the remote now, then continue. Searching takes up to 30 seconds. A CO₂ sensor with buttons, such as the Orcon CO2 15RF, is not listed here: add it as a Room sensor; its buttons work there too."
       },
       "sensor": {
-        "title": "Find the sensor",
-        "text": "Sensors report every few minutes. Pressing the button on a sensor (if it has one) makes it report at once. Searching takes up to 30 seconds."
+        "title": "Find the room sensor",
+        "text": "Room sensors such as the Orcon CO2 15RF report every few minutes. To make one report at once, press a button on it or switch its mode (e.g. from 1 to 2, or to auto), then continue. Searching takes up to 30 seconds. Its tiles appear as soon as it sends values."
       }
     },
     "broker": {

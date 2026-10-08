@@ -82,7 +82,7 @@ starten. Bij andere merken: zie de handleiding van je unit (zoek op *remote aanm
 
 - **Unit**: druk op een knop van de remote en ga dan pas verder. De unit antwoordt en wordt zo gehoord.
 - **Remote**: druk tijdens het zoeken op een knop.
-- **Sensor**: sensoren melden zich om de paar minuten. Druk op de knop van de sensor als die er een heeft, of wacht
+- **Ruimtesensor**: sensoren melden zich om de paar minuten. Druk op de knop van de sensor als die er een heeft, of wacht
   wat langer en probeer opnieuw.
 - Kijk in de [apparatenzoeker](dashboard#apparatenzoeker) of het apparaat überhaupt gehoord wordt. Zo niet, dan is
   de afstand tot de ramses_esp waarschijnlijk te groot.

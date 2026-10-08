@@ -78,7 +78,7 @@ brands: see your unit's manual (look for *registering a remote* or *pairing*).
 
 - **Unit**: press a button on the remote and only then continue. The unit answers and is heard that way.
 - **Remote**: press a button while searching.
-- **Sensor**: sensors report every few minutes. Press the sensor's button if it has one, or wait a little longer and
+- **Room sensor**: sensors report every few minutes. Press the sensor's button if it has one, or wait a little longer and
   try again.
 - Check in the [device finder](dashboard#device-finder) whether the device is heard at all. If not, it's probably too
   far from the ramses_esp.

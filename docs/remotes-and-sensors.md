@@ -68,8 +68,9 @@ Here too, only the capabilities the sensor actually reports appear.
 
 ### Adding
 
-1. Go to **Devices → + → RAMSES ESP → Sensor**.
-2. Sensors report every few minutes. If your sensor has a button, press it; it then reports right away.
+1. Go to **Devices → + → RAMSES ESP → Room sensor**.
+2. Sensors report every few minutes. To make yours report right away, press a button on it or switch its mode
+   (e.g. from 1 to 2, or to auto).
 3. Pick the sensor and add it.
 
 ### Sensors with buttons

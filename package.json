@@ -1,6 +1,6 @@
 {
   "name": "io.github.starredev.ramses",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Homey app for RAMSES II (868 MHz) ventilation and climate devices through a ramses_esp gateway over MQTT",
   "type": "module",
   "private": true,

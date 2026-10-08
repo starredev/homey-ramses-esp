@@ -152,6 +152,6 @@ Always add the devices in this order:
 1. **[Ramses Gateway](gateway)**: without a gateway Homey hears nothing from the bus.
 2. **[Ventilation unit](ventilation-unit)**
 3. **[Remotes and sensors](remotes-and-sensors)** (optional)
-4. **[Homey CO₂ sensor](homey-co2-sensor)** (optional)
+4. **[Virtual CO₂ sensor](homey-co2-sensor)** (optional)
 
 Ready? Continue with [adding the gateway](gateway).

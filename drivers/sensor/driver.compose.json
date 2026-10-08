@@ -1,7 +1,7 @@
 {
   "name": {
-    "en": "Sensor",
-    "nl": "Sensor"
+    "en": "Room sensor",
+    "nl": "Ruimtesensor"
   },
   "class": "sensor",
   "capabilities": [],

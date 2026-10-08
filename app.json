@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.github.starredev.ramses",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "runtime": "nodejs",
@@ -2049,8 +2049,8 @@
     },
     {
       "name": {
-        "en": "Sensor",
-        "nl": "Sensor"
+        "en": "Room sensor",
+        "nl": "Ruimtesensor"
       },
       "class": "sensor",
       "capabilities": [],
@@ -2132,8 +2132,8 @@
     },
     {
       "name": {
-        "en": "Homey CO₂ sensor",
-        "nl": "Homey CO₂-sensor"
+        "en": "Virtual CO₂ sensor",
+        "nl": "Virtuele CO₂-sensor"
       },
       "class": "sensor",
       "capabilities": [

@@ -33,9 +33,9 @@ Homey asks the unit for its status every few minutes (configurable).
 **Remote**. A physical remote becomes a flow trigger: *the High button was pressed*. A press arrives as a burst
 of identical radio frames; the app counts it once. Commands Homey sends in the remote's name do not trigger it.
 
-**Sensor**. CO₂, humidity, temperature and battery of room sensors.
+**Room sensor**. CO₂, humidity, temperature and battery of room sensors.
 
-**Homey CO₂ sensor**. Homey plays a RAMSES CO₂ sensor of its own and binds it to your unit from the device's
+**Virtual CO₂ sensor**. Homey plays a RAMSES CO₂ sensor of its own and binds it to your unit from the device's
 maintenance menu: power-cycle the unit, tap *Bind to a unit*, done. It offers itself as an Orcon CO2 15RF and as a
 plain sensor in turn, so the unit picks the form it knows. A flow then passes on the CO₂ or humidity of
 any Homey sensor (Zigbee, Wi-Fi, a Sensy, a Netatmo), and the unit in *Auto* ventilates on it next to its own
@@ -73,7 +73,7 @@ Then add the devices in this order:
 
 1. **Devices → + → RAMSES ESP → ramses_esp gateway.** Enter the broker (Homey's own address when you use the MQTT
    Broker app), then pick the gateway.
-2. **Ventilation unit**, **Remote** and **Sensor**. Homey lists what the gateway heard. When a device is missing,
+2. **Ventilation unit**, **Remote** and **Room sensor**. Homey lists what the gateway heard. When a device is missing,
    press a button on it (or on the remote) and continue.
 
 ## Troubleshooting

@@ -6,5 +6,9 @@
   "1.0.1": {
     "en": "The Homey CO₂ sensor now really drives an Orcon unit: the ventilation demand goes in the part of the message the unit reads, as an Orcon CO2 15RF sends it. Verified on a real unit. Binding offers itself as an Orcon CO2 15RF and as a plain sensor in turn. Documentation is now in English by default, Dutch under /nl/.",
     "nl": "De Homey CO₂-sensor stuurt een Orcon-unit nu echt aan: de ventilatievraag staat in het deel van het bericht dat de unit leest, zoals een Orcon CO2 15RF hem stuurt. Getest op een echte unit. Bij het koppelen biedt hij zich om beurten aan als Orcon CO2 15RF en als kale sensor. De documentatie is nu standaard Engels, Nederlands staat onder /nl/."
+  },
+  "1.0.2": {
+    "en": "Clearer names: Sensor is now Room sensor (for real RAMSES sensors such as the Orcon CO2 15RF) and Homey CO₂ sensor is now Virtual CO₂ sensor. Pairing explains how to make a sensor report at once and that a CO₂ sensor with buttons is added as a Room sensor.",
+    "nl": "Duidelijkere namen: Sensor heet nu Ruimtesensor (voor echte RAMSES-sensoren zoals de Orcon CO2 15RF) en Homey CO₂-sensor heet nu Virtuele CO₂-sensor. Het koppelen legt uit hoe je een sensor zich meteen laat melden en dat een CO₂-sensor met knoppen als Ruimtesensor wordt toegevoegd."
   }
 }
