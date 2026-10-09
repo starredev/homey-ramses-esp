@@ -10,5 +10,9 @@
   "1.0.2": {
     "en": "Clearer names: Sensor is now Room sensor (for real RAMSES sensors such as the Orcon CO2 15RF) and Homey CO₂ sensor is now Virtual CO₂ sensor. Pairing explains how to make a sensor report at once and that a CO₂ sensor with buttons is added as a Room sensor.",
     "nl": "Duidelijkere namen: Sensor heet nu Ruimtesensor (voor echte RAMSES-sensoren zoals de Orcon CO2 15RF) en Homey CO₂-sensor heet nu Virtuele CO₂-sensor. Het koppelen legt uit hoe je een sensor zich meteen laat melden en dat een CO₂-sensor met knoppen als Ruimtesensor wordt toegevoegd."
+  },
+  "1.0.3": {
+    "en": "A sensor that sends a ventilation demand is now always found as a Room sensor, also when it has buttons and no measurement of its own (some humidity sensors). Before, it was taken for a remote.",
+    "nl": "Een sensor die een ventilatievraag stuurt, wordt nu altijd gevonden als Ruimtesensor, ook als hij knoppen heeft en zelf niets meet (sommige vochtsensoren). Eerst werd hij voor een afstandsbediening aangezien."
   }
 }
