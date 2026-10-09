@@ -69,6 +69,7 @@ describe('roleOf', () => {
     assert.equal(roleOf(REMOTE, ['22F1', '1060']), Role.REMOTE);
     assert.equal(roleOf('30:123456', ['1FC9']), Role.GATEWAY);
     assert.equal(roleOf('32:123456', ['31E0']), Role.SENSOR);
+    assert.equal(roleOf(SENSOR, ['22F1', '31E0']), Role.SENSOR);
     assert.equal(roleOf('01:123456', ['1F09']), Role.UNKNOWN);
     assert.equal(roleOf(UNIT, [], true), Role.FAN);
     assert.equal(roleOf(REMOTE, ['22F1'], true), Role.REMOTE);
