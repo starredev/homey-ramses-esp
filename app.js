@@ -137,6 +137,27 @@ export default class RamsesApp extends Homey.App {
     }
   }
 
+  /**
+   * @param {string} address
+   * @returns {string | null} the name of the Homey device with that bus address
+   */
+  deviceName(address) {
+    for (const id of DRIVER_IDS) {
+      try {
+        const device = this.homey.drivers.getDriver(id).getDevices()
+          .find((candidate) => candidate.getData().id === address);
+
+        if (device) {
+          return device.getName();
+        }
+      } catch {
+        // The driver is not ready yet while the app is still starting.
+      }
+    }
+
+    return null;
+  }
+
   /** @returns {Set<string>} the addresses of every device added to Homey */
   #pairedAddresses() {
     const addresses = new Set();

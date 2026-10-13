@@ -109,6 +109,16 @@ bypassstand meldt: **Auto**, **Open** of **Dicht**. Ook via de flowkaart *Zet de
 - **Filter vervangen** (alarm) gaat aan als de unit meldt dat het filter vervangen moet worden.
 - Na het vervangen zet je de teller terug met de flowkaart **Zet de filterteller terug**.
 
+### Ventilatievraag
+
+Sensoren zoals een Orcon CO2 15RF, en de [Virtuele CO₂-sensor](homey-co2-sensor), vertellen de unit hoeveel ventilatie
+ze willen, in %. In *Auto* ventileert de unit op de hoogste daarvan. **Ventilatievraag** toont die hoogste vraag en
+**Vraag van** de sensor die hem stelt, met zijn naam in Homey. Een sensor die zijn vraag niet meer herhaalt, telt na
+15 minuten niet meer mee. Vraagt elke sensor 0 %, dan staat bij *Vraag van* *niemand*.
+
+Veel units, ook die van Orcon, melden niet hoe hard ze echt draaien, alleen hun stand. De vraag is dan de beste
+aanwijzing voor wat de unit in *Auto* doet.
+
 ## Wat de unit laat zien
 
 Capabilities verschijnen **pas als de unit ze meldt**. Een unit zonder CO₂-sensor krijgt dus nooit een lege
@@ -124,11 +134,16 @@ CO₂-tegel. Na het toevoegen kan het daarom een paar minuten duren voordat alle
 | Bypass-stand (%), Bypass (instelbaar) | Units met bypass |
 | Voorverwarmer, Naverwarmer (%) | Units met verwarmingselementen |
 | Luchtkwaliteit (%) | Units met een luchtkwaliteitssensor |
+| Ventilatievraag, Vraag van | Als een sensor de unit een vraag stuurt (`31E0`) |
 | Boost: resterende tijd | Tijdens een boost |
 | Filter: dagen over, Filter: resterend, Filter vervangen | Units die hun filterstatus melden (`10D0`, `31DA`) |
 | Storing, Vorstbeveiliging | Als de unit die toestand meldt |
 
 Alle numerieke waarden en alarmen worden in **Insights** bijgehouden.
+
+{: .tip }
+Insights bewaart de grafieken van waarden die een eerdere versie liet zien, zoals *Ventilatorstand* of *CO₂*. Die
+veranderen niet meer. Verwijder ze in **Insights** via het menu van de grafiek.
 
 ## Instellingen
 

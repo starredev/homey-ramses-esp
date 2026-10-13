@@ -14,5 +14,9 @@
   "1.0.3": {
     "en": "A sensor that sends a ventilation demand is now always found as a Room sensor, also when it has buttons and no measurement of its own (some humidity sensors). Before, it was taken for a remote.",
     "nl": "Een sensor die een ventilatievraag stuurt, wordt nu altijd gevonden als Ruimtesensor, ook als hij knoppen heeft en zelf niets meet (sommige vochtsensoren). Eerst werd hij voor een afstandsbediening aangezien."
+  },
+  "1.0.4": {
+    "en": "The ventilation unit shows the ventilation demand its sensors put to it, and which sensor asks it. Many units, Orcon among them, don't report their actual speed; in Auto this shows what drives them.",
+    "nl": "De ventilatie-unit toont de ventilatievraag die zijn sensoren stellen, en welke sensor hem stelt. Veel units, ook die van Orcon, melden hun echte snelheid niet; in Auto zie je zo waar ze op draaien."
   }
 }

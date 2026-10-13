@@ -2,11 +2,13 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { ValidationError } from '../lib/errors.js';
 import { ClimateSensor } from '../lib/domain/ClimateSensor.js';
+import { Demands } from '../lib/domain/Demands.js';
 import { DeviceModel } from '../lib/domain/DeviceModel.js';
 import {
   BoostStarted,
   ButtonPressed,
   BypassModeChanged,
+  DemandChanged,
   DeviceInfoReceived,
   DeviceDiscovered,
   FanModeChanged,
@@ -289,6 +291,29 @@ describe('FanUnit', () => {
       new FanModeChanged('high', null, Source.REMOTE, REMOTE),
       new BoostStarted(30, Source.REMOTE, REMOTE),
     ]);
+  });
+
+  it('follows the highest demand of its sensors, and who asks it', () => {
+    const { fan, events, timers } = unit();
+    const sensor15rf = '37:044778';
+    const homeySensor = '37:215483';
+    const demand = (/** @type {string} */ src, /** @type {string} */ hex) => packet(
+      ` I --- ${src} ${UNIT} --:------ 31E0 008 0000${hex}000100AA00`,
+    );
+
+    fan.accept(demand(sensor15rf, '00'));
+    fan.accept(demand(sensor15rf, '60'));
+    fan.accept(demand(homeySensor, 'C4'), { echo: true });
+    timers.tick(Demands.TTL_MS);
+    fan.accept(STATUS);
+
+    assert.deepEqual(events.filter((event) => event instanceof DemandChanged), [
+      new DemandChanged(0, null),
+      new DemandChanged(48, sensor15rf),
+      new DemandChanged(98, homeySensor),
+      new DemandChanged(null, null),
+    ]);
+    assert.equal(fan.demand, null);
   });
 
   it('sets the mode in the name of the remote', async () => {
