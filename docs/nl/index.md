@@ -37,11 +37,11 @@ Deze Homey-app maakt verbinding met die broker en maakt van wat er op de bus geb
 
 | In Homey | Wat je ermee kunt |
 |---|---|
-| <img src="{{ site.baseurl }}/assets/images/gateway.png" alt="" width="48" style="vertical-align: middle;"> **Ramses Gateway** | De verbinding met je ramses_esp. Ziet elk pakket op de bus en onthoudt elk apparaat dat hij hoort. |
-| <img src="{{ site.baseurl }}/assets/images/ventilation-unit.png" alt="" width="48" style="vertical-align: middle;"> **Ventilatie-unit** | Stand kiezen (laag, midden, hoog, auto, afwezig), boost, bypass, filterteller, sensoren en parameters. |
-| <img src="{{ site.baseurl }}/assets/images/remote.png" alt="" width="48" style="vertical-align: middle;"> **Afstandsbediening** | Elke knopdruk op een fysieke remote wordt een flow-trigger. |
-| <img src="{{ site.baseurl }}/assets/images/room-sensor.png" alt="" width="48" style="vertical-align: middle;"> **Ruimtesensor** | CO₂, vocht, temperatuur en batterij van ruimtesensoren. |
-| <img src="{{ site.baseurl }}/assets/images/virtual-co2-sensor.png" alt="" width="48" style="vertical-align: middle;"> **Virtuele CO₂-sensor** | Homey doet zich voor als CO₂-sensor en koppelt zich als een echte aan je unit, zodat die reageert op *elke* sensor in je huis. |
+| <span style="white-space: nowrap;"><img src="{{ site.baseurl }}/assets/images/gateway.png" alt="" width="48" style="vertical-align: middle;"> <strong>Ramses Gateway</strong></span> | De verbinding met je ramses_esp. Ziet elk pakket op de bus en onthoudt elk apparaat dat hij hoort. |
+| <span style="white-space: nowrap;"><img src="{{ site.baseurl }}/assets/images/ventilation-unit.png" alt="" width="48" style="vertical-align: middle;"> <strong>Ventilatie-unit</strong></span> | Stand kiezen (laag, midden, hoog, auto, afwezig), boost, bypass, filterteller, sensoren en parameters. |
+| <span style="white-space: nowrap;"><img src="{{ site.baseurl }}/assets/images/remote.png" alt="" width="48" style="vertical-align: middle;"> <strong>Afstandsbediening</strong></span> | Elke knopdruk op een fysieke remote wordt een flow-trigger. |
+| <span style="white-space: nowrap;"><img src="{{ site.baseurl }}/assets/images/room-sensor.png" alt="" width="48" style="vertical-align: middle;"> <strong>Ruimtesensor</strong></span> | CO₂, vocht, temperatuur en batterij van ruimtesensoren. |
+| <span style="white-space: nowrap;"><img src="{{ site.baseurl }}/assets/images/virtual-co2-sensor.png" alt="" width="48" style="vertical-align: middle;"> <strong>Virtuele CO₂-sensor</strong></span> | Homey doet zich voor als CO₂-sensor en koppelt zich als een echte aan je unit, zodat die reageert op *elke* sensor in je huis. |
 
 Daarnaast krijg je een **dashboardwidget** en een **busweergave** met live verkeer, een apparatenzoeker en een
 formulier om zelf frames te versturen.
