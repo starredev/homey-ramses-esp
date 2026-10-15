@@ -10,6 +10,8 @@ nav_order: 5
 Laat je ventilatie-unit reageren op elke CO₂- of vochtsensor in Homey, alsof het een originele RAMSES-sensor is.
 {: .fs-6 .fw-300 }
 
+<img src="{{ site.baseurl }}/assets/images/virtual-co2-sensor.png" alt="Virtuele CO₂-sensor" width="140" style="float: right; margin: 0 0 1rem 1.5rem;">
+
 <details open markdown="block">
   <summary>Op deze pagina</summary>
   {: .text-delta }

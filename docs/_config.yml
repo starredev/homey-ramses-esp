@@ -1,5 +1,5 @@
 title: RAMSES ESP for Homey
-description: Control your 868 MHz ventilation (Orcon, Itho, Vasco, ClimaRad) from Homey through a ramses_esp gateway.
+description: Let your Orcon, Itho, Vasco or ClimaRad ventilation respond to CO₂, humidity and your daily routine with Homey.
 lang: en
 
 remote_theme: just-the-docs/just-the-docs@v0.10.1

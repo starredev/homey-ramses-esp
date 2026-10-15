@@ -2,7 +2,7 @@
 title: Home
 layout: home
 nav_order: 1
-description: Control your 868 MHz ventilation unit from Homey through a ramses_esp gateway.
+description: Let your home ventilation respond to CO₂, humidity and your daily routine with Homey.
 permalink: /
 redirect_from:
   - /en/
@@ -11,14 +11,18 @@ redirect_from:
 # RAMSES ESP for Homey
 {: .fs-9 }
 
+Let your home ventilation respond to CO₂, humidity and your daily routine.
+{: .fs-6 .fw-300 }
+
 Bring your heat recovery or ventilation unit from Orcon, Itho, Vasco or ClimaRad into Homey. Set the fan mode,
 start a boost, read CO₂, humidity, temperatures and filter status, and use your existing remotes and sensors as
 flow triggers.
-{: .fs-6 .fw-300 }
 
 [Get started](installation){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [View on GitHub](https://github.com/starredev/homey-ramses-esp){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [Nederlands](nl/){: .btn .fs-5 .mb-4 .mb-md-0 }
+
+<img src="{{ site.baseurl }}/assets/images/app.png" alt="A house with a ventilation unit in the attic, fresh air coming in and stale air going out" width="100%" style="max-width: 720px; border-radius: 8px;">
 
 ---
 
@@ -33,11 +37,11 @@ This Homey app connects to that broker and turns what happens on the bus into re
 
 | In Homey | What you can do |
 |---|---|
-| **Ramses Gateway** | The link to your ramses_esp. Sees every packet on the bus and remembers every device it hears. |
-| **Ventilation unit** | Choose the mode (low, medium, high, auto, away), boost, bypass, filter counter, sensors and parameters. |
-| **Remote** | Every button press on a physical remote becomes a flow trigger. |
-| **Room sensor** | CO₂, humidity, temperature and battery of room sensors. |
-| **Virtual CO₂ sensor** | Homey poses as a CO₂ sensor and binds to your unit like a real one, so the unit responds to *any* sensor in your home. |
+| <img src="{{ site.baseurl }}/assets/images/gateway.png" alt="" width="48" style="vertical-align: middle;"> **Ramses Gateway** | The link to your ramses_esp. Sees every packet on the bus and remembers every device it hears. |
+| <img src="{{ site.baseurl }}/assets/images/ventilation-unit.png" alt="" width="48" style="vertical-align: middle;"> **Ventilation unit** | Choose the mode (low, medium, high, auto, away), boost, bypass, filter counter, sensors and parameters. |
+| <img src="{{ site.baseurl }}/assets/images/remote.png" alt="" width="48" style="vertical-align: middle;"> **Remote** | Every button press on a physical remote becomes a flow trigger. |
+| <img src="{{ site.baseurl }}/assets/images/room-sensor.png" alt="" width="48" style="vertical-align: middle;"> **Room sensor** | CO₂, humidity, temperature and battery of room sensors. |
+| <img src="{{ site.baseurl }}/assets/images/virtual-co2-sensor.png" alt="" width="48" style="vertical-align: middle;"> **Virtual CO₂ sensor** | Homey poses as a CO₂ sensor and binds to your unit like a real one, so the unit responds to *any* sensor in your home. |
 
 You also get a **dashboard widget** and a **bus view** with live traffic, a device finder and a form to send frames
 yourself.

@@ -12,6 +12,8 @@ redirect_from:
 Let your ventilation unit respond to any CO₂ or humidity sensor in Homey, as if it were an original RAMSES sensor.
 {: .fs-6 .fw-300 }
 
+<img src="{{ site.baseurl }}/assets/images/virtual-co2-sensor.png" alt="Virtual CO₂ sensor" width="140" style="float: right; margin: 0 0 1rem 1.5rem;">
+
 <details open markdown="block">
   <summary>On this page</summary>
   {: .text-delta }

@@ -23,6 +23,8 @@ Your existing wireless buttons and sensors as Homey devices.
 
 ## Remote
 
+<img src="{{ site.baseurl }}/assets/images/remote.png" alt="Remote" width="120" style="float: right; margin: 0 0 1rem 1.5rem;">
+
 A physical RAMSES remote (e.g. an Orcon 15RF or an Itho RFT) becomes a Homey device with the capability
 **Last button**. Every button press is a flow trigger.
 
@@ -51,7 +53,9 @@ Examples are on the [Flows](flows#examples) page.
 A remote doesn't have to be bound to your unit to work as a Homey button. A spare, unbound remote makes a fine
 wireless scene button for other things in your home.
 
-## Sensor
+## Room sensor
+
+<img src="{{ site.baseurl }}/assets/images/room-sensor.png" alt="Room sensor" width="100" style="float: right; margin: 0 0 1rem 1.5rem;">
 
 RAMSES room sensors (e.g. the Orcon CO2 15RF) become a Homey sensor with the values they broadcast:
 
@@ -83,7 +87,7 @@ there are the same triggers as for the remote:
 
 ## Naming
 
-New devices are called *Remote 29:123456* or *Sensor 37:044778*. Rename them to something recognisable
+New devices are called *Remote 29:123456* or *Room sensor 37:044778*. Rename them to something recognisable
 (*Kitchen remote*, *Living room CO₂*). The address stays visible under *Settings → Bus*.
 
 ## Recognising addresses
