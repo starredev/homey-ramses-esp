@@ -104,6 +104,16 @@ bypass state: **Auto**, **Open** or **Closed**. Also through the flow card *Set 
 - **Replace filter** (alarm) turns on when the unit reports that the filter needs replacing.
 - After replacing it, reset the counter with the flow card **Reset the filter counter**.
 
+### Ventilation demand
+
+Sensors such as an Orcon CO2 15RF, and the [Virtual CO₂ sensor](homey-co2-sensor), tell the unit how much ventilation
+they want, in %. In *Auto* the unit ventilates on the highest of them. **Ventilation demand** shows that highest
+demand and **Demand from** the sensor that asks it, by its name in Homey. A sensor that stops repeating its demand
+no longer counts after 15 minutes. When every sensor asks 0 %, *Demand from* says *nobody*.
+
+Many units, Orcon among them, don't report how fast they actually run, only their mode. The demand is then the best
+indication of what the unit does in *Auto*.
+
 ## What the unit shows
 
 Capabilities appear **only once the unit reports them**. A unit without a CO₂ sensor never gets an empty CO₂ tile.
@@ -119,11 +129,16 @@ After adding, it can therefore take a few minutes before everything shows up.
 | Bypass position (%), Bypass (settable) | Units with a bypass |
 | Pre-heater, Post-heater (%) | Units with heating elements |
 | Air quality (%) | Units with an air quality sensor |
+| Ventilation demand, Demand from | When a sensor sends the unit a demand (`31E0`) |
 | Boost time left | During a boost |
 | Filter days left, Filter left, Replace filter | Units that report their filter state (`10D0`, `31DA`) |
 | Fault, Frost protection | When the unit reports that state |
 
 All numeric values and alarms are logged in **Insights**.
+
+{: .tip }
+Insights keeps the graphs of values an earlier version showed, such as *Fan level* or *CO₂*. They no longer change.
+Remove them in **Insights** via the graph's menu.
 
 ## Settings
 

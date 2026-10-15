@@ -25,6 +25,7 @@ bus all the time and remembers every device it hears, across restarts.
 | Fan speed (% or speed step), supply fan speed | `31D9`, `31DA` |
 | CO₂, humidity, indoor / outdoor / supply / exhaust temperature | `31DA` |
 | Bypass position, air quality, boost time left | `31DA` |
+| Ventilation demand and the sensor that asks it | `31E0` from sensors |
 | Filter days left | `10D0` |
 
 Capabilities appear when the unit reports them, so a unit without a CO₂ sensor never shows an empty CO₂ tile.

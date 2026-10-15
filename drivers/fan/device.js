@@ -1,6 +1,6 @@
 import { ValidationError } from '../../lib/errors.js';
 import {
-  BypassModeChanged, FanModeChanged, ParamChanged, ReadingChanged, SchemeDetected,
+  BypassModeChanged, DemandChanged, FanModeChanged, ParamChanged, ReadingChanged, SchemeDetected,
 } from '../../lib/domain/events.js';
 import { FAN_PARAMS } from '../../lib/ramses/FanParams.js';
 import { REMOTE_OFFER } from '../../lib/ramses/binding.js';
@@ -144,6 +144,10 @@ export default class FanDevice extends RamsesDevice {
       }).catch(this.error);
     }
 
+    if (event instanceof DemandChanged) {
+      await this.#showDemand(event);
+    }
+
     if (event instanceof SchemeDetected) {
       this.log(`The unit numbers its modes as ${event.scheme} does`);
       await this.setStoreValue('scheme', event.scheme);
@@ -231,6 +235,25 @@ export default class FanDevice extends RamsesDevice {
     await this.capabilities.add(FanStatus.LABEL_CAPABILITY);
     await this.capabilities.set(FanStatus.LABEL_CAPABILITY, FanStatus.label(mode, this.homey.i18n.getLanguage()));
     this.#indicated = mode;
+  }
+
+  /**
+   * Shows the highest demand the sensors put to the unit, and which sensor
+   * asks it. Units no sensor ever asked anything never show them.
+   * @param {DemandChanged} demand
+   */
+  async #showDemand({ percent, by }) {
+    if (percent === null && !this.hasCapability('measure_ramses_demand')) {
+      return;
+    }
+
+    await this.capabilities.add('measure_ramses_demand');
+    await this.capabilities.add('measure_ramses_demand_source');
+    await this.capabilities.set('measure_ramses_demand', percent);
+    await this.capabilities.set(
+      'measure_ramses_demand_source',
+      by === null ? this.homey.__('device.no_demand') : this.app.deviceName(by) ?? by,
+    );
   }
 
   /**

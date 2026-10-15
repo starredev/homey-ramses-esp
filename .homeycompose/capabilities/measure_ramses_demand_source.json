@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Demand from",
+    "nl": "Vraag van"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/air.svg"
+}

@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.github.starredev.ramses",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "runtime": "nodejs",
@@ -13,8 +13,8 @@
     "nl": "RAMSES ESP"
   },
   "description": {
-    "en": "Control your 868 MHz ventilation unit and use its remotes and sensors in flows.",
-    "nl": "Bedien je 868 MHz-ventilatie-unit en gebruik de remotes en sensoren in flows."
+    "en": "Let your home ventilation respond to CO₂, humidity and your daily routine.",
+    "nl": "Laat je ventilatie meebewegen met CO₂, vochtigheid en je dagritme."
   },
   "category": [
     "climate"
@@ -2468,6 +2468,17 @@
       "min": 0,
       "max": 100,
       "insights": true
+    },
+    "measure_ramses_demand_source": {
+      "type": "string",
+      "title": {
+        "en": "Demand from",
+        "nl": "Vraag van"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/air.svg"
     },
     "measure_ramses_exhaust_flow": {
       "type": "number",
