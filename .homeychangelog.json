@@ -18,5 +18,9 @@
   "1.0.4": {
     "en": "The ventilation unit shows the ventilation demand its sensors put to it, and which sensor asks it. Many units, Orcon among them, don't report their actual speed; in Auto this shows what drives them.",
     "nl": "De ventilatie-unit toont de ventilatievraag die zijn sensoren stellen, en welke sensor hem stelt. Veel units, ook die van Orcon, melden hun echte snelheid niet; in Auto zie je zo waar ze op draaien."
+  },
+  "1.0.5": {
+    "en": "New app image and a picture of the real device for each driver, so you can see at a glance which one to add. Shorter app description.",
+    "nl": "Nieuwe app-afbeelding en voor elke driver een plaatje van het echte apparaat, zodat je meteen ziet welke je moet toevoegen. Kortere app-beschrijving."
   }
 }
