@@ -10,6 +10,8 @@ nav_order: 2
 De gateway is de verbinding tussen Homey en je ramses_esp. Alle andere apparaten lopen erdoorheen.
 {: .fs-6 .fw-300 }
 
+<img src="{{ site.baseurl }}/assets/images/gateway.png" alt="ramses_esp-gateway" width="140" style="float: right; margin: 0 0 1rem 1.5rem;">
+
 <details open markdown="block">
   <summary>Op deze pagina</summary>
   {: .text-delta }

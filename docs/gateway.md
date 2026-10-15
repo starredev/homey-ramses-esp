@@ -12,6 +12,8 @@ redirect_from:
 The gateway is the link between Homey and your ramses_esp. All other devices go through it.
 {: .fs-6 .fw-300 }
 
+<img src="{{ site.baseurl }}/assets/images/gateway.png" alt="ramses_esp gateway" width="140" style="float: right; margin: 0 0 1rem 1.5rem;">
+
 <details open markdown="block">
   <summary>On this page</summary>
   {: .text-delta }

@@ -12,6 +12,8 @@ redirect_from:
 Adding, controlling and configuring your heat recovery or mechanical ventilation unit.
 {: .fs-6 .fw-300 }
 
+<img src="{{ site.baseurl }}/assets/images/ventilation-unit.png" alt="Ventilation unit" width="140" style="float: right; margin: 0 0 1rem 1.5rem;">
+
 <details open markdown="block">
   <summary>On this page</summary>
   {: .text-delta }

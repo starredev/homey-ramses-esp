@@ -8,6 +8,8 @@ Orcon, Itho, Vasco and ClimaRad) through a [ramses_esp](https://github.com/Indal
 The app talks to the MQTT broker the ramses_esp already publishes to, for example the MQTT Broker app on Homey
 itself. No Home Assistant, no websocket bridge, and no reflashing needed.
 
+<img src="assets/images/xlarge.png" alt="A house with a ventilation unit in the attic, fresh air coming in and stale air going out" width="600">
+
 📖 **Documentation:** [English](https://starredev.github.io/homey-ramses-esp/) · [Nederlands](https://starredev.github.io/homey-ramses-esp/nl/)
 — installation, binding, flows, widget and troubleshooting.
 

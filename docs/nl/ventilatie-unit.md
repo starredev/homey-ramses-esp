@@ -13,6 +13,8 @@ redirect_from:
 Toevoegen, bedienen en instellen van je WTW- of mechanische ventilatie-unit.
 {: .fs-6 .fw-300 }
 
+<img src="{{ site.baseurl }}/assets/images/ventilation-unit.png" alt="Ventilatie-unit" width="140" style="float: right; margin: 0 0 1rem 1.5rem;">
+
 <details open markdown="block">
   <summary>Op deze pagina</summary>
   {: .text-delta }

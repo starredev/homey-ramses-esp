@@ -24,6 +24,8 @@ Je bestaande draadloze knoppen en sensoren als Homey-apparaten.
 
 ## Afstandsbediening
 
+<img src="{{ site.baseurl }}/assets/images/remote.png" alt="Afstandsbediening" width="120" style="float: right; margin: 0 0 1rem 1.5rem;">
+
 Een fysieke RAMSES-remote (bv. een Orcon 15RF of een Itho RFT) wordt in Homey een apparaat met de capability
 **Laatste knop**. Elke knopdruk is een flow-trigger.
 
@@ -52,7 +54,9 @@ Voorbeelden staan op de pagina [Flows](flows#voorbeelden).
 Een remote hoeft niet aan je unit gekoppeld te zijn om als Homey-knop te werken. Een losse, ongekoppelde remote is
 een prima draadloze scèneknop voor andere dingen in huis.
 
-## Sensor
+## Ruimtesensor
+
+<img src="{{ site.baseurl }}/assets/images/room-sensor.png" alt="Ruimtesensor" width="100" style="float: right; margin: 0 0 1rem 1.5rem;">
 
 RAMSES-ruimtesensoren (bv. de Orcon CO2 15RF) worden een Homey-sensor met de waarden die ze uitzenden:
 
@@ -84,7 +88,7 @@ Daarvoor zijn er dezelfde triggers als bij de remote:
 
 ## Naamgeving
 
-Nieuwe apparaten heten *Afstandsbediening 29:123456* of *Sensor 37:044778*. Hernoem ze naar iets herkenbaars
+Nieuwe apparaten heten *Afstandsbediening 29:123456* of *Ruimtesensor 37:044778*. Hernoem ze naar iets herkenbaars
 (*Remote keuken*, *CO₂ woonkamer*). Het adres blijft zichtbaar onder *Instellingen → Bus*.
 
 ## Adressen herkennen
