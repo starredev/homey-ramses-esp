@@ -37,11 +37,11 @@ This Homey app connects to that broker and turns what happens on the bus into re
 
 | In Homey | What you can do |
 |---|---|
-| <img src="{{ site.baseurl }}/assets/images/gateway.png" alt="" width="48" style="vertical-align: middle;"> **Ramses Gateway** | The link to your ramses_esp. Sees every packet on the bus and remembers every device it hears. |
-| <img src="{{ site.baseurl }}/assets/images/ventilation-unit.png" alt="" width="48" style="vertical-align: middle;"> **Ventilation unit** | Choose the mode (low, medium, high, auto, away), boost, bypass, filter counter, sensors and parameters. |
-| <img src="{{ site.baseurl }}/assets/images/remote.png" alt="" width="48" style="vertical-align: middle;"> **Remote** | Every button press on a physical remote becomes a flow trigger. |
-| <img src="{{ site.baseurl }}/assets/images/room-sensor.png" alt="" width="48" style="vertical-align: middle;"> **Room sensor** | CO₂, humidity, temperature and battery of room sensors. |
-| <img src="{{ site.baseurl }}/assets/images/virtual-co2-sensor.png" alt="" width="48" style="vertical-align: middle;"> **Virtual CO₂ sensor** | Homey poses as a CO₂ sensor and binds to your unit like a real one, so the unit responds to *any* sensor in your home. |
+| <span style="white-space: nowrap;"><img src="{{ site.baseurl }}/assets/images/gateway.png" alt="" width="48" style="vertical-align: middle;"> <strong>Ramses Gateway</strong></span> | The link to your ramses_esp. Sees every packet on the bus and remembers every device it hears. |
+| <span style="white-space: nowrap;"><img src="{{ site.baseurl }}/assets/images/ventilation-unit.png" alt="" width="48" style="vertical-align: middle;"> <strong>Ventilation unit</strong></span> | Choose the mode (low, medium, high, auto, away), boost, bypass, filter counter, sensors and parameters. |
+| <span style="white-space: nowrap;"><img src="{{ site.baseurl }}/assets/images/remote.png" alt="" width="48" style="vertical-align: middle;"> <strong>Remote</strong></span> | Every button press on a physical remote becomes a flow trigger. |
+| <span style="white-space: nowrap;"><img src="{{ site.baseurl }}/assets/images/room-sensor.png" alt="" width="48" style="vertical-align: middle;"> <strong>Room sensor</strong></span> | CO₂, humidity, temperature and battery of room sensors. |
+| <span style="white-space: nowrap;"><img src="{{ site.baseurl }}/assets/images/virtual-co2-sensor.png" alt="" width="48" style="vertical-align: middle;"> <strong>Virtual CO₂ sensor</strong></span> | Homey poses as a CO₂ sensor and binds to your unit like a real one, so the unit responds to *any* sensor in your home. |
 
 You also get a **dashboard widget** and a **bus view** with live traffic, a device finder and a form to send frames
 yourself.
