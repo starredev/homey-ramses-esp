@@ -27,7 +27,7 @@ Van een losse ramses_esp tot een werkende app op je Homey.
 | Onderdeel | Toelichting |
 |---|---|
 | **Homey Pro (2023)** of **Homey Pro mini** | Firmware **12.4 of nieuwer**. De app draait lokaal; Homey Cloud wordt niet ondersteund. |
-| **ramses_esp** | Een ESP32 met 868 MHz-radio en de [ramses_esp](https://github.com/IndaloTech/ramses_esp)-firmware, verbonden met je wifi. |
+| **ramses_esp** | Een ESP32 met 868 MHz-radio en de [ramses_esp](https://github.com/IndaloTech/ramses_esp)-firmware, verbonden met je wifi. Zie [welke gateway](#welke-gateway) voor boards die je kunt kopen. |
 | **MQTT-broker** | Waar de ramses_esp naartoe publiceert. Het makkelijkst is de *MQTT Broker*-app op Homey zelf; Mosquitto op een NAS of Raspberry Pi werkt net zo goed. |
 | **Een RAMSES II-ventilatiesysteem** | Orcon, Itho, Vasco, ClimaRad of Nuaire op 868 MHz. |
 
@@ -35,6 +35,20 @@ Van een losse ramses_esp tot een werkende app op je Homey.
 Plaats de ramses_esp ergens tussen je Homey-wifi en de ventilatie-unit in. 868 MHz komt goed door muren, maar een
 zolder met een betonvloer ertussen kan net te veel zijn. De [busweergave](dashboard#busweergave) laat de
 signaalsterkte (RSSI) van elk pakket zien.
+
+### Welke gateway?
+
+Deze boards zijn getest met de app. Beide worden geleverd met de juiste firmware, dus je stelt alleen wifi en MQTT in
+(stap 2 hieronder).
+
+| Board | Chip | Firmware | Waar |
+|---|---|---|---|
+| **Elecram Sub-GHz 855–925 MHz Bridge** | ESP32-C6 + TI CC1101 | [ramses_esp voor ESP32-C6](https://github.com/IMMRMKW/ramses_esp) (meldt zich als `ramses_esp_c6`) | [elecram.com](https://elecram.com/products/esp32-c6-wifi-zigbee-to-855-925mhz-wireless?variant=52605637132621). Bestel de 868 MHz-antenne erbij. |
+| **Indalo-Tech RAMSES_ESP** | ESP32-S3 + TI CC1101 | [ramses_esp](https://github.com/IndaloTech/ramses_esp) (meldt zich als `ramses_esp`) | [indalotech.co.uk](https://indalotech.co.uk), als de winkel open is. |
+
+De app leest beide firmwares op dezelfde manier: hij vindt gateways aan hun MQTT-topics, niet aan de naam van de
+firmware. Het Elecram-board heeft bij het instellen een paar extra aandachtspunten; zie
+[Elecram ESP32-C6-board](#elecram-esp32-c6-board).
 
 ## 1. De MQTT-broker
 
@@ -73,9 +87,21 @@ configureer hem zoals hieronder. Je ramses_cc-configuratie heb je daarna niet me
 1. Stop de ramses_esp in een pc met Windows, macOS of Linux.
 2. Open een seriële terminal op de juiste poort met **115200 baud**:
    - **Windows**: [PuTTY](https://www.putty.org/), verbindingstype *Serial*. De COM-poort vind je in
-     *Apparaatbeheer → Poorten (COM & LPT)*.
+     *Apparaatbeheer → Poorten (COM & LPT)*. Stel PuTTY in zoals hieronder voordat je op *Open* klikt.
    - **macOS / Linux**: bijvoorbeeld `screen /dev/ttyUSB0 115200` (op macOS iets als `/dev/tty.usbserial-…`).
 3. Druk op **Enter**. Je krijgt de prompt van de ramses_esp.
+
+#### PuTTY-instellingen
+
+| Waar in PuTTY | Instelling | Waarom |
+|---|---|---|
+| *Session* | Connection type **Serial**, serial line **COM…**, speed **115200** | De poort van het board. |
+| *Connection → Serial* | Flow control **None** | Met de standaard *XON/XOFF* krijgt het board niets binnen van wat je typt. |
+| *Terminal* | **Implicit CR in every LF** aan | Regels beginnen links in plaats van als een trap naar beneden te lopen. |
+| *Terminal* | Local echo **Force on**, local line editing **Force on** | Je ziet wat je typt en kunt het verbeteren vóór *Enter*. |
+
+Sla dit op onder een naam op de pagina *Session*, dan open je het de volgende keer met een dubbelklik. Sluit PuTTY
+voordat je het board flasht: maar één programma tegelijk kan de COM-poort gebruiken.
 
 ### Wifi en MQTT instellen
 
@@ -110,6 +136,36 @@ Na de `reset` verbindt de stick met je wifi en de broker. Je kunt hem dan loskop
 de stroom hangen, het liefst halverwege je Homey-wifi en de ventilatie-unit.
 
 Meer commando's en firmware-updates staan in de [documentatie van ramses_esp](https://github.com/IndaloTech/ramses_esp).
+
+### Elecram ESP32-C6-board
+
+Het Elecram-board kent dezelfde commando's, met deze verschillen:
+
+| Punt | Wat je doet |
+|---|---|
+| **Netwerkmodus** | De firmware kan via wifi of Zigbee werken; MQTT werkt alleen in wifimodus. Typ `network show`. Staat er `zigbee`, typ dan `network wifi`; het board slaat dat op en herstart. |
+| **Brokeradres** | Typ het volledig, met `mqtt://` en de poort: `mqtt broker mqtt://192.168.1.20:1883`. |
+| **MQTT-inlog wijzigen** | Typ `reset` na `mqtt user` en `mqtt password`. Tot die tijd blijft het board het opnieuw proberen met de oude inlog en toont de console steeds `MQTT: Disonnected`. |
+| **Tijd** | De firmware heeft standaard geen tijdserver, dus de tijdstempels staan op `1970-01-01`. Stel er een in met `sntp server pool.ntp.org` en een tijdzone, bijvoorbeeld `timezone CET-1CEST,M3.5.0,M10.5.0/3` (Amsterdam met zomertijd), en dan `reset`. Homey gebruikt de tijdstempels niet, dus dit is optioneel. |
+
+Als het werkt, toont de console:
+
+```text
+# Connected to SSID:JOUW_WIFI_SSID
+# MQTT: Connecting to mqtt://192.168.1.20:1883
+# MQTT: Connected
+```
+
+In MQTT Explorer verschijnt het board als `RAMSES/GATEWAY/18:xxxxxx = online` met `info/firmware = ramses_esp_c6`.
+
+{: .let_op }
+**Via Zigbee in plaats van wifi (experimenteel, niet getest).** In Zigbee-modus kan het board aan
+[Zigbee2MQTT](https://www.zigbee2mqtt.io/) worden gekoppeld. De fork heeft een Zigbee2MQTT-extensie (branch
+`z2m_support`, `z2m/external_extensions/ramses-esp-bridge.mjs`) die de pakketten doorgeeft op dezelfde
+`RAMSES/GATEWAY/18:xxxxxx/rx`- en `/tx`-topics, zodat de app ze gewoon kan lezen. Zigbee2MQTT moet dan dezelfde broker
+gebruiken als Homey. De extensie zit nog niet in een release en heeft ook de apparaatdefinitie van het board in
+Zigbee2MQTT nodig. Via Zigbee is er geen online/offline-statustopic, dus de online-kaart en de offline-melding van de
+gateway werken niet. Gebruik wifi, tenzij je wilt experimenteren.
 
 ### Topics
 

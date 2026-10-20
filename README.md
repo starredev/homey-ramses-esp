@@ -60,7 +60,10 @@ role of every device on the bus and whether it is added to Homey, and a form to 
 
 ## Requirements
 
-- A **ramses_esp** (868 MHz) connected to an MQTT broker, publishing on `RAMSES/GATEWAY/<id>/rx`.
+- A **ramses_esp** (868 MHz) connected to an MQTT broker, publishing on `RAMSES/GATEWAY/<id>/rx`. Tested:
+  the [Elecram Sub-GHz Bridge (ESP32-C6)](https://elecram.com/products/esp32-c6-wifi-zigbee-to-855-925mhz-wireless?variant=52605637132621)
+  with [ramses_esp for ESP32-C6](https://github.com/IMMRMKW/ramses_esp), and the Indalo-Tech RAMSES_ESP (ESP32-S3).
+  Setup with PuTTY: [installation guide](https://starredev.github.io/homey-ramses-esp/installation#which-gateway).
 - Homey Pro (2023) or Homey Pro mini with firmware **12.4 or newer**.
 - To control a unit: the address of a remote (or sensor) the unit is **bound** to. The unit only obeys devices
   it is bound to, so Homey sends commands in that device's name. The app fills it in when it has heard such a
