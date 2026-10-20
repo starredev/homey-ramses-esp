@@ -70,6 +70,7 @@ export default [
       'node_modules/',
       '.homeybuild/',
       'coverage/',
+      'website/',
     ],
   },
   js.configs.recommended,

@@ -1,0 +1,90 @@
+---
+title: "Ontwikkelen"
+description: "Bijdragen aan de app, of hem zelf aanpassen."
+---
+
+## Aan de slag
+
+Je hebt [Node.js 22](https://nodejs.org/), de Homey CLI en, voor `homey app run`, Docker nodig.
+
+```bash
+npm install
+```
+
+| Commando | Wat het doet |
+|---|---|
+| `npm test` | Alleen de tests |
+| `npm run check` | Lint, typecheck, tests met coverage en manifestvalidatie, precies wat de CI doet |
+| `npm run lint:fix` | Lintfouten automatisch herstellen |
+| `homey app run` | De app tijdelijk op je Homey draaien met live logs |
+| `homey app install` | De app blijvend op je Homey installeren |
+
+De CI eist minimaal **85 % regels**, **80 % branches** en **85 % functies** coverage over `lib/`.
+
+## Opbouw
+
+De code is in lagen opgedeeld. Alles onder `lib/homey` draait onder kale `node --test`, zonder Homey.
+
+```text
+lib/
+  ramses/    protocol: Packet, decoders per code, commando's, merkschema's, BusScanner, koppelen
+  mqtt/      verbinding: BrokerConfig, GatewayConnection, BrokerProbe
+  domain/    modellen: Gateway, FanUnit, Remote, ClimateSensor, VirtualSensor, events
+  homey/     adapters: GatewayRegistry, capabilities, flowkaarten, pairing, web-API
+drivers/     dunne Homey-drivers en -devices
+settings/    de busweergave
+widgets/     de dashboardwidget
+```
+
+<Mermaid chart={`flowchart TB
+    M[MQTT-bericht] --> GC[GatewayConnection]
+    GC --> P[Packet]
+    P --> G[Gateway / BusScanner]
+    G --> D[FanUnit, Remote, ...]
+    D -- domeinevents --> RD[RamsesDevice]
+    RD --> C[Capabilities]
+    RD --> F[Flow-triggers]
+`} />
+
+Afhankelijkheden (MQTT-`connect`, klok, timers, verstuurfunctie) worden **geïnjecteerd**. De tests drijven zo de hele
+keten met nep-objecten, van een MQTT-bericht tot een flow-trigger.
+
+## Een nieuw merk of nieuwe code
+
+- **Merk**: voeg een `FanScheme` toe in `lib/ramses/FanScheme.js` en een waarde aan de dropdown *Merk* in
+  `drivers/fan/driver.settings.compose.json`.
+- **Berichtcode**: voeg een decoder toe in `lib/ramses/decoders.js` en, als hij een nieuwe meetwaarde oplevert, een
+  koppeling in `lib/homey/ReadingCapabilities.js`.
+- Schrijf er een test bij met een **echt frame** van de bus.
+
+## Vertalingen
+
+De app is tweetalig (Engels en Nederlands). Teksten staan in `locales/en.json` en `locales/nl.json`, en in de
+`*.compose.json`-bestanden. Homey-placeholders zijn `__id__`, niet `{{id}}`.
+
+## Deze documentatie
+
+De site staat in `website/` en is gebouwd met [Fumadocs](https://fumadocs.dev/) (Next.js, statische export). De
+Engelse pagina's staan in `website/content/docs/en/`, de Nederlandse in `website/content/docs/nl/`, onder **dezelfde
+bestandsnamen**, zodat de taalkeuze je op dezelfde pagina houdt. De volgorde in de zijbalk staat in de `meta.json`
+van elke map; de landingspagina is `website/app/[lang]/(home)/page.tsx`. Lokaal bekijken:
+
+```bash
+cd website
+npm install
+npm run dev     # http://localhost:3000/nl/
+npm run build   # statische export naar out/
+```
+
+| In een pagina | Wat het geeft |
+|---|---|
+| `<Callout type="idea">` / `"info"` / `"warn"` / `"error"` | Een tip-, achtergrond-, let-op- of waarschuwingsblok |
+| `<Mermaid chart={...} />` | Een diagram dat licht en donker volgt |
+| `<DeviceImage device="gateway" alt="..." />` | Een apparaatillustratie naast de tekst |
+| `<DeviceIcon device="remote" />` | Een kleine apparaatillustratie, voor tabellen |
+| `[label](./gateway.mdx#anker)` | Een link naar een andere pagina in dezelfde taal |
+
+Elke push naar `main` die `website/` raakt, bouwt de site en publiceert hem op de branch `gh-pages`
+(`.github/workflows/docs.yml`). GitHub Pages serveert die branch: *Settings → Pages → Deploy from a branch →
+`gh-pages` / `/ (root)`*. De oude Jekyll-URL's verwijzen door naar de nieuwe pagina's.
+

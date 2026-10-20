@@ -1,0 +1,22 @@
+{
+  "title": "Documentatie",
+  "root": true,
+  "pages": [
+    "---Aan de slag---",
+    "index",
+    "installation",
+    "gateway",
+    "---Apparaten---",
+    "ventilation-unit",
+    "remotes-and-sensors",
+    "homey-co2-sensor",
+    "---De app gebruiken---",
+    "flows",
+    "dashboard",
+    "---Hulp---",
+    "troubleshooting",
+    "---Onder de motorkap---",
+    "protocol",
+    "development"
+  ]
+}
