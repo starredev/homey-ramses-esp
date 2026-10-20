@@ -1,0 +1,22 @@
+{
+  "title": "Documentation",
+  "root": true,
+  "pages": [
+    "---Getting started---",
+    "index",
+    "installation",
+    "gateway",
+    "---Devices---",
+    "ventilation-unit",
+    "remotes-and-sensors",
+    "homey-co2-sensor",
+    "---Using the app---",
+    "flows",
+    "dashboard",
+    "---Help---",
+    "troubleshooting",
+    "---Under the hood---",
+    "protocol",
+    "development"
+  ]
+}

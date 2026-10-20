@@ -10,7 +10,7 @@ itself. No Home Assistant, no websocket bridge, and no reflashing needed.
 
 <img src="assets/images/xlarge.png" alt="A house with a ventilation unit in the attic, fresh air coming in and stale air going out" width="600">
 
-📖 **Documentation:** [English](https://starredev.github.io/homey-ramses-esp/) · [Nederlands](https://starredev.github.io/homey-ramses-esp/nl/)
+📖 **Documentation:** [English](https://starredev.github.io/homey-ramses-esp/en/docs/) · [Nederlands](https://starredev.github.io/homey-ramses-esp/nl/docs/)
 — installation, binding, flows, widget and troubleshooting.
 
 > **Unofficial community project.** Not made or endorsed by any of the brands above or by the ramses_esp authors.
@@ -44,7 +44,7 @@ plain sensor in turn, so the unit picks the form it knows. A flow then passes on
 any Homey sensor (Zigbee, Wi-Fi, a Sensy, a Netatmo), and the unit in *Auto* ventilates on it next to its own
 sensors. Homey derives the ventilation demand from a configurable curve and repeats it every 5 minutes, like a real
 sensor. Verified on an Orcon unit with a CO2 15RF already bound; see
-[the docs](https://starredev.github.io/homey-ramses-esp/homey-co2-sensor) for the frames.
+[the docs](https://starredev.github.io/homey-ramses-esp/en/docs/homey-co2-sensor/) for the frames.
 
 **Flow cards**
 
@@ -63,7 +63,7 @@ role of every device on the bus and whether it is added to Homey, and a form to 
 - A **ramses_esp** (868 MHz) connected to an MQTT broker, publishing on `RAMSES/GATEWAY/<id>/rx`. Tested:
   the [Elecram Sub-GHz Bridge (ESP32-C6)](https://elecram.com/products/esp32-c6-wifi-zigbee-to-855-925mhz-wireless?variant=52605637132621)
   with [ramses_esp for ESP32-C6](https://github.com/IMMRMKW/ramses_esp), and the Indalo-Tech RAMSES_ESP (ESP32-S3).
-  Setup with PuTTY: [installation guide](https://starredev.github.io/homey-ramses-esp/installation#which-gateway).
+  Setup with PuTTY: [installation guide](https://starredev.github.io/homey-ramses-esp/en/docs/installation/#which-gateway).
 - Homey Pro (2023) or Homey Pro mini with firmware **12.4 or newer**.
 - To control a unit: the address of a remote (or sensor) the unit is **bound** to. The unit only obeys devices
   it is bound to, so Homey sends commands in that device's name. The app fills it in when it has heard such a

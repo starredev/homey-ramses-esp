@@ -4,4 +4,5 @@ coverage/
 eslint.config.js
 jsconfig.json
 *.md
-docs/
+website/
+tools/
