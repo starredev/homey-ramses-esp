@@ -43,14 +43,14 @@ Homey can also bind itself to the unit as a new remote of its own. You then don'
    devices for about 2 minutes.
 2. In Homey, open the device → **Settings** (gear) → **Maintenance** → **Bind Homey as a remote**.
 3. Homey picks a free address (`29:xxxxxx`), offers itself every 5 seconds and waits up to 90 seconds for the unit to
-   accept.
-4. Done? The new address is shown under *Remote address* and you can control the unit.
+   accept. This runs in the background: the device shows a warning *Binding…* in the meantime.
+4. Done? The warning disappears, the new address is shown under *Remote address* and you can control the unit.
 
 Only *this* unit may accept the binding, so a neighbour's unit that happens to be in binding mode too is not bound by
 accident.
 
 <Callout type="idea">
-Getting *No unit answered*? The unit was not (or no longer) in binding mode. Repeat step 1 and start binding within 2
+Does the warning change to *No unit answered*? The unit was not (or no longer) in binding mode. Repeat step 1 and start binding within 2
 minutes.
 </Callout>
 
@@ -155,7 +155,8 @@ Itho, choose Itho yourself.**
 ### Parameters (heat recovery)
 
 Heat recovery units (Orcon HRC, Vasco, ClimaRad and others) have internal parameters. Homey reads them after adding the
-unit; *Supported by this unit* then shows **Yes** or **No**. Change a value and save, and Homey writes it to the unit.
+unit; *Supported by this unit* then shows **Yes** or **No**. Change a value and save, and Homey writes it to the unit, within the range the unit reports. The ranges below are
+the usual ones; a unit that reports no range of its own uses these.
 
 | Parameter | Range |
 |---|---|

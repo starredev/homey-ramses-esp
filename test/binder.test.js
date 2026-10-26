@@ -3,6 +3,7 @@ import { describe, it } from 'node:test';
 import { Gateway } from '../lib/domain/Gateway.js';
 import { BindingTimeoutError } from '../lib/domain/BindingSession.js';
 import { Binder } from '../lib/homey/Binder.js';
+import { BindingJob } from '../lib/homey/BindingJob.js';
 import { GatewayRegistry } from '../lib/homey/GatewayRegistry.js';
 import { VirtualSensorCards, VirtualSensorFlowCards } from '../lib/homey/flows/VirtualSensorFlowCards.js';
 import { REMOTE_OFFER, SENSOR_OFFERS } from '../lib/ramses/binding.js';
@@ -72,6 +73,62 @@ describe('Binder', () => {
 
     await assert.rejects(result, BindingTimeoutError);
     connection.hear(packet(` W --- ${UNIT} 37:100001 --:------ 1FC9 006 0031D9763A9C`));
+  });
+});
+
+describe('BindingJob', () => {
+  /**
+   * @param {() => Promise<string>} bind
+   * @param {(unit: string) => Promise<void>} [onBound]
+   */
+  function job(bind, onBound = async () => {}) {
+    /** @type {unknown[]} */
+    const outcomes = [];
+    const binding = new BindingJob({
+      bind,
+      onBound: async (unit) => {
+        outcomes.push(['bound', unit]);
+        await onBound(unit);
+      },
+      onFailed: async (error) => {
+        outcomes.push(['failed', /** @type {Error} */ (error).message]);
+      },
+    });
+
+    return { binding, outcomes };
+  }
+
+  it('returns at once and reports the unit that accepted later', async () => {
+    const { binder, connection } = setup();
+    const { binding, outcomes } = job(() => binder.bind({ supplicant: '29:100001', offers: [REMOTE_OFFER], unit: UNIT }));
+    const done = binding.start();
+
+    assert.equal(binding.running, true);
+    assert.equal(binding.start(), null);
+    await flush();
+    connection.hear(packet(` W --- ${UNIT} 29:100001 --:------ 1FC9 006 0031D9763A9C`));
+
+    await done;
+    assert.deepEqual(outcomes, [['bound', UNIT]]);
+    assert.equal(binding.running, false);
+  });
+
+  it('reports a timeout, and a failure after the binding, as failures', async () => {
+    const { binder, timers } = setup();
+    const timedOut = job(() => binder.bind({ supplicant: '37:100001', offers: SENSOR_OFFERS }));
+    const done = timedOut.binding.start();
+
+    await flush();
+    timers.tick(90000);
+    await done;
+    assert.deepEqual(timedOut.outcomes.map(([outcome]) => outcome), ['failed']);
+
+    const unsaved = job(async () => UNIT, async () => {
+      throw new Error('settings not saved');
+    });
+
+    await unsaved.binding.start();
+    assert.deepEqual(unsaved.outcomes, [['bound', UNIT], ['failed', 'settings not saved']]);
   });
 });
 

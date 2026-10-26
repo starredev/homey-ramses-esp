@@ -47,14 +47,15 @@ remote-adres nodig.
    staat daarna ongeveer 2 minuten open voor nieuwe apparaten.
 2. Open in Homey het apparaat → **Instellingen** (tandwiel) → **Onderhoud** → **Koppel Homey als afstandsbediening**.
 3. Homey kiest een vrij adres (`29:xxxxxx`), biedt zich elke 5 seconden aan en wacht maximaal 90 seconden tot de
-   unit accepteert.
-4. Gelukt? Dan staat het nieuwe adres bij *Adres van de afstandsbediening* en kun je de unit bedienen.
+   unit accepteert. Dit loopt op de achtergrond: het apparaat toont intussen de waarschuwing *Koppelen…*.
+4. Gelukt? Dan verdwijnt de waarschuwing, staat het nieuwe adres bij *Adres van de afstandsbediening* en kun je de
+   unit bedienen.
 
 Alleen *deze* unit mag de koppeling accepteren, dus een buur-unit die toevallig ook in koppelmodus staat, wordt niet
 per ongeluk gekoppeld.
 
 <Callout type="idea">
-Krijg je *Geen unit antwoordde*? Dan stond de unit niet (meer) in koppelmodus. Herhaal stap 1 en start de koppeling
+Verandert de waarschuwing in *Geen unit antwoordde*? Dan stond de unit niet (meer) in koppelmodus. Herhaal stap 1 en start de koppeling
 binnen 2 minuten.
 </Callout>
 
@@ -160,7 +161,8 @@ onderscheiden: **heb je een Itho, kies dan zelf Itho.**
 
 Warmteterugwinunits (Orcon HRC, Vasco, ClimaRad en andere) hebben interne parameters. Homey leest ze na het
 toevoegen uit; *Ondersteund door deze unit* toont daarna **Ja** of **Nee**. Wijzig je een waarde en sla je op, dan
-schrijft Homey die naar de unit.
+schrijft Homey die naar de unit, binnen het bereik dat de unit opgeeft. Hieronder staan de gebruikelijke bereiken;
+een unit die zelf geen bereik opgeeft, gebruikt deze.
 
 | Parameter | Bereik |
 |---|---|

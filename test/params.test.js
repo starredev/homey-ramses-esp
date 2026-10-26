@@ -91,6 +91,30 @@ describe('FanParams', () => {
     assert.equal(decodeParam('000031000FFFFFFFFF000000000000005000000001A632'), null);
   });
 
+  it('uses the range of the table when the unit reports an open range, as an HRC400 does', () => {
+    const open = decodeParam('0000F5000000000000000000000000FFFE00000001A600');
+
+    assert.deepEqual(open && [open.min, open.max, open.step], [-15, -5, 1]);
+    assert.doesNotThrow(() => encodeParam('F5', -10, open));
+    assert.throws(() => encodeParam('F5', 10, open), /between -15 and -5/);
+    assert.equal(decodeParam('0000AA000000000000000000000000FFFE00000001A600')?.max, 0xfffe);
+  });
+
+  it('leaves the ranges to the unit, so the settings form never rejects a save', () => {
+    /** @type {Array<{ id?: string, type?: string, value?: number, min?: number, max?: number, children?: any[] }>} */
+    const groups = JSON.parse(readFileSync(new URL('../drivers/fan/driver.settings.compose.json', import.meta.url), 'utf8'));
+    const settings = groups.flatMap((group) => group.children ?? []);
+
+    for (const setting of settings.filter((candidate) => candidate.type === 'number')) {
+      assert.ok(setting.min === undefined || Number(setting.value) >= setting.min, `${setting.id} default below min`);
+      assert.ok(setting.max === undefined || Number(setting.value) <= setting.max, `${setting.id} default above max`);
+
+      if (String(setting.id).startsWith('param_')) {
+        assert.equal(setting.min ?? setting.max, undefined, `${setting.id} has a fixed range`);
+      }
+    }
+  });
+
   it('knows its parameters by id', () => {
     assert.equal(paramById('3f')?.name.nl, 'Laag: toevoer');
     assert.equal(paramById('99'), null);

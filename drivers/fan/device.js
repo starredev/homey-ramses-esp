@@ -5,6 +5,7 @@ import {
 import { FAN_PARAMS } from '../../lib/ramses/FanParams.js';
 import { REMOTE_OFFER } from '../../lib/ramses/binding.js';
 import { FanUnit } from '../../lib/domain/FanUnit.js';
+import { BindingJob } from '../../lib/homey/BindingJob.js';
 import { FanStatus } from '../../lib/homey/FanStatus.js';
 import { RamsesDevice } from '../../lib/homey/RamsesDevice.js';
 import { FanFlowCards } from '../../lib/homey/flows/FanFlowCards.js';
@@ -50,6 +51,9 @@ export default class FanDevice extends RamsesDevice {
   /** @type {string | null} the mode the indicator shows */
   #indicated = null;
 
+  /** @type {BindingJob} binds Homey as a remote, in the background */
+  #binding;
+
   async onInit() {
     await super.onInit();
     await this.#migrate().catch(this.error);
@@ -72,6 +76,15 @@ export default class FanDevice extends RamsesDevice {
         await this.#bindAsRemote();
       });
     }
+
+    this.#binding = new BindingJob({
+      bind: () => this.#bindRemote(),
+      onBound: (remote) => this.#onRemoteBound(remote),
+      onFailed: async (error) => {
+        this.log('Binding as remote failed:', /** @type {Error} */ (error).message);
+        await this.setWarning(this.toUserError(error).message).catch(this.error);
+      },
+    });
 
     await this.#showRemoteWarning(this.getSetting('remote_id'));
     this.#startPolling(this.getSetting('poll_interval'));
@@ -199,24 +212,32 @@ export default class FanDevice extends RamsesDevice {
   /**
    * Binds Homey to the unit as a remote of its own, so it no longer needs to
    * speak in the name of a physical remote. The unit must be in binding mode.
+   * The binding runs in the background; a warning tells how it goes.
    */
   async #bindAsRemote() {
+    if (this.#binding.start()) {
+      await this.setWarning(this.homey.__('device.binding_started')).catch(this.error);
+    }
+  }
+
+  /** @returns {Promise<string>} the address Homey bound as */
+  async #bindRemote() {
     const binder = this.app.binder;
     const remote = this.getStoreValue('own_remote') ?? binder.freeAddress('29');
 
     await this.setStoreValue('own_remote', remote);
+    await binder.bind({
+      supplicant: remote,
+      offers: [REMOTE_OFFER],
+      unit: this.getData().id,
+      gateway: this.gatewayId,
+    });
 
-    try {
-      await binder.bind({
-        supplicant: remote,
-        offers: [REMOTE_OFFER],
-        unit: this.getData().id,
-        gateway: this.gatewayId,
-      });
-    } catch (error) {
-      throw this.toUserError(error);
-    }
+    return remote;
+  }
 
+  /** @param {string} remote */
+  async #onRemoteBound(remote) {
     this.log(`Bound as remote ${remote}`);
     this.unit.configure({ remote });
     await this.setSettings({ remote_id: remote });
