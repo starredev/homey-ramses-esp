@@ -26,5 +26,8 @@
   "1.0.6": {
     "en": "Heat recovery units such as the Orcon HRC400: the device settings can be saved again (a parameter range blocked them), and parameters are written within the range the unit reports. Binding Homey as a remote or binding the CO₂ sensor now runs in the background, with a warning that shows how it goes.",
     "nl": "Warmteterugwinunits zoals de Orcon HRC400: de apparaatinstellingen kunnen weer opgeslagen worden (een parameterbereik blokkeerde ze), en parameters worden geschreven binnen het bereik dat de unit opgeeft. Homey als afstandsbediening koppelen of de CO₂-sensor koppelen loopt nu op de achtergrond, met een waarschuwing die laat zien hoe het gaat."
+  },
+  "1.0.7": {
+    "en": "New photos: a lifestyle app image and a product photo of each device on a transparent background, so you can see at a glance what you connect."
   }
 }
