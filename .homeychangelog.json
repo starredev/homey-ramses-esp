@@ -29,5 +29,9 @@
   },
   "1.0.7": {
     "en": "New photos: a lifestyle app image and a product photo of each device on a transparent background, so you can see at a glance what you connect."
+  },
+  "1.0.8": {
+    "en": "The ventilation unit shows its fan mode as a graph in Insights (0 off, 1 away, 2 low, 3 medium, 4 high, 5 auto), so you can see next to the humidity when it ran in which mode.",
+    "nl": "De ventilatie-unit toont zijn ventilatiestand als grafiek in Insights (0 uit, 1 afwezig, 2 laag, 3 midden, 4 hoog, 5 auto), zodat je naast de luchtvochtigheid ziet wanneer hij in welke stand draaide."
   }
 }
