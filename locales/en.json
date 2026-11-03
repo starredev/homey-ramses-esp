@@ -8,6 +8,7 @@
     "params_supported": "Yes",
     "params_unsupported": "No",
     "unknown_param": "Unknown parameter.",
+    "binding_started": "Binding… Put the unit in binding mode now (Orcon: switch its power off and on). Homey keeps trying for 90 seconds.",
     "binding_timeout": "No unit answered. Put the unit in binding mode first (Orcon: switch its power off and on), then try again within 2 minutes."
   },
   "gateway": {

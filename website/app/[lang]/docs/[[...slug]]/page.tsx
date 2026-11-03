@@ -20,8 +20,9 @@ export default async function Page(props: PageProps<'/[lang]/docs/[[...slug]]'>)
       <DocsBody>
         <MDX
           components={getMDXComponents({
-            // this allows you to link to other pages with relative file paths
-            a: createRelativeLink(source, page),
+            // Relative links like ./gateway.mdx. Fumadocs looks them up without the language folder, while page.path
+            // still starts with it (nl/installation.mdx), so strip it or every link stays a raw .mdx href.
+            a: createRelativeLink(source, { ...page, path: page.path.slice(lang.length + 1) }),
           })}
         />
       </DocsBody>

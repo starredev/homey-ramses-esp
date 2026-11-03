@@ -113,8 +113,8 @@
         },
         "value": "-",
         "hint": {
-          "en": "Only heat recovery units (Orcon HRC, Vasco, ClimaRad and others) have parameters. The values are read from the unit; a change is written to it.",
-          "nl": "Alleen warmteterugwinunits (Orcon HRC, Vasco, ClimaRad en andere) hebben parameters. De waarden worden uit de unit gelezen; een wijziging wordt naar de unit geschreven."
+          "en": "Only heat recovery units (Orcon HRC, Vasco, ClimaRad and others) have parameters. The values are read from the unit; a change is written to it, within the range the unit reports.",
+          "nl": "Alleen warmteterugwinunits (Orcon HRC, Vasco, ClimaRad en andere) hebben parameters. De waarden worden uit de unit gelezen; een wijziging wordt naar de unit geschreven, binnen het bereik dat de unit opgeeft."
         }
       },
       {
@@ -125,9 +125,7 @@
           "nl": "Filter vervangen na"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 1800.0,
-        "step": 30.0,
+        "step": 30,
         "units": {
           "en": "days",
           "nl": "dagen"
@@ -141,8 +139,6 @@
           "nl": "Afwezig: toevoer"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 40.0,
         "step": 0.5,
         "units": {
           "en": "%"
@@ -156,8 +152,6 @@
           "nl": "Afwezig: afvoer"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 40.0,
         "step": 0.5,
         "units": {
           "en": "%"
@@ -171,8 +165,6 @@
           "nl": "Laag: toevoer"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 75.0,
         "step": 0.5,
         "units": {
           "en": "%"
@@ -186,8 +178,6 @@
           "nl": "Laag: afvoer"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 75.0,
         "step": 0.5,
         "units": {
           "en": "%"
@@ -201,8 +191,6 @@
           "nl": "Midden: toevoer"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 75.0,
         "step": 0.5,
         "units": {
           "en": "%"
@@ -216,8 +204,6 @@
           "nl": "Midden: afvoer"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 75.0,
         "step": 0.5,
         "units": {
           "en": "%"
@@ -231,8 +217,6 @@
           "nl": "Hoog: toevoer"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 100.0,
         "step": 0.5,
         "units": {
           "en": "%"
@@ -246,8 +230,6 @@
           "nl": "Hoog: afvoer"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 100.0,
         "step": 0.5,
         "units": {
           "en": "%"
@@ -261,8 +243,6 @@
           "nl": "Boost: toevoer en afvoer"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 100.0,
         "step": 0.5,
         "units": {
           "en": "%"
@@ -276,9 +256,7 @@
           "nl": "Timer nachtstand"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 180.0,
-        "step": 10.0,
+        "step": 10,
         "units": {
           "en": "min"
         }
@@ -291,9 +269,7 @@
           "nl": "Timer afwezig"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 180.0,
-        "step": 10.0,
+        "step": 10,
         "units": {
           "en": "min"
         }
@@ -306,9 +282,7 @@
           "nl": "Timer hoog"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 180.0,
-        "step": 10.0,
+        "step": 10,
         "units": {
           "en": "min"
         }
@@ -321,9 +295,7 @@
           "nl": "Timer laag"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 180.0,
-        "step": 10.0,
+        "step": 10,
         "units": {
           "en": "min"
         }
@@ -336,9 +308,7 @@
           "nl": "Timer minimum"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 180.0,
-        "step": 10.0,
+        "step": 10,
         "units": {
           "en": "min"
         }
@@ -350,10 +320,8 @@
           "en": "Humidity sensor overrun",
           "nl": "Nalooptijd vochtsensor"
         },
-        "value": 15.0,
-        "min": 15.0,
-        "max": 60.0,
-        "step": 1.0,
+        "value": 15,
+        "step": 1,
         "units": {
           "en": "min"
         }
@@ -365,10 +333,8 @@
           "en": "Exhaust temperature limit",
           "nl": "Temperatuurgrens afvoer"
         },
-        "value": 5.0,
-        "min": 5.0,
-        "max": 25.0,
-        "step": 1.0,
+        "value": 5,
+        "step": 1,
         "units": {
           "en": "°C"
         }
@@ -380,10 +346,8 @@
           "en": "Supply temperature limit",
           "nl": "Temperatuurgrens toevoer"
         },
-        "value": 5.0,
-        "min": 5.0,
-        "max": 25.0,
-        "step": 1.0,
+        "value": 5,
+        "step": 1,
         "units": {
           "en": "°C"
         }
@@ -396,8 +360,6 @@
           "nl": "Comforttemperatuur"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 30.0,
         "step": 0.5,
         "units": {
           "en": "°C"
@@ -411,9 +373,7 @@
           "nl": "Timer bypass handmatig"
         },
         "value": 0,
-        "min": 0.0,
-        "max": 180.0,
-        "step": 10.0,
+        "step": 10,
         "units": {
           "en": "min"
         }
@@ -425,10 +385,8 @@
           "en": "Summer mode limit",
           "nl": "Grens zomerstand"
         },
-        "value": 15.0,
-        "min": 15.0,
-        "max": 25.0,
-        "step": 1.0,
+        "value": 15,
+        "step": 1,
         "units": {
           "en": "°C"
         }
@@ -440,10 +398,8 @@
           "en": "Winter mode limit",
           "nl": "Grens winterstand"
         },
-        "value": 5.0,
-        "min": 5.0,
-        "max": 15.0,
-        "step": 1.0,
+        "value": 5,
+        "step": 1,
         "units": {
           "en": "°C"
         }
@@ -456,8 +412,6 @@
           "nl": "Hysterese bypass"
         },
         "value": 0.5,
-        "min": 0.5,
-        "max": 5.0,
         "step": 0.5,
         "units": {
           "en": "°C"
@@ -471,9 +425,7 @@
           "nl": "Grens voorverwarmer"
         },
         "value": 0,
-        "min": -15.0,
-        "max": -5.0,
-        "step": 1.0,
+        "step": 1,
         "units": {
           "en": "°C"
         }
@@ -486,8 +438,6 @@
           "nl": "Hysterese voorverwarmer"
         },
         "value": 0.5,
-        "min": 0.5,
-        "max": 5.0,
         "step": 0.5,
         "units": {
           "en": "°C"

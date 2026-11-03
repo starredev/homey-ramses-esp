@@ -48,6 +48,8 @@ interface Copy {
   gatewaysLead: string;
   gateways: { name: string; chip: string; note: string }[];
   gatewaysLink: string;
+  /** Id of the "which gateway" heading on the installation page in this language. */
+  gatewaysAnchor: string;
   footer: string;
 }
 
@@ -96,6 +98,7 @@ function copyFor(lang: string): Copy {
         { name: 'Indalo-Tech RAMSES_ESP', chip: 'ESP32-S3 + CC1101', note: 'ramses_esp' },
       ],
       gatewaysLink: 'Welke gateway?',
+      gatewaysAnchor: 'welke-gateway',
       footer: 'MIT-licentie · Onofficieel communityproject, niet gemaakt of goedgekeurd door de fabrikanten of de makers van ramses_esp.',
     };
   }
@@ -141,6 +144,7 @@ function copyFor(lang: string): Copy {
       { name: 'Indalo-Tech RAMSES_ESP', chip: 'ESP32-S3 + CC1101', note: 'ramses_esp' },
     ],
     gatewaysLink: 'Which gateway?',
+    gatewaysAnchor: 'which-gateway',
     footer: 'MIT licence · Unofficial community project, not made or endorsed by the manufacturers or by the ramses_esp authors.',
   };
 }
@@ -286,7 +290,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
           <div>
             <h2 className="text-2xl font-semibold tracking-tight">{t.gatewaysTitle}</h2>
             <p className="mt-2 text-fd-muted-foreground">{t.gatewaysLead}</p>
-            <Link href={`/${lang}/docs/installation#which-gateway`} className="mt-6 inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline">
+            <Link href={`/${lang}/docs/installation#${t.gatewaysAnchor}`} className="mt-6 inline-flex items-center gap-1 text-sm font-medium underline-offset-4 hover:underline">
               {t.gatewaysLink} <ArrowRight className="size-3.5" />
             </Link>
           </div>

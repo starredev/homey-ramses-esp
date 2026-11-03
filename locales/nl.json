@@ -8,6 +8,7 @@
     "params_supported": "Ja",
     "params_unsupported": "Nee",
     "unknown_param": "Onbekende parameter.",
+    "binding_started": "Koppelen… Zet de unit nu in koppelmodus (Orcon: stroom eraf en erop). Homey blijft het 90 seconden proberen.",
     "binding_timeout": "Geen unit antwoordde. Zet de unit eerst in koppelmodus (Orcon: stroom eraf en erop) en probeer het daarna binnen 2 minuten opnieuw."
   },
   "gateway": {

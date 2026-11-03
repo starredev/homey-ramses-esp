@@ -3,6 +3,7 @@ import { RamsesError } from '../../lib/errors.js';
 import { loggerFrom } from '../../lib/utils.js';
 import { VirtualSensor } from '../../lib/domain/VirtualSensor.js';
 
+import { BindingJob } from '../../lib/homey/BindingJob.js';
 import { CapabilityStore } from '../../lib/homey/CapabilityStore.js';
 import { SENSOR_OFFERS } from '../../lib/ramses/binding.js';
 
@@ -32,6 +33,9 @@ export default class VirtualSensorDevice extends Homey.Device {
   /** @type {unknown} */
   #repeater = null;
 
+  /** @type {BindingJob} */
+  #binding;
+
   async onInit() {
     this.#capabilities = new CapabilityStore(this, loggerFrom(this));
     this.#sensor = new VirtualSensor({
@@ -39,6 +43,12 @@ export default class VirtualSensorDevice extends Homey.Device {
       unit: this.getStoreValue('unit') ?? null,
       curve: VirtualSensorDevice.curveOf(this.getSettings()),
       send: (packet) => this.#app.gateways.send(packet),
+    });
+
+    this.#binding = new BindingJob({
+      bind: () => this.#app.binder.bind({ supplicant: this.#sensor.address, offers: SENSOR_OFFERS }),
+      onBound: (unit) => this.#onBound(unit),
+      onFailed: (error) => this.#onBindFailed(error),
     });
 
     this.registerCapabilityListener(BIND_ACTION, async () => {
@@ -98,21 +108,29 @@ export default class VirtualSensorDevice extends Homey.Device {
     await this.#capabilities.set(capability, value);
   }
 
+  /** Binds the sensor in the background; a warning tells how it goes. */
   async #bind() {
-    try {
-      const unit = await this.#app.binder.bind({ supplicant: this.#sensor.address, offers: SENSOR_OFFERS });
-
-      this.#sensor.bindTo(unit);
-      await this.setStoreValue('unit', unit);
-      await this.setSettings({ bound_unit: unit });
-      this.log(`Bound to unit ${unit}`);
-    } catch (error) {
-      if (error instanceof RamsesError && error.code === 'BINDING_TIMEOUT') {
-        throw new Error(this.homey.__('device.binding_timeout'));
-      }
-
-      throw error;
+    if (this.#binding.start()) {
+      await this.setWarning(this.homey.__('device.binding_started')).catch(this.error);
     }
+  }
+
+  /** @param {string} unit */
+  async #onBound(unit) {
+    this.#sensor.bindTo(unit);
+    await this.setStoreValue('unit', unit);
+    await this.setSettings({ bound_unit: unit });
+    await this.unsetWarning();
+    this.log(`Bound to unit ${unit}`);
+  }
+
+  /** @param {unknown} error */
+  async #onBindFailed(error) {
+    const timedOut = error instanceof RamsesError && error.code === 'BINDING_TIMEOUT';
+
+    this.log('Binding failed:', /** @type {Error} */ (error).message);
+    await this.setWarning(timedOut ? this.homey.__('device.binding_timeout') : /** @type {Error} */ (error).message)
+      .catch(this.error);
   }
 
   #stop() {
