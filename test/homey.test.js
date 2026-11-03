@@ -161,6 +161,15 @@ describe('FanStatus', () => {
     assert.equal(FanStatus.label('turbo', 'nl'), 'turbo');
     assert.equal(FanStatus.LABEL_CAPABILITY, 'measure_ramses_fan_mode_label');
   });
+
+  it('numbers the mode for Insights, from off up to auto', () => {
+    assert.deepEqual(
+      ['off', 'away', 'low', 'medium', 'high', 'auto'].map((mode) => FanStatus.level(mode)),
+      [0, 1, 2, 3, 4, 5],
+    );
+    assert.equal(FanStatus.level('turbo'), null);
+    assert.equal(FanStatus.LEVEL_CAPABILITY, 'measure_ramses_fan_mode_level');
+  });
 });
 
 describe('FanPresenter', () => {

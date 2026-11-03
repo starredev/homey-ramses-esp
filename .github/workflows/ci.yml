@@ -38,3 +38,33 @@ jobs:
 
       - name: Validate the app manifest
         run: npm run validate
+
+  publish:
+    name: Publish to the Homey App Store
+    needs: check
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Only publish when the version changed
+        id: version
+        run: |
+          current=$(jq -r .version .homeycompose/app.json)
+          previous=$(git show HEAD^:.homeycompose/app.json | jq -r .version)
+          echo "Version $previous -> $current"
+          echo "changed=$([ "$current" != "$previous" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+      - name: Publish
+        id: publish
+        if: steps.version.outputs.changed == 'true'
+        uses: athombv/github-action-homey-app-publish@master
+        with:
+          personal_access_token: ${{ secrets.HOMEY_PAT }}
+
+      - name: Link to the build
+        if: steps.version.outputs.changed == 'true'
+        run: echo "Manage the release at ${{ steps.publish.outputs.url }}" >> "$GITHUB_STEP_SUMMARY"

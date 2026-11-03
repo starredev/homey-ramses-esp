@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.github.starredev.ramses",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "runtime": "nodejs",
@@ -1259,6 +1259,7 @@
       "capabilities": [
         "ramses_fan_mode",
         "measure_ramses_fan_mode_label",
+        "measure_ramses_fan_mode_level",
         "button.bind_remote"
       ],
       "platforms": [
@@ -2457,6 +2458,25 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/capabilities/fan.svg"
+    },
+    "measure_ramses_fan_mode_level": {
+      "type": "number",
+      "title": {
+        "en": "Fan mode (level)",
+        "nl": "Ventilatiestand (niveau)"
+      },
+      "desc": {
+        "en": "The fan mode as a number, for Insights: 0 off, 1 away, 2 low, 3 medium, 4 high, 5 auto",
+        "nl": "De ventilatiestand als getal, voor Insights: 0 uit, 1 afwezig, 2 laag, 3 midden, 4 hoog, 5 auto"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/fan.svg",
+      "decimals": 0,
+      "min": 0,
+      "max": 5,
+      "insights": true
     },
     "measure_ramses_fan_speed": {
       "type": "number",
