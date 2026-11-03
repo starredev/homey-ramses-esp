@@ -1,0 +1,19 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Fan mode (level)",
+    "nl": "Ventilatiestand (niveau)"
+  },
+  "desc": {
+    "en": "The fan mode as a number, for Insights: 0 off, 1 away, 2 low, 3 medium, 4 high, 5 auto",
+    "nl": "De ventilatiestand als getal, voor Insights: 0 uit, 1 afwezig, 2 laag, 3 midden, 4 hoog, 5 auto"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capabilities/fan.svg",
+  "decimals": 0,
+  "min": 0,
+  "max": 5,
+  "insights": true
+}

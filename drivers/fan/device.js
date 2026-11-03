@@ -245,7 +245,8 @@ export default class FanDevice extends RamsesDevice {
   }
 
   /**
-   * Shows the mode as a word, for the indicator on the device tile.
+   * Shows the mode as a word, for the indicator on the device tile, and as a
+   * number, for a graph in Insights.
    * @param {unknown} mode
    */
   async #showStatus(mode) {
@@ -255,6 +256,8 @@ export default class FanDevice extends RamsesDevice {
 
     await this.capabilities.add(FanStatus.LABEL_CAPABILITY);
     await this.capabilities.set(FanStatus.LABEL_CAPABILITY, FanStatus.label(mode, this.homey.i18n.getLanguage()));
+    await this.capabilities.add(FanStatus.LEVEL_CAPABILITY);
+    await this.capabilities.set(FanStatus.LEVEL_CAPABILITY, FanStatus.level(mode));
     this.#indicated = mode;
   }
 

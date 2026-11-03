@@ -7,6 +7,7 @@
   "capabilities": [
     "ramses_fan_mode",
     "measure_ramses_fan_mode_label",
+    "measure_ramses_fan_mode_level",
     "button.bind_remote"
   ],
   "platforms": [
